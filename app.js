@@ -1,39 +1,5 @@
 const ASSET = "";
 
-// Affiliate configuration. Replace the placeholder IDs in affiliate-config.js after approval.
-const AFFILIATE = window.TRAVEL_AFFILIATE_CONFIG || {
-  booking: { aid: "YOUR_BOOKING_AID", base: "https://www.booking.com" },
-  agoda: { cid: "8085912", base: "https://www.agoda.com" }
-};
-
-function affiliateConfigured(provider) {
-  if (provider === "booking") return Boolean(AFFILIATE.booking?.aid && AFFILIATE.booking.aid !== "YOUR_BOOKING_AID");
-  if (provider === "agoda") return Boolean(AFFILIATE.agoda?.cid && AFFILIATE.agoda.cid !== "8085912");
-  return false;
-}
-
-function bookingUrl(params = {}) {
-  const url = new URL(params.flight ? "/flights/index.html" : "/searchresults.html", AFFILIATE.booking?.base || "https://www.booking.com");
-  if (params.destination) url.searchParams.set("ss", params.destination);
-  if (params.checkIn) url.searchParams.set("checkin", params.checkIn);
-  if (params.checkOut) url.searchParams.set("checkout", params.checkOut);
-  if (params.adults) url.searchParams.set("group_adults", String(params.adults));
-  if (params.rooms) url.searchParams.set("no_rooms", String(params.rooms));
-  if (affiliateConfigured("booking")) url.searchParams.set("aid", AFFILIATE.booking.aid);
-  return url.toString();
-}
-
-function agodaUrl(params = {}) {
-  const url = new URL("/search", AFFILIATE.agoda?.base || "https://www.agoda.com");
-  if (params.destination) url.searchParams.set("text", params.destination);
-  if (params.checkIn) url.searchParams.set("checkIn", params.checkIn);
-  if (params.checkOut) url.searchParams.set("checkOut", params.checkOut);
-  if (params.rooms) url.searchParams.set("rooms", String(params.rooms));
-  if (params.adults) url.searchParams.set("adults", String(params.adults));
-  if (affiliateConfigured("agoda")) url.searchParams.set("cid", AFFILIATE.agoda.cid);
-  return url.toString();
-}
-
 const destinations = [
   ["Bangladesh", "Jeddah", "King Abdulaziz International Airport", "JED", "SAUDI ARABIA", "jeddah.jpg"],
   ["Bangladesh", "Dubai", "Dubai International Airport", "DXB", "UNITED ARAB EMIRATES", "dubai.jpg"],
@@ -134,7 +100,7 @@ function footer() {
     <div><h3>Explore</h3><a href="#/about-us">About Us</a><a href="#/contact-us">Contact Us</a><a href="#/privacy-policy">Privacy Policy</a><a href="#/terms-and-conditions">Terms &amp; Conditions</a><a href="#/refund-policy">Refund &amp; Cancellation</a><a href="#/blog">Blog</a><a href="#/payment-method">Payment Method</a></div>
     <div><h3>Services</h3><a href="#/flights">Flight</a><a href="#/hotels">Hotel</a><a href="#/holidays">Holiday</a><a href="#/visa">Visa</a><a href="#/umrah-packages">Umrah</a></div>
     <div><h3>Corporate Office</h3><p>28/A-2 Toyenbee Circular Road (1st Floor), Motijheel C/A, Dhaka-1000, Bangladesh.</p><p>Sat–Thu, 10:00 AM – 8:00 PM</p><div class="socials"><a href="https://facebook.com/Travel2know0" target="_blank" rel="noreferrer">f</a><a href="https://youtube.com/Travel2know0" target="_blank" rel="noreferrer">▶</a><a href="https://instagram.com/Travel2know0" target="_blank" rel="noreferrer">◎</a></div></div>
-  </div><div class="footer-bottom"><span>© 2026 Travel To Know. All rights reserved.</span><span>Some travel links may be affiliate links; prices and booking terms are set by the supplier.</span><span>Designed &amp; Developed by RegTech Nexus AI</span></div></footer>`;
+  </div><div class="footer-bottom"><span>© 2026 Travel To Know. All rights reserved.</span><span>Designed &amp; Developed by <a href="https://m360ict.com" target="_blank" rel="noreferrer">M360ICT</a></span></div></footer>`;
 }
 
 function serviceTabMarkup(active) {
@@ -142,15 +108,15 @@ function serviceTabMarkup(active) {
 }
 
 function bookingForm(type) {
-  if (type === "hotels") return `<div class="booking-card" data-form="hotels"><div class="mode-row"><span class="mode active">Stay More, Pay Less — Book Your Dream Hotel Now! 🏨💫</span></div><div class="form-grid"><div class="field"><label>CITY / HOTEL / RESORT / AREA</label><input class="input" name="hotel-destination" value="Dhaka, Bangladesh" aria-label="City, hotel, resort or area"></div><div class="field"><label>CHECK IN DATE</label><input class="date-input" name="hotel-checkin" type="date" value="2026-09-23"></div><div class="field"><label>CHECK OUT DATE</label><input class="date-input" name="hotel-checkout" type="date" value="2026-09-26"></div><div class="field"><label>ROOMS &amp; GUESTS</label><select name="hotel-rooms-guests"><option value="1|2">1 Room, 2 Guests</option><option value="2|4">2 Rooms, 4 Guests</option><option value="3|6">3 Rooms, 6 Guests</option></select></div><button class="primary-button" data-affiliate-search="hotel" data-provider="booking" type="button">Search on Booking.com</button><button class="primary-button" data-affiliate-search="hotel" data-provider="agoda" type="button">Search on Agoda</button></div></div>`;
+  if (type === "hotels") return `<div class="booking-card" data-form="hotels"><div class="mode-row"><span class="mode active">Stay More, Pay Less — Book Your Dream Hotel Now! 🏨💫</span></div><div class="form-grid"><div class="field"><label>CITY / HOTEL / RESORT / AREA</label><div class="field-box"><strong>⌖</strong><span>Dhaka, Bangladesh</span></div></div><div class="field"><label>CHECK IN DATE</label><input class="date-input" type="date" value="2026-09-23"></div><div class="field"><label>CHECK OUT DATE</label><input class="date-input" type="date" value="2026-09-26"></div><div class="field"><label>ROOMS &amp; GUESTS</label><select><option>1 Room, 2 Guests</option><option>2 Rooms, 4 Guests</option><option>3 Rooms, 6 Guests</option></select></div><button class="primary-button" data-demo-search="Hotel">Search Hotel</button></div></div>`;
   if (type === "holidays") return `<div class="booking-card" data-form="holidays"><div class="mode-row"><span class="mode active">Explore More, Pay Less — Book Your Dream Tour Today! 🌍✨</span></div><div class="form-grid"><div class="field"><label>SELECT YOUR TOUR DESTINATION CITY</label><select><option>Cox's Bazar — BANGLADESH</option><option>Dubai — UAE</option><option>Kuala Lumpur — MALAYSIA</option><option>Bangkok — THAILAND</option></select></div><div></div><div></div><button class="primary-button" data-demo-search="Holiday">Search Holiday</button></div></div>`;
   if (type === "visa") return `<div class="booking-card" data-form="visa"><div class="mode-row"><span class="mode active">Hassle-Free Visa Services — Apply With Us For Fast Approval! 🛂✈️</span></div><div class="form-grid"><div class="field"><label>SELECT YOUR VISA CITY</label><select><option>Select country</option><option>Singapore</option><option>Thailand</option><option>Malaysia</option><option>Vietnam</option><option>Uzbekistan</option></select></div><div class="field"><label>SELECT TRAVELER(S)</label><select><option>1 Traveler</option><option>2 Travelers</option><option>3 Travelers</option></select></div><div></div><button class="primary-button" data-demo-search="Visa">Find Visa Info</button></div></div>`;
-  return `<div class="booking-card" data-form="flights"><div class="mode-row"><button class="mode active" data-flight-mode="one-way" type="button">One-way</button><button class="mode" data-flight-mode="round-trip" type="button">Round-trip</button><button class="mode" data-flight-mode="multi-city" type="button">Multi-city</button></div><div class="form-grid"><div class="field"><label>From</label><input class="input" name="flight-from" value="DAC" aria-label="Departure airport code"></div><div class="field"><label>To</label><input class="input" name="flight-to" value="CXB" aria-label="Arrival airport code"></div><div class="field"><label>Departure date</label><input class="date-input" name="flight-departure" type="date" value="2026-09-23"></div><div class="field"><label>Return date</label><input class="date-input" name="flight-return" type="date" value="2026-09-26"><span class="hint">Save more on roundtrip</span></div><div class="field"><label>TRAVELERS</label><select name="flight-travelers"><option value="1">1 Traveler</option><option value="2">2 Travelers</option><option value="3">3 Travelers</option><option value="4">4 Travelers</option></select></div><div class="field"><label>CLASS</label><select name="flight-class"><option>Economy</option><option>Premium Economy</option><option>Business</option><option>First Class</option></select></div><div></div><button class="primary-button" data-affiliate-search="flight" data-provider="booking" type="button">Search Flights</button></div></div>`;
+  return `<div class="booking-card" data-form="flights"><div class="mode-row"><button class="mode active" data-flight-mode="one-way">One-way</button><button class="mode" data-flight-mode="round-trip">Round-trip</button><button class="mode" data-flight-mode="multi-city">Multi-city</button></div><div class="form-grid"><div class="field"><label>From</label><div class="field-box clickable"><strong>⌖</strong><span><b>DAC</b> - Hazrat Shahjalal International Airport</span></div></div><div class="field"><label>To</label><div class="field-box clickable"><strong>⌖</strong><span><b>CXB</b> - Cox's Bazar Airport</span></div></div><div class="field"><label>Departure date</label><input class="date-input" type="date" value="2026-09-23"></div><div class="field"><label>Return date</label><input class="date-input" type="date" value="2026-09-26"><span class="hint">Save more on roundtrip</span></div><div class="field"><label>TRAVELERS</label><select><option>1 Traveler</option><option>2 Travelers</option><option>3 Travelers</option><option>4 Travelers</option></select></div><div class="field"><label>CLASS</label><select><option>Economy</option><option>Premium Economy</option><option>Business</option><option>First Class</option></select></div><div></div><button class="primary-button" data-demo-search="Flight">Search Flight</button></div></div>`;
 }
 
 function heroPage(type = "flights", activeRoute = `/${type}`) {
   const copy = { flights: ["Explore the Best Flight Options", "Uncover unbeatable offers on global travel destinations"], hotels: ["Discover Your Perfect Vacation Stay", "Discover amazing deals to destinations worldwide"], holidays: ["Discover Your Next Tour", "Discover amazing deals to destinations worldwide"], visa: ["Visa processing Services Available!", "Visa depends on your profile and financial conditions!"] }[type];
-  return `${header(activeRoute, true)}<main><section class="hero"><div class="hero-inner"><div class="hero-copy"><h1>${copy[0]}</h1><p>${copy[1]}</p><div class="hero-actions"><a class="primary-button" href="#/request-service">Plan Your Next Journey</a><a class="hero-call" href="tel:+8801772282925">Call +88 01772 282925</a></div></div><div class="booking-shell">${serviceTabMarkup(type)}${bookingForm(type)}</div></div></section>${serviceLanes()}${trustStrip()}${offers()}${destinationSection()}${featuresSection()}${placesSection()}${newsletter()}</main>${footer()}`;
+  return `${header(activeRoute, true)}<main><section class="hero"><div class="hero-inner"><div class="hero-copy"><h1>${copy[0]}</h1><p>${copy[1]}</p><div class="hero-actions"><a class="primary-button" href="#/request-service">Plan Your Next Journey</a><a class="hero-call" href="tel:+8801772282925">Call +88 01772 282925</a></div></div><div class="booking-shell">${serviceTabMarkup(type)}${bookingForm(type)}</div></div></section>${serviceLanes()}${trustStrip()}${offers()}${amazonProductSection()}${destinationSection()}${featuresSection()}${placesSection()}${newsletter()}</main>${footer()}`;
 }
 
 function serviceLanes() { return `<section class="section service-lanes"><div class="section-header"><h2>Travel support for the journeys that matter</h2><p>Tell us what you need. A Travel To Know specialist will review the request and respond with the next practical step.</p></div><div class="segment-grid">${serviceLaneData.map(([title, text, value], index) => `<a class="segment-card segment-${index + 1}" href="#/request-service?service=${encodeURIComponent(value)}"><span class="segment-number">0${index + 1}</span><h3>${title}</h3><p>${text}</p><span class="segment-link">Request support →</span></a>`).join("")}</div></section>`; }
@@ -158,6 +124,8 @@ function serviceLanes() { return `<section class="section service-lanes"><div cl
 function trustStrip() { return `<section class="trust-strip"><div class="trust-wrap"><div><span class="eyebrow">WHY TRAVEL TO KNOW</span><h2>Your journey. Our priority.</h2><p>Reliable travel solutions for business, leisure and journeys beyond borders—with human support when the details matter.</p></div><div class="trust-badges"><div><strong>IATA</strong><span>Accredited agency</span></div><div><strong>MoCAT</strong><span>0013575</span></div><div><strong>DBID</strong><span>717571834</span></div></div><div class="trust-actions"><a class="primary-button" href="#/request-service">Start an enquiry</a><a href="#/contact-us">View contact &amp; office details</a><a href="#/terms-and-conditions">Read refund &amp; cancellation terms</a></div></div></section>`; }
 
 function offers() { return `<section class="section compact"><div class="section-header"><h2>Exclusive Offers</h2><p>Discover unbeatable offers that won't last long. Grab these premium deals before they're gone!</p></div><div class="empty-state">No offer found</div></section>`; }
+
+function amazonProductSection() { return `<section class="section amazon-product-section"><div style="display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;padding:28px;border:1px solid #e5e7eb;border-radius:16px;background:#fff;box-shadow:0 8px 24px rgba(0,0,0,.06)"><div style="flex:1;min-width:260px"><span class="eyebrow">TRAVEL GEAR</span><h2>Amazon Basics 21-Inch Carry-On Luggage</h2><p>Expandable carry-on luggage with multi-directional wheels and a scratch-resistant surface.</p><p style="font-size:12px;color:#6b7280">As an Amazon Associate I earn from qualifying purchases.</p></div><div><a class="primary-button" href="https://amzn.to/4AUcpLI" target="_blank" rel="nofollow sponsored noopener">🛒 Check Price on Amazon</a></div></div></section>`; }
 
 function destinationSection() { return `<section class="section"><div class="section-header"><h2>Popular Destinations</h2><p>Click on a destination to explore exciting flight deals.</p></div><div class="destination-grid">${destinations.map(([from, to, airport, code, country, image]) => `<button class="destination-card" data-destination="${to}"><img src="${ASSET}${image}" alt="${from} to ${to}"><div class="destination-info"><h3>${from} <span>${to}</span></h3><p>${airport}</p><div class="destination-meta"><span>IATA: ${code} · ${country}</span><span class="tag">Top Pick</span></div></div></button>`).join("")}</div></section>`; }
 
@@ -230,30 +198,7 @@ function bindInteractions() {
   document.querySelector("[data-dismiss-announcement]")?.addEventListener("click", (event) => { event.target.closest(".announcement")?.remove(); });
   document.querySelector("[data-menu-toggle]")?.addEventListener("click", () => document.querySelector("[data-primary-nav]")?.classList.toggle("open"));
   document.querySelectorAll("[data-service-tab]").forEach((button) => button.addEventListener("click", () => go(`/${button.dataset.serviceTab}`)));
-  document.querySelectorAll("[data-affiliate-search]").forEach((button) => button.addEventListener("click", () => {
-    const card = button.closest("[data-form]");
-    const provider = button.dataset.provider;
-    const type = button.dataset.affiliateSearch;
-    if (!card) return;
-    if (type === "hotel") {
-      const [rooms, adults] = (card.querySelector("[name=hotel-rooms-guests]")?.value || "1|2").split("|");
-      const params = {
-        destination: card.querySelector("[name=hotel-destination]")?.value || "Dhaka, Bangladesh",
-        checkIn: card.querySelector("[name=hotel-checkin]")?.value || "",
-        checkOut: card.querySelector("[name=hotel-checkout]")?.value || "",
-        rooms, adults
-      };
-      const url = provider === "agoda" ? agodaUrl(params) : bookingUrl(params);
-      window.open(url, "_blank", "noopener,noreferrer");
-      return;
-    }
-    const from = card.querySelector("[name=flight-from]")?.value || "DAC";
-    const to = card.querySelector("[name=flight-to]")?.value || "CXB";
-    const departure = card.querySelector("[name=flight-departure]")?.value || "";
-    const ret = card.querySelector("[name=flight-return]")?.value || "";
-    const adults = card.querySelector("[name=flight-travelers]")?.value || "1";
-    window.open(bookingUrl({ flight: true }), "_blank", "noopener,noreferrer");
-  }));
+  document.querySelectorAll("[data-demo-search]").forEach((button) => button.addEventListener("click", () => showModal(`${button.dataset.demoSearch} search demo`, "This GitHub Pages copy reproduces the search interface. Live supplier fares and availability require the original OTA/API connection.")));
   document.querySelectorAll("[data-destination], [data-place]").forEach((button) => button.addEventListener("click", () => showModal(button.dataset.destination || button.dataset.place, "Destination detail is ready for the live travel API or your own package catalogue.")));
   document.querySelectorAll("[data-demo-payment]").forEach((link) => link.addEventListener("click", (event) => { event.preventDefault(); showModal("Payment verification", "Please verify the current account details with Travel To Know support before making a transfer."); }));
   document.querySelector("[data-newsletter]")?.addEventListener("submit", (event) => { event.preventDefault(); toast("Thanks — newsletter subscription is ready for backend integration."); event.target.reset(); });
