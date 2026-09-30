@@ -1,18 +1,9 @@
-Travel To Know — ready-to-upload update bundle
+Travel To Know update — corrected branding + payment method + Amazon affiliate preservation
 
-Included changes:
-- API connector scaffold: api-config.js + api-client.js
-- Agoda CID 8085912 retained/configured
-- Booking.com AID remains YOUR_BOOKING_AID until supplied
-- Hotels tab opens the configured hotel affiliate destination
-- Popular Destination cards/photos open hotel affiliate destination searches
-- Must-Visit Places cards/photos open hotel affiliate destination searches
-- Visible IATA airport labels removed from destination cards/poster-style destination visuals
-- RegTech Nexus AI branding link used for the footer developer credit
-- Existing legal IATA certificate information is preserved
-
-Important:
-- The repository's existing image assets and styles.css are not replaced by this update bundle.
-- The app references the existing GitHub Pages assets so the current visuals remain available.
-- Upload/merge these files into the existing repository root; do not delete the existing image assets.
-- When the real provider APIs are supplied, set TRAVEL_API_CONFIG.baseUrl and endpoints in api-config.js.
+1. Replaced the footer "Designed & Developed by M360ICT" with "Designed & Developed by RegTech Nexus AI" across the application pages.
+2. Preserved the existing Amazon affiliate integration and link: https://amzn.to/4AUcpLI
+3. Preserved Amazon tracking ID: traveltoknow2-20.
+4. Added BRAC Bank Bangla QR as a separate payment method directly under BRAC Bank PLC.
+5. Added BRAC Bank, bKash and Dutch-Bangla Bank logos above their payment names.
+6. Added Download QR and Open QR actions for the supplied BRAC Bank Bangla QR image.
+7. This is an update package for the existing repository. Keep existing styles.css and destination images in place.
