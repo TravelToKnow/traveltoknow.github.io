@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 96" role="img" aria-label="BRAC Bank logo">
+  <rect width="320" height="96" rx="18" fill="#0b5c78"/>
+  <g fill="#fff">
+    <rect x="18" y="18" width="60" height="60" rx="8"/>
+    <rect x="30" y="30" width="36" height="36" fill="#0b5c78"/>
+    <rect x="38" y="38" width="20" height="20" fill="#fff"/>
+    <text x="92" y="48" font-family="Arial, Helvetica, sans-serif" font-size="27" font-weight="800">BRAC BANK</text>
+    <text x="92" y="70" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="600" opacity=".9">A BANK FOR THE FUTURE</text>
+  </g>
+</svg>
