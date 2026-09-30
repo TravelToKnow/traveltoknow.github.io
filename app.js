@@ -1,4 +1,4 @@
-const ASSET = "";
+const ASSET = "https://traveltoknow.github.io/";
 
 const destinations = [
   ["Bangladesh", "Jeddah", "King Abdulaziz International Airport", "JED", "SAUDI ARABIA", "jeddah.jpg"],
@@ -100,7 +100,7 @@ function footer() {
     <div><h3>Explore</h3><a href="#/about-us">About Us</a><a href="#/contact-us">Contact Us</a><a href="#/privacy-policy">Privacy Policy</a><a href="#/terms-and-conditions">Terms &amp; Conditions</a><a href="#/refund-policy">Refund &amp; Cancellation</a><a href="#/blog">Blog</a><a href="#/payment-method">Payment Method</a></div>
     <div><h3>Services</h3><a href="#/flights">Flight</a><a href="#/hotels">Hotel</a><a href="#/holidays">Holiday</a><a href="#/visa">Visa</a><a href="#/umrah-packages">Umrah</a></div>
     <div><h3>Corporate Office</h3><p>28/A-2 Toyenbee Circular Road (1st Floor), Motijheel C/A, Dhaka-1000, Bangladesh.</p><p>Sat–Thu, 10:00 AM – 8:00 PM</p><div class="socials"><a href="https://facebook.com/Travel2know0" target="_blank" rel="noreferrer">f</a><a href="https://youtube.com/Travel2know0" target="_blank" rel="noreferrer">▶</a><a href="https://instagram.com/Travel2know0" target="_blank" rel="noreferrer">◎</a></div></div>
-  </div><div class="footer-bottom"><span>© 2026 Travel To Know. All rights reserved.</span><span>Designed &amp; Developed by <a href="https://m360ict.com" target="_blank" rel="noreferrer">M360ICT</a></span></div></footer>`;
+  </div><div class="footer-bottom"><span>© 2026 Travel To Know. All rights reserved.</span><span>Designed &amp; Developed by <a href="https://regtechnexusai.com" target="_blank" rel="noopener noreferrer">RegTech Nexus AI</a></span></div></footer>`;
 }
 
 function serviceTabMarkup(active) {
@@ -121,26 +121,15 @@ function heroPage(type = "flights", activeRoute = `/${type}`) {
 
 function serviceLanes() { return `<section class="section service-lanes"><div class="section-header"><h2>Travel support for the journeys that matter</h2><p>Tell us what you need. A Travel To Know specialist will review the request and respond with the next practical step.</p></div><div class="segment-grid">${serviceLaneData.map(([title, text, value], index) => `<a class="segment-card segment-${index + 1}" href="#/request-service?service=${encodeURIComponent(value)}"><span class="segment-number">0${index + 1}</span><h3>${title}</h3><p>${text}</p><span class="segment-link">Request support →</span></a>`).join("")}</div></section>`; }
 
-function trustStrip() { return `<section class="trust-strip"><style>
-.trust-strip .trust-badges{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px!important;margin:28px 0 34px!important}
-.trust-strip .trust-badges>div{position:relative!important;overflow:hidden!important;min-height:96px!important;display:flex!important;flex-direction:column!important;justify-content:center!important;align-items:center!important;text-align:center!important;padding:18px 12px!important;border-radius:18px!important;background:#fff!important;border:1.5px solid var(--brand)!important;box-shadow:0 8px 22px rgba(20,40,60,.09)!important;transition:transform .2s ease,box-shadow .2s ease!important}
-.trust-strip .trust-badges>div:before{content:"";position:absolute;left:0;right:0;top:0;height:7px;background:var(--brand)!important}
-.trust-strip .trust-badges>div:hover{transform:translateY(-3px)!important;box-shadow:0 12px 28px rgba(20,40,60,.14)!important}
-.trust-strip .trust-badges .iata{--brand:#005eb8;background:linear-gradient(145deg,#edf6ff 0%,#fff 72%)!important}
-.trust-strip .trust-badges .mocat{--brand:#16834b;background:linear-gradient(145deg,#effaf3 0%,#fff 72%)!important}
-.trust-strip .trust-badges .dbid{--brand:#e67e22;background:linear-gradient(145deg,#fff5e9 0%,#fff 72%)!important}
-.trust-strip .trust-badges strong{display:block!important;margin:0 0 7px!important;font-size:1.22rem!important;letter-spacing:.03em!important;color:var(--brand)!important}
-.trust-strip .trust-badges span{display:block!important;color:#68737d!important;font-size:.94rem!important}
-@media(max-width:640px){.trust-strip .trust-badges{grid-template-columns:1fr!important;gap:12px!important}.trust-strip .trust-badges>div{min-height:88px!important}}
-</style><div class="trust-wrap"><div><span class="eyebrow">WHY TRAVEL TO KNOW</span><h2>Your journey. Our priority.</h2><p>Reliable travel solutions for business, leisure and journeys beyond borders—with human support when the details matter.</p></div><div class="trust-badges"><div class="iata"><strong>IATA</strong><span>Accredited agency</span></div><div class="mocat"><strong>MoCAT</strong><span>0013575</span></div><div class="dbid"><strong>DBID</strong><span>717571834</span></div></div><div class="trust-actions"><a class="primary-button" href="#/request-service">Start an enquiry</a><a href="#/contact-us">View contact &amp; office details</a><a href="#/terms-and-conditions">Read refund &amp; cancellation terms</a></div></div></section>`; }
+function trustStrip() { return `<section class="trust-strip"><div class="trust-wrap"><div><span class="eyebrow">WHY TRAVEL TO KNOW</span><h2>Your journey. Our priority.</h2><p>Reliable travel solutions for business, leisure and journeys beyond borders—with human support when the details matter.</p></div><div class="trust-badges"><div><strong>IATA</strong><span>Accredited agency</span></div><div><strong>MoCAT</strong><span>0013575</span></div><div><strong>DBID</strong><span>717571834</span></div></div><div class="trust-actions"><a class="primary-button" href="#/request-service">Start an enquiry</a><a href="#/contact-us">View contact &amp; office details</a><a href="#/terms-and-conditions">Read refund &amp; cancellation terms</a></div></div></section>`; }
 
 function offers() { return `<section class="section compact"><div class="section-header"><h2>Exclusive Offers</h2><p>Discover unbeatable offers that won't last long. Grab these premium deals before they're gone!</p></div><div class="empty-state">No offer found</div></section>`; }
 
-function destinationSection() { return `<section class="section"><div class="section-header"><h2>Popular Destinations</h2><p>Click on a destination to explore exciting flight deals.</p></div><div class="destination-grid">${destinations.map(([from, to, airport, code, country, image]) => `<button class="destination-card" data-destination="${to}"><img src="${ASSET}${image}" alt="${from} to ${to}"><div class="destination-info"><h3>${from} <span>${to}</span></h3><p>${airport}</p><div class="destination-meta"><span>IATA: ${code} · ${country}</span><span class="tag">Top Pick</span></div></div></button>`).join("")}</div></section>`; }
+function destinationSection() { return `<section class="section"><div class="section-header"><h2>Popular Destinations</h2><p>Click on a destination to explore hotel options and travel deals.</p></div><div class="destination-grid">${destinations.map(([from, to, airport, code, country, image]) => `<button class="destination-card affiliate-clickable" data-destination="${to}" data-affiliate-destination="${to}" aria-label="Explore hotel offers in ${to}"><img src="${ASSET}${image}" alt="${from} to ${to}"><div class="destination-info"><h3>${from} <span>${to}</span></h3><p>${airport}</p><div class="destination-meta"><span>${country}</span><span class="tag">Hotel Offers</span></div></div></button>`).join("")}</div></section>`; }
 
 function featuresSection() { return `<section class="section"><div class="section-header"><h2>Our Services at a Glance</h2><p>Discover a variety of features designed to enhance and simplify your travel journey.</p></div><div class="features-grid">${features.map(([icon, title, text]) => `<div class="feature"><div class="feature-icon">${icon}</div><h3>${title}</h3><p>${text}</p></div>`).join("")}</div></section>`; }
 
-function placesSection() { return `<section class="places-section"><h2>Must-Visit Places</h2><p>Discover More About Us</p><div class="places-grid">${places.map(([title, text, image]) => `<button class="place-card" data-place="${title}"><img src="${ASSET}${image}" alt="${title}"><div class="place-copy"><h3>${title}</h3><p>${text}</p></div></button>`).join("")}</div></section>`; }
+function placesSection() { return `<section class="places-section"><h2>Must-Visit Places</h2><p>Discover More About Us</p><div class="places-grid">${places.map(([title, text, image]) => `<button class="place-card affiliate-clickable" data-place="${title}" data-affiliate-destination="${title}" aria-label="Explore hotel offers in ${title}"><img src="${ASSET}${image}" alt="${title}"><div class="place-copy"><h3>${title}</h3><p>${text}</p></div></button>`).join("")}</div></section>`; }
 
 function newsletter() { return `<section class="newsletter"><h2>Join Our Travel Circle</h2><p>Get insider travel advice, sneak peeks at new destinations, and access to subscriber-only offers. Your next adventure starts in your inbox.</p><form class="newsletter-form" data-newsletter><input class="input" type="email" placeholder="you@example.com" aria-label="Email address" required><button class="primary-button" type="submit">Get Updates</button></form></section>`; }
 
@@ -203,12 +192,41 @@ function showModal(title, message) {
   backdrop.addEventListener("click", (event) => { if (event.target === backdrop || event.target.closest("[data-close-modal]")) backdrop.remove(); });
 }
 
+function getAffiliateConfig() { return window.TRAVEL_AFFILIATE_CONFIG || {}; }
+function buildHotelAffiliateUrl(destination = "") {
+  const cfg = getAffiliateConfig();
+  const provider = cfg.preferredProvider || "agoda";
+  const cleanDestination = String(destination || "").trim();
+  if (provider === "booking" && cfg.booking?.aid && cfg.booking.aid !== "YOUR_BOOKING_AID") {
+    const base = cfg.booking.base || "https://www.booking.com";
+    const path = cfg.booking.destinationPath || "/searchresults.html";
+    const url = new URL(path, base);
+    url.searchParams.set("aid", cfg.booking.aid);
+    if (cleanDestination) url.searchParams.set("ss", cleanDestination);
+    return url.toString();
+  }
+  if (cfg.agoda?.cid) {
+    const base = cfg.agoda.base || "https://www.agoda.com";
+    const path = cfg.agoda.destinationPath || "/search";
+    const url = new URL(path, base);
+    url.searchParams.set("textToSearch", cleanDestination || "Dhaka");
+    url.searchParams.set("cid", cfg.agoda.cid);
+    return url.toString();
+  }
+  return "";
+}
+function openHotelAffiliate(destination = "") {
+  const url = buildHotelAffiliateUrl(destination);
+  if (!url) { showModal("Hotel booking connection", "Affiliate credentials are not fully configured yet. Add the Booking.com AID or Agoda configuration when available."); return; }
+  window.open(url, "_blank", "noopener,noreferrer");
+}
+
 function bindInteractions() {
   document.querySelector("[data-dismiss-announcement]")?.addEventListener("click", (event) => { event.target.closest(".announcement")?.remove(); });
   document.querySelector("[data-menu-toggle]")?.addEventListener("click", () => document.querySelector("[data-primary-nav]")?.classList.toggle("open"));
-  document.querySelectorAll("[data-service-tab]").forEach((button) => button.addEventListener("click", () => go(`/${button.dataset.serviceTab}`)));
+  document.querySelectorAll("[data-service-tab]").forEach((button) => button.addEventListener("click", () => { if (button.dataset.serviceTab === "hotels") openHotelAffiliate(); else go(`/${button.dataset.serviceTab}`); }));
   document.querySelectorAll("[data-demo-search]").forEach((button) => button.addEventListener("click", () => showModal(`${button.dataset.demoSearch} search demo`, "This GitHub Pages copy reproduces the search interface. Live supplier fares and availability require the original OTA/API connection.")));
-  document.querySelectorAll("[data-destination], [data-place]").forEach((button) => button.addEventListener("click", () => showModal(button.dataset.destination || button.dataset.place, "Destination detail is ready for the live travel API or your own package catalogue.")));
+  document.querySelectorAll("[data-affiliate-destination]").forEach((button) => button.addEventListener("click", () => openHotelAffiliate(button.dataset.affiliateDestination)));
   document.querySelectorAll("[data-demo-payment]").forEach((link) => link.addEventListener("click", (event) => { event.preventDefault(); showModal("Payment verification", "Please verify the current account details with Travel To Know support before making a transfer."); }));
   document.querySelector("[data-newsletter]")?.addEventListener("submit", (event) => { event.preventDefault(); toast("Thanks — newsletter subscription is ready for backend integration."); event.target.reset(); });
   document.querySelector("[data-lead-form]")?.addEventListener("submit", (event) => {

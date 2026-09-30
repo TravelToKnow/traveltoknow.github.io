@@ -1,11 +1,17 @@
-/* Travel To Know affiliate configuration. Replace the two placeholders after approval. */
+/* Travel To Know affiliate configuration.
+ * Booking AID is intentionally left as a placeholder until the approved AID is supplied.
+ * Agoda CID is the currently supplied CID.
+ */
 window.TRAVEL_AFFILIATE_CONFIG = {
+  preferredProvider: "agoda",
   booking: {
     aid: "YOUR_BOOKING_AID",
-    base: "https://www.booking.com"
+    base: "https://www.booking.com",
+    destinationPath: "/searchresults.html"
   },
   agoda: {
     cid: "8085912",
-    base: "https://www.agoda.com"
+    base: "https://www.agoda.com",
+    destinationPath: "/search"
   }
 };

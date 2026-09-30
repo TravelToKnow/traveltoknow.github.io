@@ -1,0 +1,18 @@
+Travel To Know — ready-to-upload update bundle
+
+Included changes:
+- API connector scaffold: api-config.js + api-client.js
+- Agoda CID 8085912 retained/configured
+- Booking.com AID remains YOUR_BOOKING_AID until supplied
+- Hotels tab opens the configured hotel affiliate destination
+- Popular Destination cards/photos open hotel affiliate destination searches
+- Must-Visit Places cards/photos open hotel affiliate destination searches
+- Visible IATA airport labels removed from destination cards/poster-style destination visuals
+- RegTech Nexus AI branding link used for the footer developer credit
+- Existing legal IATA certificate information is preserved
+
+Important:
+- The repository's existing image assets and styles.css are not replaced by this update bundle.
+- The app references the existing GitHub Pages assets so the current visuals remain available.
+- Upload/merge these files into the existing repository root; do not delete the existing image assets.
+- When the real provider APIs are supplied, set TRAVEL_API_CONFIG.baseUrl and endpoints in api-config.js.
