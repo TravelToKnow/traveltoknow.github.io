@@ -1,8 +1,10 @@
 Amazon affiliate integration
 
-The website app.js has been updated to display an Amazon product section with this affiliate link:
+The Travel To Know website includes the existing Amazon affiliate link:
 https://amzn.to/4AUcpLI
 
 Tracking ID used by the Amazon link: traveltoknow2-20
 
-Replace the existing app.js in the website with the patched app.js from this package, then redeploy the site. The Amazon section is rendered by app.js, so adding a separate HTML page alone does not add it to the live website.
+The homepage now includes a Travel Essentials section with the same affiliate link, and the standalone amazon-product-link.html page is retained.
+
+Amazon affiliate links should remain direct Amazon/amzn.to links and should not be replaced by the hotel API redirect flow.

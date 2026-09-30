@@ -1,4 +1,4 @@
-const ASSET = "https://traveltoknow.github.io/";
+const ASSET = "";
 
 const destinations = [
   ["Bangladesh", "Jeddah", "King Abdulaziz International Airport", "JED", "SAUDI ARABIA", "jeddah.jpg"],
@@ -116,7 +116,7 @@ function bookingForm(type) {
 
 function heroPage(type = "flights", activeRoute = `/${type}`) {
   const copy = { flights: ["Explore the Best Flight Options", "Uncover unbeatable offers on global travel destinations"], hotels: ["Discover Your Perfect Vacation Stay", "Discover amazing deals to destinations worldwide"], holidays: ["Discover Your Next Tour", "Discover amazing deals to destinations worldwide"], visa: ["Visa processing Services Available!", "Visa depends on your profile and financial conditions!"] }[type];
-  return `${header(activeRoute, true)}<main><section class="hero"><div class="hero-inner"><div class="hero-copy"><h1>${copy[0]}</h1><p>${copy[1]}</p><div class="hero-actions"><a class="primary-button" href="#/request-service">Plan Your Next Journey</a><a class="hero-call" href="tel:+8801772282925">Call +88 01772 282925</a></div></div><div class="booking-shell">${serviceTabMarkup(type)}${bookingForm(type)}</div></div></section>${serviceLanes()}${trustStrip()}${offers()}${destinationSection()}${featuresSection()}${placesSection()}${newsletter()}</main>${footer()}`;
+  return `${header(activeRoute, true)}<main><section class="hero"><div class="hero-inner"><div class="hero-copy"><h1>${copy[0]}</h1><p>${copy[1]}</p><div class="hero-actions"><a class="primary-button" href="#/request-service">Plan Your Next Journey</a><a class="hero-call" href="tel:+8801772282925">Call +88 01772 282925</a></div></div><div class="booking-shell">${serviceTabMarkup(type)}${bookingForm(type)}</div></div></section>${serviceLanes()}${trustStrip()}${offers()}${amazonAffiliateSection()}${destinationSection()}${featuresSection()}${placesSection()}${newsletter()}</main>${footer()}`;
 }
 
 function serviceLanes() { return `<section class="section service-lanes"><div class="section-header"><h2>Travel support for the journeys that matter</h2><p>Tell us what you need. A Travel To Know specialist will review the request and respond with the next practical step.</p></div><div class="segment-grid">${serviceLaneData.map(([title, text, value], index) => `<a class="segment-card segment-${index + 1}" href="#/request-service?service=${encodeURIComponent(value)}"><span class="segment-number">0${index + 1}</span><h3>${title}</h3><p>${text}</p><span class="segment-link">Request support →</span></a>`).join("")}</div></section>`; }
@@ -125,7 +125,11 @@ function trustStrip() { return `<section class="trust-strip"><div class="trust-w
 
 function offers() { return `<section class="section compact"><div class="section-header"><h2>Exclusive Offers</h2><p>Discover unbeatable offers that won't last long. Grab these premium deals before they're gone!</p></div><div class="empty-state">No offer found</div></section>`; }
 
-function destinationSection() { return `<section class="section"><div class="section-header"><h2>Popular Destinations</h2><p>Click on a destination to explore hotel options and travel deals.</p></div><div class="destination-grid">${destinations.map(([from, to, airport, code, country, image]) => `<button class="destination-card affiliate-clickable" data-destination="${to}" data-affiliate-destination="${to}" aria-label="Explore hotel offers in ${to}"><img src="${ASSET}${image}" alt="${from} to ${to}"><div class="destination-info"><h3>${from} <span>${to}</span></h3><p>${airport}</p><div class="destination-meta"><span>${country}</span><span class="tag">Hotel Offers</span></div></div></button>`).join("")}</div></section>`; }
+function amazonAffiliateSection() {
+  const link = "https://amzn.to/4AUcpLI";
+  return `<section class="section amazon-affiliate-section" aria-labelledby="amazon-travel-essentials-title"><div class="amazon-affiliate-card"><div class="amazon-affiliate-copy"><span class="eyebrow">TRAVEL ESSENTIALS</span><h2 id="amazon-travel-essentials-title">Travel Essentials on Amazon</h2><p>Find useful travel gear and accessories through our Amazon Associate link.</p><a class="amazon-affiliate-button" href="${link}" target="_blank" rel="nofollow sponsored noopener">🛒 Check Price on Amazon</a><p class="amazon-disclosure">As an Amazon Associate I earn from qualifying purchases.</p></div><div class="amazon-affiliate-badge" aria-hidden="true">Amazon</div></div></section>`; }
+
+function destinationSection() { return `<section class="section"><div class="section-header"><h2>Popular Destinations</h2><p>Click on a destination to explore exciting flight deals.</p></div><div class="destination-grid">${destinations.map(([from, to, airport, code, country, image]) => `<button class="destination-card affiliate-clickable" data-destination="${to}" data-affiliate-destination="${to}" aria-label="Explore hotel offers in ${to}"><img src="${ASSET}${image}" alt="${from} to ${to}"><div class="destination-info"><h3>${from} <span>${to}</span></h3><p>${airport}</p><div class="destination-meta"><span>${country}</span><span class="tag">Hotel Offers</span></div></div></button>`).join("")}</div></section>`; }
 
 function featuresSection() { return `<section class="section"><div class="section-header"><h2>Our Services at a Glance</h2><p>Discover a variety of features designed to enhance and simplify your travel journey.</p></div><div class="features-grid">${features.map(([icon, title, text]) => `<div class="feature"><div class="feature-icon">${icon}</div><h3>${title}</h3><p>${text}</p></div>`).join("")}</div></section>`; }
 
@@ -192,41 +196,31 @@ function showModal(title, message) {
   backdrop.addEventListener("click", (event) => { if (event.target === backdrop || event.target.closest("[data-close-modal]")) backdrop.remove(); });
 }
 
-function getAffiliateConfig() { return window.TRAVEL_AFFILIATE_CONFIG || {}; }
-function buildHotelAffiliateUrl(destination = "") {
-  const cfg = getAffiliateConfig();
-  const provider = cfg.preferredProvider || "agoda";
-  const cleanDestination = String(destination || "").trim();
-  if (provider === "booking" && cfg.booking?.aid && cfg.booking.aid !== "YOUR_BOOKING_AID") {
-    const base = cfg.booking.base || "https://www.booking.com";
-    const path = cfg.booking.destinationPath || "/searchresults.html";
-    const url = new URL(path, base);
-    url.searchParams.set("aid", cfg.booking.aid);
-    if (cleanDestination) url.searchParams.set("ss", cleanDestination);
-    return url.toString();
-  }
-  if (cfg.agoda?.cid) {
-    const base = cfg.agoda.base || "https://www.agoda.com";
-    const path = cfg.agoda.destinationPath || "/search";
-    const url = new URL(path, base);
-    url.searchParams.set("textToSearch", cleanDestination || "Dhaka");
-    url.searchParams.set("cid", cfg.agoda.cid);
-    return url.toString();
-  }
-  return "";
-}
-function openHotelAffiliate(destination = "") {
-  const url = buildHotelAffiliateUrl(destination);
-  if (!url) { showModal("Hotel booking connection", "Affiliate credentials are not fully configured yet. Add the Booking.com AID or Agoda configuration when available."); return; }
-  window.open(url, "_blank", "noopener,noreferrer");
-}
-
 function bindInteractions() {
   document.querySelector("[data-dismiss-announcement]")?.addEventListener("click", (event) => { event.target.closest(".announcement")?.remove(); });
   document.querySelector("[data-menu-toggle]")?.addEventListener("click", () => document.querySelector("[data-primary-nav]")?.classList.toggle("open"));
-  document.querySelectorAll("[data-service-tab]").forEach((button) => button.addEventListener("click", () => { if (button.dataset.serviceTab === "hotels") openHotelAffiliate(); else go(`/${button.dataset.serviceTab}`); }));
+  document.querySelectorAll("[data-service-tab]").forEach((button) => button.addEventListener("click", () => go(`/${button.dataset.serviceTab}`)));
   document.querySelectorAll("[data-demo-search]").forEach((button) => button.addEventListener("click", () => showModal(`${button.dataset.demoSearch} search demo`, "This GitHub Pages copy reproduces the search interface. Live supplier fares and availability require the original OTA/API connection.")));
-  document.querySelectorAll("[data-affiliate-destination]").forEach((button) => button.addEventListener("click", () => openHotelAffiliate(button.dataset.affiliateDestination)));
+  document.querySelectorAll("[data-affiliate-destination]").forEach((button) => button.addEventListener("click", () => {
+    const destination = button.dataset.affiliateDestination || button.dataset.destination || button.dataset.place || "";
+    const config = window.TRAVEL_AFFILIATE_CONFIG || {};
+    const provider = config.preferredProvider || "agoda";
+    if (provider === "booking" && config.booking?.aid && config.booking.aid !== "YOUR_BOOKING_AID") {
+      const url = `${config.booking.base || "https://www.booking.com"}${config.booking.destinationPath || "/searchresults.html"}?ss=${encodeURIComponent(destination)}&aid=${encodeURIComponent(config.booking.aid)}`;
+      window.open(url, "_blank", "noopener");
+      return;
+    }
+    if (config.agoda?.cid) {
+      const url = `${config.agoda.base || "https://www.agoda.com"}${config.agoda.destinationPath || "/search"}?textToSearch=${encodeURIComponent(destination)}&cid=${encodeURIComponent(config.agoda.cid)}`;
+      window.open(url, "_blank", "noopener");
+      return;
+    }
+    showModal(destination, "Hotel affiliate links are not configured yet.");
+  }));
+  document.querySelectorAll("[data-destination], [data-place]").forEach((button) => {
+    if (button.dataset.affiliateDestination) return;
+    button.addEventListener("click", () => showModal(button.dataset.destination || button.dataset.place, "Destination detail is ready for the live travel API or your own package catalogue."));
+  });
   document.querySelectorAll("[data-demo-payment]").forEach((link) => link.addEventListener("click", (event) => { event.preventDefault(); showModal("Payment verification", "Please verify the current account details with Travel To Know support before making a transfer."); }));
   document.querySelector("[data-newsletter]")?.addEventListener("submit", (event) => { event.preventDefault(); toast("Thanks — newsletter subscription is ready for backend integration."); event.target.reset(); });
   document.querySelector("[data-lead-form]")?.addEventListener("submit", (event) => {
