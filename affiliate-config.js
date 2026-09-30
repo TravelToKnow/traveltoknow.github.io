@@ -13,7 +13,8 @@ window.TRAVEL_AFFILIATE_CONFIG = {
   agoda: {
     cid: "8085912",
     base: "https://www.agoda.com",
-    destinationPath: "/search"
+    destinationPath: "/search",
+    flightPath: "/flights"
   },
   amazon: {
     url: "https://amzn.to/4AUcpLI",

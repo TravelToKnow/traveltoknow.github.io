@@ -1,0 +1,23 @@
+Travel To Know — Flights + Agoda Affiliate Update
+
+1. Flights tab
+- Kept the existing flight fields: One-way / Round-trip / Multi-city, From, To, Departure, Return, Travelers and Class.
+- From/To now accept IATA airport codes such as DAC and CXB.
+- Search Flight captures the selected criteria and is ready to send them to /api/flights/search when a secure flight-search backend is connected.
+- When the flight API returns results, the website renders flight cards on the Travel To Know page with airline, times, duration/stops and price, plus a Book on Agoda button.
+- If the flight API is not connected, the website does not pretend to have live fares. It shows the captured search criteria and provides an Agoda Flights affiliate handoff using CID 8085912.
+
+2. Agoda Flights affiliate
+- Agoda flight landing page is configured as https://www.agoda.com/flights with CID 8085912.
+- Agoda's current affiliate FAQ states that links containing the affiliate CID can be tracked from URLs within the registered domain. The website therefore uses a CID-tagged Agoda handoff for flights.
+- Exact flight inventory, pricing and booking-result data should not be scraped from Agoda into GitHub Pages. For on-site live results, connect a permitted flight-search API/backend to /api/flights/search.
+
+3. Holidays
+- The Holiday Search button now sends the selected destination to Agoda's search page with CID 8085912.
+
+4. Existing integrations preserved
+- Amazon affiliate link: https://amzn.to/4AUcpLI
+- Amazon tracking ID: traveltoknow2-20
+- BRAC Bank Bangla QR remains a separate payment method.
+- Booking.com AID remains a placeholder until the approved AID is supplied.
+- RegTech Nexus AI footer branding remains unchanged.

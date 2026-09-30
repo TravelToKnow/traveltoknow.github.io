@@ -11,6 +11,7 @@
   window.TravelToKnowAPI = {
     config: cfg,
     searchHotels: (payload) => request(cfg.endpoints.hotelsSearch, { method: "POST", body: JSON.stringify(payload || {}) }),
+    searchFlights: (payload) => request(cfg.endpoints.flightsSearch, { method: "POST", body: JSON.stringify(payload || {}) }),
     getHotelDetails: (payload) => request(cfg.endpoints.hotelDetails, { method: "POST", body: JSON.stringify(payload || {}) }),
     getBookingRedirect: (payload) => request(cfg.endpoints.bookingRedirect, { method: "POST", body: JSON.stringify(payload || {}) }),
     getAgodaRedirect: (payload) => request(cfg.endpoints.agodaRedirect, { method: "POST", body: JSON.stringify(payload || {}) })

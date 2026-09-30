@@ -8,6 +8,7 @@ window.TRAVEL_API_CONFIG = {
   endpoints: {
     hotelsSearch: "/api/hotels/search",
     hotelDetails: "/api/hotels/details",
+    flightsSearch: "/api/flights/search",
     bookingRedirect: "/api/affiliates/booking",
     agodaRedirect: "/api/affiliates/agoda"
   }

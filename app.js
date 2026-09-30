@@ -109,9 +109,9 @@ function serviceTabMarkup(active) {
 
 function bookingForm(type) {
   if (type === "hotels") return `<div class="booking-card" data-form="hotels"><div class="mode-row"><span class="mode active">Stay More, Pay Less — Book Your Dream Hotel Now! 🏨💫</span></div><div class="form-grid"><div class="field"><label>CITY / HOTEL / RESORT / AREA</label><div class="field-box"><strong>⌖</strong><span>Dhaka, Bangladesh</span></div></div><div class="field"><label>CHECK IN DATE</label><input class="date-input" type="date" value="2026-09-23"></div><div class="field"><label>CHECK OUT DATE</label><input class="date-input" type="date" value="2026-09-26"></div><div class="field"><label>ROOMS &amp; GUESTS</label><select><option>1 Room, 2 Guests</option><option>2 Rooms, 4 Guests</option><option>3 Rooms, 6 Guests</option></select></div><button class="primary-button" data-demo-search="Hotel">Search Hotel</button></div></div>`;
-  if (type === "holidays") return `<div class="booking-card" data-form="holidays"><div class="mode-row"><span class="mode active">Explore More, Pay Less — Book Your Dream Tour Today! 🌍✨</span></div><div class="form-grid"><div class="field"><label>SELECT YOUR TOUR DESTINATION CITY</label><select><option>Cox's Bazar — BANGLADESH</option><option>Dubai — UAE</option><option>Kuala Lumpur — MALAYSIA</option><option>Bangkok — THAILAND</option></select></div><div></div><div></div><button class="primary-button" data-demo-search="Holiday">Search Holiday</button></div></div>`;
+  if (type === "holidays") return `<div class="booking-card" data-form="holidays"><div class="mode-row"><span class="mode active">Explore More, Pay Less — Book Your Dream Tour Today! 🌍✨</span></div><div class="form-grid"><div class="field"><label>SELECT YOUR TOUR DESTINATION CITY</label><select data-holiday-destination><option>Cox's Bazar — BANGLADESH</option><option>Dubai — UAE</option><option>Kuala Lumpur — MALAYSIA</option><option>Bangkok — THAILAND</option></select></div><div></div><div></div><button class="primary-button" data-holiday-search>Search Holiday</button></div></div>`;
   if (type === "visa") return `<div class="booking-card" data-form="visa"><div class="mode-row"><span class="mode active">Hassle-Free Visa Services — Apply With Us For Fast Approval! 🛂✈️</span></div><div class="form-grid"><div class="field"><label>SELECT YOUR VISA CITY</label><select><option>Select country</option><option>Singapore</option><option>Thailand</option><option>Malaysia</option><option>Vietnam</option><option>Uzbekistan</option></select></div><div class="field"><label>SELECT TRAVELER(S)</label><select><option>1 Traveler</option><option>2 Travelers</option><option>3 Travelers</option></select></div><div></div><button class="primary-button" data-demo-search="Visa">Find Visa Info</button></div></div>`;
-  return `<div class="booking-card" data-form="flights"><div class="mode-row"><button class="mode active" data-flight-mode="one-way">One-way</button><button class="mode" data-flight-mode="round-trip">Round-trip</button><button class="mode" data-flight-mode="multi-city">Multi-city</button></div><div class="form-grid"><div class="field"><label>From</label><div class="field-box clickable"><strong>⌖</strong><span><b>DAC</b> - Hazrat Shahjalal International Airport</span></div></div><div class="field"><label>To</label><div class="field-box clickable"><strong>⌖</strong><span><b>CXB</b> - Cox's Bazar Airport</span></div></div><div class="field"><label>Departure date</label><input class="date-input" type="date" value="2026-09-23"></div><div class="field"><label>Return date</label><input class="date-input" type="date" value="2026-09-26"><span class="hint">Save more on roundtrip</span></div><div class="field"><label>TRAVELERS</label><select><option>1 Traveler</option><option>2 Travelers</option><option>3 Travelers</option><option>4 Travelers</option></select></div><div class="field"><label>CLASS</label><select><option>Economy</option><option>Premium Economy</option><option>Business</option><option>First Class</option></select></div><div></div><button class="primary-button" data-demo-search="Flight">Search Flight</button></div></div>`;
+  return `<div class="booking-card flight-booking-card" data-form="flights"><div class="mode-row"><button class="mode active" data-flight-mode="one-way">One-way</button><button class="mode" data-flight-mode="round-trip">Round-trip</button><button class="mode" data-flight-mode="multi-city">Multi-city</button></div><div class="form-grid"><div class="field"><label>From</label><input class="flight-airport-input" name="from" value="DAC" maxlength="3" placeholder="DAC" aria-label="Departure airport IATA code"></div><div class="field"><label>To</label><input class="flight-airport-input" name="to" value="CXB" maxlength="3" placeholder="CXB" aria-label="Arrival airport IATA code"></div><div class="field"><label>Departure date</label><input class="date-input" name="departureDate" type="date" value="2026-09-23"></div><div class="field"><label>Return date</label><input class="date-input" name="returnDate" type="date" value="2026-09-26"><span class="hint">Used for round-trip searches</span></div><div class="field"><label>TRAVELERS</label><select name="travellers"><option value="1">1 Traveler</option><option value="2">2 Travelers</option><option value="3">3 Travelers</option><option value="4">4 Travelers</option><option value="5">5 Travelers</option><option value="6">6 Travelers</option><option value="7">7 Travelers</option><option value="8">8 Travelers</option><option value="9">9 Travelers</option></select></div><div class="field"><label>CLASS</label><select name="cabin"><option value="Economy">Economy</option><option value="Premium Economy">Premium Economy</option><option value="Business">Business</option><option value="First Class">First Class</option></select></div><div></div><button class="primary-button" data-flight-search type="button">Search Flight</button></div><div class="flight-affiliate-note"><span>Flight results can be displayed here when the secure flight-search API is connected.</span><a class="text-link" data-agoda-flight-search href="https://www.agoda.com/flights?cid=8085912" target="_blank" rel="nofollow sponsored noopener">Search flights on Agoda →</a></div></div><div class="flight-results" data-flight-results aria-live="polite"></div>`;
 }
 
 function heroPage(type = "flights", activeRoute = `/${type}`) {
@@ -188,11 +188,88 @@ function showModal(title, message) {
   backdrop.addEventListener("click", (event) => { if (event.target === backdrop || event.target.closest("[data-close-modal]")) backdrop.remove(); });
 }
 
+function getAgodaConfig() { return (window.TRAVEL_AFFILIATE_CONFIG || {}).agoda || {}; }
+
+function agodaFlightUrl() {
+  const cfg = getAgodaConfig();
+  const base = cfg.flightBase || cfg.base || "https://www.agoda.com";
+  const path = cfg.flightPath || "/flights";
+  const url = new URL(path, base);
+  if (cfg.cid) url.searchParams.set("cid", cfg.cid);
+  return url.toString();
+}
+
+function normalizeFlightResults(payload) {
+  if (Array.isArray(payload)) return payload;
+  return payload?.results || payload?.flights || payload?.data || payload?.itineraries || [];
+}
+
+function renderFlightResults(payload, criteria) {
+  const box = document.querySelector("[data-flight-results]");
+  if (!box) return;
+  const results = normalizeFlightResults(payload);
+  if (!results.length) {
+    box.innerHTML = `<div class="flight-results-empty"><h3>No flight results returned</h3><p>Try another route or date, or continue to Agoda for live flight inventory.</p><a class="primary-button" href="${agodaFlightUrl()}" target="_blank" rel="nofollow sponsored noopener">Search live flights on Agoda</a></div>`;
+    return;
+  }
+  box.innerHTML = `<div class="flight-results-head"><div><span class="eyebrow">FLIGHT SEARCH RESULTS</span><h2>${escapeHtml(criteria.from)} → ${escapeHtml(criteria.to)}</h2><p>${escapeHtml(criteria.departureDate)} · ${escapeHtml(criteria.travellers)} traveller(s) · ${escapeHtml(criteria.cabin)}</p></div></div><div class="flight-result-list">${results.map((item, index) => {
+    const airline = item.airline || item.carrier || item.airlineName || "Airline";
+    const depart = item.departureTime || item.departure || item.departureAt || "";
+    const arrive = item.arrivalTime || item.arrival || item.arrivalAt || "";
+    const duration = item.duration || item.totalDuration || "";
+    const stops = item.stops ?? item.stopCount ?? "";
+    const price = item.price ?? item.totalPrice ?? item.amount ?? "";
+    const currency = item.currency || "";
+    const bookUrl = item.bookUrl || item.bookingUrl || agodaFlightUrl();
+    return `<article class="flight-result-card"><div><strong>${escapeHtml(airline)}</strong><div class="flight-times"><span>${escapeHtml(depart)}</span><b>→</b><span>${escapeHtml(arrive)}</span></div><small>${escapeHtml(duration)}${stops !== "" ? ` · ${escapeHtml(String(stops))} stop(s)` : ""}</small></div><div class="flight-result-price"><strong>${escapeHtml(currency)} ${escapeHtml(String(price))}</strong><a class="primary-button" href="${escapeHtml(bookUrl)}" target="_blank" rel="nofollow sponsored noopener">Book on Agoda</a></div></article>`;
+  }).join("")}</div>`;
+}
+
+async function searchFlightsFromForm(button) {
+  const card = button.closest("[data-form=flights]");
+  const mode = card?.querySelector(".mode.active")?.dataset.flightMode || "one-way";
+  const criteria = {
+    mode,
+    from: (card?.querySelector('[name="from"]')?.value || "").trim().toUpperCase(),
+    to: (card?.querySelector('[name="to"]')?.value || "").trim().toUpperCase(),
+    departureDate: card?.querySelector('[name="departureDate"]')?.value || "",
+    returnDate: card?.querySelector('[name="returnDate"]')?.value || "",
+    travellers: card?.querySelector('[name="travellers"]')?.value || "1",
+    cabin: card?.querySelector('[name="cabin"]')?.value || "Economy"
+  };
+  if (!/^[A-Z]{3}$/.test(criteria.from) || !/^[A-Z]{3}$/.test(criteria.to)) { toast("Please enter valid 3-letter airport codes, such as DAC and CXB."); return; }
+  if (!criteria.departureDate) { toast("Please select a departure date."); return; }
+  if (mode === "round-trip" && !criteria.returnDate) { toast("Please select a return date for a round-trip search."); return; }
+  sessionStorage.setItem("travelToKnowFlightSearch", JSON.stringify(criteria));
+  const box = document.querySelector("[data-flight-results]");
+  if (box) box.innerHTML = `<div class="flight-results-loading"><span class="eyebrow">SEARCHING</span><h3>Checking available flight options…</h3><p>Your search fields have been captured. Live results require the connected flight-search backend.</p></div>`;
+  try {
+    if (window.TravelToKnowAPI?.searchFlights && window.TRAVEL_API_CONFIG?.ready) {
+      const payload = await window.TravelToKnowAPI.searchFlights(criteria);
+      renderFlightResults(payload, criteria);
+      return;
+    }
+    if (box) box.innerHTML = `<div class="flight-results-empty"><span class="eyebrow">SEARCH READY</span><h3>Flight search criteria captured</h3><p>${escapeHtml(criteria.from)} → ${escapeHtml(criteria.to)} · ${escapeHtml(criteria.departureDate)} · ${escapeHtml(criteria.travellers)} traveller(s) · ${escapeHtml(criteria.cabin)}</p><p>To show live fares on Travel To Know before booking, connect a flight-search API to <code>/api/flights/search</code>. Agoda itself is used as the affiliate booking handoff.</p><a class="primary-button" href="${agodaFlightUrl()}" target="_blank" rel="nofollow sponsored noopener">Continue to Agoda Flights</a></div>`;
+  } catch (error) {
+    if (box) box.innerHTML = `<div class="flight-results-empty"><h3>Flight search is temporarily unavailable</h3><p>${escapeHtml(error.message || "Please try again later.")}</p><a class="primary-button" href="${agodaFlightUrl()}" target="_blank" rel="nofollow sponsored noopener">Continue to Agoda Flights</a></div>`;
+  }
+}
+
 function bindInteractions() {
   document.querySelector("[data-dismiss-announcement]")?.addEventListener("click", (event) => { event.target.closest(".announcement")?.remove(); });
   document.querySelector("[data-menu-toggle]")?.addEventListener("click", () => document.querySelector("[data-primary-nav]")?.classList.toggle("open"));
   document.querySelectorAll("[data-service-tab]").forEach((button) => button.addEventListener("click", () => go(`/${button.dataset.serviceTab}`)));
-  document.querySelectorAll("[data-demo-search]").forEach((button) => button.addEventListener("click", () => showModal(`${button.dataset.demoSearch} search demo`, "This GitHub Pages copy reproduces the search interface. Live supplier fares and availability require the original OTA/API connection.")));
+  document.querySelectorAll("[data-demo-search]").forEach((button) => button.addEventListener("click", () => showModal(`${button.dataset.demoSearch} search demo`, "This service remains connected to the existing Travel To Know enquiry flow. Live supplier fares and availability require the relevant secure API connection.")));
+  document.querySelectorAll("[data-flight-search]").forEach((button) => button.addEventListener("click", () => searchFlightsFromForm(button)));
+  document.querySelectorAll("[data-holiday-search]").forEach((button) => button.addEventListener("click", () => {
+    const destination = document.querySelector("[data-holiday-destination]")?.value || "";
+    const cleanDestination = destination.split("—")[0].trim();
+    const cfg = getAgodaConfig();
+    const url = new URL(cfg.destinationPath || "/search", cfg.base || "https://www.agoda.com");
+    url.searchParams.set("textToSearch", cleanDestination);
+    if (cfg.cid) url.searchParams.set("cid", cfg.cid);
+    window.open(url.toString(), "_blank", "noopener");
+  }));
   document.querySelectorAll("[data-affiliate-destination]").forEach((button) => button.addEventListener("click", () => {
     const destination = button.dataset.affiliateDestination || button.dataset.destination || button.dataset.place || "";
     const config = window.TRAVEL_AFFILIATE_CONFIG || {};
