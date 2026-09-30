@@ -150,3 +150,16 @@
   .trust-badge-icon{width:54px;height:54px;border-radius:15px;font-size:11px;}
   .trust-badge-copy small{font-size:8px;}
 }
+
+/* Uploaded visual assets */
+.amazon-affiliate-badge{overflow:hidden;display:flex;align-items:center;justify-content:center;padding:0!important;background:#ff9900!important;}
+.amazon-affiliate-badge img{display:block;width:100%;height:100%;max-height:150px;object-fit:cover;border-radius:inherit;}
+.trust-badges-logos{grid-template-columns:repeat(4,minmax(0,1fr));align-items:stretch;}
+.trust-logo-badge{position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;min-height:190px;padding:14px 12px 12px!important;background:linear-gradient(145deg,#ffffff,#f2f7fb)!important;border:1px solid rgba(16,57,78,.1)!important;box-shadow:0 14px 28px rgba(14,48,68,.12), inset 0 1px 0 rgba(255,255,255,.9)!important;}
+.trust-logo-badge::after{content:"";position:absolute;left:12%;right:12%;bottom:0;height:6px;border-radius:8px 8px 0 0;box-shadow:0 -2px 8px rgba(0,0,0,.08);}
+.trust-badge-mocat::after{background:#159447}.trust-badge-atab::after{background:#1d4f88}.trust-badge-dbid::after{background:#7a208f}.trust-badge-iata::after{background:#1555a0}
+.trust-logo-badge img{display:block;width:100%;height:112px;object-fit:contain;border-radius:12px;background:#fff;}
+.trust-logo-badge .trust-badge-copy{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:8px;}
+.trust-logo-badge .trust-badge-copy strong{font-size:1rem}.trust-logo-badge .trust-badge-copy small{font-size:.72rem;text-align:right;}
+@media (max-width:900px){.trust-badges-logos{grid-template-columns:repeat(2,minmax(0,1fr));}}
+@media (max-width:520px){.trust-badges-logos{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.trust-logo-badge{min-height:155px;padding:9px 8px 10px!important}.trust-logo-badge img{height:82px}.trust-logo-badge .trust-badge-copy{display:block}.trust-logo-badge .trust-badge-copy strong,.trust-logo-badge .trust-badge-copy small{display:block;text-align:center}.trust-logo-badge .trust-badge-copy small{margin-top:2px;font-size:.65rem}.amazon-affiliate-badge{min-height:120px!important}.amazon-affiliate-badge img{max-height:120px;}}
