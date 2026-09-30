@@ -1,7 +1,17 @@
 /* Travel To Know API client scaffold. No provider secrets are stored in the browser. */
 (function () {
   const cfg = window.TRAVEL_API_CONFIG || { baseUrl: "", ready: false, endpoints: {} };
-  function url(path) { return new URL(path || "", cfg.baseUrl || window.location.origin).toString(); }
+  function url(path) {
+    const base = cfg.baseUrl || window.location.origin;
+    const baseUrl = new URL(base, window.location.origin);
+    const candidate = new URL(path || "", baseUrl);
+    const sameOrigin = candidate.origin === window.location.origin;
+    const configuredOrigin = candidate.origin === baseUrl.origin;
+    if (!sameOrigin && (!cfg.baseUrl || !configuredOrigin || candidate.protocol !== "https:")) {
+      throw new Error("Blocked API destination.");
+    }
+    return candidate.toString();
+  }
   async function request(path, options = {}) {
     if (!cfg.ready || !cfg.baseUrl) throw new Error("Travel To Know API is not connected yet.");
     const response = await fetch(url(path), { ...options, headers: { "Content-Type": "application/json", ...(options.headers || {}) } });
