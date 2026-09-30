@@ -1,18 +1,4 @@
-/* Travel To Know flight search + Agoda affiliate handoff */
-.flight-booking-card .flight-affiliate-note{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:14px;padding:12px 14px;border:1px solid #e5edf2;border-radius:10px;background:#f8fbfd;color:#5f6d75;font-size:.84rem;line-height:1.45}
-.flight-booking-card .flight-affiliate-note .text-link{white-space:nowrap}
-.flight-results{margin-top:22px}
-.flight-results-loading,.flight-results-empty{padding:24px;border:1px solid #e5edf2;border-radius:14px;background:#fff;box-shadow:0 8px 24px rgba(16,45,66,.05)}
-.flight-results-loading h3,.flight-results-empty h3{margin:5px 0 8px;color:#12384d}
-.flight-results-loading p,.flight-results-empty p{margin:0 0 14px;color:#66737b;line-height:1.55}
-.flight-results-head{margin-bottom:14px}
-.flight-results-head h2{margin:5px 0;color:#12384d}
-.flight-results-head p{margin:0;color:#66737b}
-.flight-result-list{display:grid;gap:12px}
-.flight-result-card{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:18px;border:1px solid #e5edf2;border-radius:14px;background:#fff}
-.flight-result-card>div:first-child{min-width:0}
-.flight-times{display:flex;align-items:center;gap:10px;margin:7px 0 4px;font-size:1.05rem}
-.flight-result-card small{color:#6b7780}
-.flight-result-price{text-align:right;display:flex;align-items:flex-end;flex-direction:column;gap:9px;white-space:nowrap}
-.flight-result-price strong{font-size:1.1rem;color:#12384d}
-@media (max-width:700px){.flight-booking-card .flight-affiliate-note,.flight-result-card{flex-direction:column;align-items:stretch}.flight-booking-card .flight-affiliate-note .text-link{white-space:normal}.flight-result-price{align-items:stretch;text-align:left}.flight-result-price .primary-button{text-align:center}}
+.flight-booking-card .flight-airport-select{width:100%;min-height:46px;padding:0 12px;border:1px solid #dce6eb;border-radius:8px;background:#fff;color:#173b4d;font:inherit;outline:none;}
+.flight-booking-card .flight-airport-select:focus{border-color:#0f6078;box-shadow:0 0 0 3px rgba(15,96,120,.1);}
+.flight-booking-card .flight-airport-select option{font-size:.92rem;}
+@media (max-width:700px){.flight-booking-card .flight-airport-select{min-height:48px;font-size:.9rem;}}

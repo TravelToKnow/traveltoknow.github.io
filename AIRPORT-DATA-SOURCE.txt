@@ -1,0 +1,8 @@
+Travel To Know airport dropdown
+
+The Flights From/To dropdowns are populated from the OurAirports open-data airports.csv dataset at runtime.
+Source: https://ourairports.com/data/
+Direct dataset: https://davidmegginson.github.io/ourairports-data/airports.csv
+
+Only records with a valid 3-letter IATA code are shown. The dataset is updated daily by OurAirports.
+A small fallback list of common airports is included so the form remains usable if the external dataset cannot be reached.
