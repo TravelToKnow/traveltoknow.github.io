@@ -1,8 +1,12 @@
-# Travel To Know — Footer Route Scroll Fix
+Travel To Know — Amazon Affiliate + Preservation Update
 
-Updated `app.js` so that when a user taps any footer Explore/Services link, the SPA renders the selected page and then explicitly resets both the window and document scroll positions to the very top.
+Updated app.js preserves the existing Travel To Know structure and adds:
+- Amazon Basics 21-Inch Carry-On Luggage card under Exclusive Offers
+- Canonical Amazon short link: https://amzn.to/4AUcpLI
+- rel="nofollow sponsored noopener"
+- RegTech Nexus AI footer branding
+- Colourful trust badges and glossy action styling
+- Payment method brand marks without changing account details
+- Route render scroll-to-top behaviour
 
-This fixes the issue where the new page could open while retaining the previous page's scroll position.
-
-## Install
-Replace the current `app.js` in the GitHub Pages repository with this version.
+Amazon URL audit: only https://amzn.to/4AUcpLI is present; no old Amazon URL was found.
