@@ -151,10 +151,10 @@ function infoPage(route) {
   return `${header(route)}<main class="page-main"><div class="content-card legal-copy">${body}</div></main>${footer()}`;
 }
 function paymentPage() { return `${header("/payment-method")}<main class="page-main"><div class="content-card"><h1>Payment Methods</h1><p class="intro">Select a verified payment method to proceed with your transaction.</p><h2>Available Methods</h2><div class="payment-grid">
-<div class="payment-card"><div class="payment-brand-logo-wrap"><img class="payment-brand-logo" src="brac-bank-logo.svg" alt="BRAC Bank logo"></div><h3>BRAC Bank PLC</h3><div class="type">Bank</div><dl><div><dt>Account Name</dt><dd>Travel To Know</dd></div><div><dt>Account Number</dt><dd>2060728030001</dd></div><div><dt>Branch</dt><dd>Motijheel Branch</dd></div><div><dt>Routing</dt><dd>060274247</dd></div><div><dt>SWIFT Code</dt><dd>BRAKBDDH</dd></div></dl><a href="#/payment-method" data-demo-payment>Proceed to deposit →</a></div>
-<div class="payment-card payment-qr-card"><div class="payment-brand-logo-wrap"><img class="payment-brand-logo" src="brac-bank-logo.svg" alt="BRAC Bank logo"></div><h3>BRAC Bank Bangla QR</h3><div class="type">Digital QR Payment</div><div class="payment-qr-box"><img src="brac-bank-bangla-qr.jpg" alt="Travel To Know BRAC Bank Bangla QR merchant payment code"><p class="payment-qr-caption"><strong>Scan &amp; Pay</strong><br>Use a supported banking app to scan this BRAC Bank Bangla QR and make a payment to Travel To Know.</p><div class="payment-qr-actions"><a class="payment-qr-download" href="brac-bank-bangla-qr.jpg" download="Travel-To-Know-BRAC-Bank-Bangla-QR.jpg">⬇ Download QR</a><a class="payment-qr-open" href="brac-bank-bangla-qr.jpg" target="_blank" rel="noopener">↗ Open QR</a></div><p class="payment-qr-merchant">Merchant: <strong>TRAVEL TO KNOW</strong></p></div></div>
-<div class="payment-card"><div class="payment-brand-logo-wrap"><img class="payment-brand-logo" src="bkash-logo.svg" alt="bKash logo"></div><h3>bKash (Payment Only)</h3><div class="type">MFS</div><dl><div><dt>Account Name</dt><dd>Travel To Know</dd></div><div><dt>Account Number</dt><dd>01772282925</dd></div></dl><a href="#/payment-method" data-demo-payment>Proceed to deposit →</a></div>
-<div class="payment-card"><div class="payment-brand-logo-wrap"><img class="payment-brand-logo" src="dbbl-logo.svg" alt="Dutch-Bangla Bank logo"></div><h3>Dutch-Bangla Bank PLC</h3><div class="type">Bank</div><dl><div><dt>Account Name</dt><dd>Travel To Know</dd></div><div><dt>Account Number</dt><dd>7017100453518</dd></div><div><dt>Branch</dt><dd>Agent Banking (Foreign Exchange Branch)</dd></div><div><dt>Routing</dt><dd>090270608</dd></div><div><dt>SWIFT Code</dt><dd>DBBLBDDH</dd></div></dl><a href="#/payment-method" data-demo-payment>Proceed to deposit →</a></div>
+<div class="payment-card"><div class="payment-brand-logo-wrap"><img class="payment-brand-logo" src="brac-bank-logo.png" alt="BRAC Bank logo"></div><h3>BRAC Bank PLC</h3><div class="type">Bank</div><dl><div><dt>Account Name</dt><dd>Travel To Know</dd></div><div><dt>Account Number</dt><dd>2060728030001</dd></div><div><dt>Branch</dt><dd>Motijheel Branch</dd></div><div><dt>Routing</dt><dd>060274247</dd></div><div><dt>SWIFT Code</dt><dd>BRAKBDDH</dd></div></dl><a href="#/payment-method" data-demo-payment>Proceed to deposit →</a></div>
+<div class="payment-card payment-qr-card"><div class="payment-brand-logo-wrap"><img class="payment-brand-logo" src="brac-bank-logo.png" alt="BRAC Bank logo"></div><h3>BRAC Bank Bangla QR</h3><div class="type">Digital QR Payment</div><div class="payment-qr-box"><img src="brac-bank-bangla-qr.jpg" alt="Travel To Know BRAC Bank Bangla QR merchant payment code"><p class="payment-qr-caption"><strong>Scan &amp; Pay</strong><br>Use a supported banking app to scan this BRAC Bank Bangla QR and make a payment to Travel To Know.</p><div class="payment-qr-actions"><a class="payment-qr-download" href="brac-bank-bangla-qr.jpg" download="Travel-To-Know-BRAC-Bank-Bangla-QR.jpg">⬇ Download QR</a><a class="payment-qr-open" href="brac-bank-bangla-qr.jpg" target="_blank" rel="noopener">↗ Open QR</a></div><p class="payment-qr-merchant">Merchant: <strong>TRAVEL TO KNOW</strong></p></div></div>
+<div class="payment-card"><div class="payment-brand-logo-wrap"><img class="payment-brand-logo" src="bkash-logo.png" alt="bKash logo"></div><h3>bKash (Payment Only)</h3><div class="type">MFS</div><dl><div><dt>Account Name</dt><dd>Travel To Know</dd></div><div><dt>Account Number</dt><dd>01772282925</dd></div></dl><a href="#/payment-method" data-demo-payment>Proceed to deposit →</a></div>
+<div class="payment-card"><div class="payment-brand-logo-wrap"><img class="payment-brand-logo" src="dbbl-logo.png" alt="Dutch-Bangla Bank logo"></div><h3>Dutch-Bangla Bank PLC</h3><div class="type">Bank</div><dl><div><dt>Account Name</dt><dd>Travel To Know</dd></div><div><dt>Account Number</dt><dd>7017100453518</dd></div><div><dt>Branch</dt><dd>Agent Banking (Foreign Exchange Branch)</dd></div><div><dt>Routing</dt><dd>090270608</dd></div><div><dt>SWIFT Code</dt><dd>DBBLBDDH</dd></div></dl><a href="#/payment-method" data-demo-payment>Proceed to deposit →</a></div>
 </div><p class="hint" style="margin-top:24px">All payment methods should be verified with Travel To Know support before making a transfer.</p></div></main>${footer()}`; }
 function render() {
   const route = routeFromLocation();
@@ -200,15 +200,13 @@ function airportLookup(code) {
 
 function agodaFlightUrl(criteria) {
   const cfg = getAgodaConfig();
-  const from = airportLookup(criteria?.from);
-  const to = airportLookup(criteria?.to);
-  const base = cfg.base || "https://www.agoda.com";
-  const fromSlug = airportSlug(from?.city || from?.name || criteria?.from || "departure");
-  const toSlug = airportSlug(to?.city || to?.name || criteria?.to || "destination");
-  const routeSlug = `${fromSlug}-${toSlug}`;
-  const path = `/flights/airport/${String(criteria?.from || "").toLowerCase()}/${String(criteria?.to || "").toLowerCase()}/${routeSlug}.html`;
-  const url = new URL(path, base);
+  const url = new URL(cfg.flightPath || "/flights", cfg.base || "https://www.agoda.com");
   if (cfg.cid) url.searchParams.set("cid", cfg.cid);
+  // Keep the user's selected search criteria in the affiliate URL. Agoda may
+  // change/ignore individual query parameters, but the destination remains
+  // the stable Agoda Flights page and the CID is preserved for attribution.
+  if (criteria?.from) url.searchParams.set("from", String(criteria.from).toUpperCase());
+  if (criteria?.to) url.searchParams.set("to", String(criteria.to).toUpperCase());
   if (criteria?.departureDate) url.searchParams.set("departureDate", criteria.departureDate);
   if (criteria?.returnDate && criteria.mode !== "one-way") url.searchParams.set("returnDate", criteria.returnDate);
   if (criteria?.travellers) url.searchParams.set("travellers", criteria.travellers);
