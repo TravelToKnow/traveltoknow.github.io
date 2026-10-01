@@ -34,3 +34,20 @@ button,a,input,select,textarea{-webkit-tap-highlight-color:transparent}
 .amazon-affiliate-badge{min-width:118px;min-height:72px;padding:10px;background:#fff;color:#232F3E;border:1px solid #232F3E;border-radius:12px;box-shadow:0 8px 18px rgba(35,47,62,.14);font-size:0}
 .amazon-affiliate-badge img{width:96px;height:auto;max-height:44px;object-fit:contain}
 @media(max-width:650px){.brand{padding:3px 7px}.brand img{width:120px}.footer-brand img{width:180px}.footer-brand>a{margin-bottom:9px}.footer-wrap>div:not(.footer-brand)>a{margin-bottom:9px}.amazon-affiliate-badge{min-width:104px;min-height:64px;align-self:center}.amazon-affiliate-badge img{width:86px;max-height:40px}}
+
+/* Final requested polish: trust controls, Amazon badge fit, blog UI and route scrolling. */
+.trust-actions{align-items:stretch}
+.trust-actions .primary-button{display:flex;align-items:center;justify-content:center;text-align:center;min-height:48px;padding:0 18px;line-height:1.2;white-space:normal}
+.trust-actions>a:not(.primary-button){display:flex;align-items:center;min-height:38px}
+.amazon-affiliate-card{gap:18px}
+.amazon-affiliate-badge{width:118px;min-width:118px;height:64px;min-height:64px;padding:0;display:flex;align-items:center;justify-content:center;background:#FF9900;border-color:#232F3E;overflow:hidden}
+.amazon-affiliate-badge img{display:block;width:108px;height:60px;max-width:108px;max-height:60px;object-fit:contain}
+.blog-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:18px;margin-top:28px}
+.blog-card{padding:24px;border:1px solid #e5eaee;border-radius:16px;background:linear-gradient(145deg,#fff,#f7fafb);box-shadow:0 10px 26px rgba(16,45,66,.06)}
+.blog-card-label{display:inline-block;color:var(--orange);font-size:11px;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+.blog-card h2{margin:8px 0 10px;color:var(--navy-deep)}
+.blog-card p{margin:0 0 18px;color:var(--muted);line-height:1.65}
+.blog-read-button{display:inline-flex;align-items:center;justify-content:center;min-height:44px;text-decoration:none;color:#fff!important}
+.back-link{display:inline-flex;margin-bottom:20px;color:var(--orange);font-weight:800;text-decoration:none}
+.article-card h1{margin-bottom:14px}
+@media(max-width:650px){.amazon-affiliate-badge{width:104px;min-width:104px;height:58px;min-height:58px;align-self:center}.amazon-affiliate-badge img{width:98px;height:54px;max-width:98px;max-height:54px}.trust-actions .primary-button{width:100%}}

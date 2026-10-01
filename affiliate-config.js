@@ -17,7 +17,9 @@ window.TRAVEL_AFFILIATE_CONFIG = {
     base: "https://www.agoda.com",
     allowedHost: "www.agoda.com",
     destinationPath: "/search",
-    flightPath: "/flights"
+    flightPath: "/flights",
+    flightBase: "https://flights.agoda.com",
+    flightAllowedHost: "flights.agoda.com"
   },
   amazon: {
     url: "https://amzn.to/4AUcpLI",

@@ -144,6 +144,14 @@ function placesSection() { return `<section class="places-section"><h2>Must-Visi
 
 function newsletter() { return `<section class="newsletter"><h2>Join Our Travel Circle</h2><p>Get insider travel advice, sneak peeks at new destinations, and access to subscriber-only offers. Your next adventure starts in your inbox.</p><form class="newsletter-form" data-newsletter><input class="input" type="email" placeholder="you@example.com" aria-label="Email address" required><button class="primary-button" type="submit">Get Updates</button></form></section>`; }
 
+function blogPage() {
+  return `${header("/blog")}<main class="page-main blog-page"><div class="content-card"><span class="eyebrow">TRAVEL TO KNOW · BLOG</span><h1>Travel Guidance &amp; Support</h1><p class="intro">Practical travel guidance, planning notes and service insights for business, family and international journeys.</p><div class="blog-grid"><article class="blog-card"><span class="blog-card-label">Travel Planning</span><h2>Corporate Travel Planning &amp; Cost Control</h2><p>Practical ways to structure business travel requests, compare options and keep travel records clear.</p><a class="primary-button blog-read-button" href="#/blog/corporate-travel-cost-control">Read article</a></article></div></div></main>${footer()}`;
+}
+
+function articlePage() {
+  return `${header("/blog")}<main class="page-main blog-page"><article class="content-card article-card"><a class="back-link" href="#/blog">← Back to Blog</a><span class="eyebrow">TRAVEL TO KNOW · TRAVEL GUIDANCE</span><h1>Corporate Travel Planning &amp; Cost Control</h1><p class="intro">A practical framework for organising business travel while keeping approvals, traveller needs and costs visible.</p><h2>Start with a clear travel brief</h2><p>Record the traveller, route, dates, flexibility, cabin preference, baggage needs and approval requirements before searching. A complete brief reduces repeated changes and makes supplier comparisons easier.</p><h2>Compare the full travel cost</h2><p>Look beyond the headline fare. Consider baggage, change conditions, cancellation terms, hotel location, transport needs and any service charges that apply before confirmation.</p><h2>Keep approvals and records together</h2><p>For business travel, retain the approved itinerary, traveller details, supplier terms and final confirmation in one accessible record. This supports later reconciliation and makes changes easier to track.</p><h2>Review before confirmation</h2><p>Confirm names, dates, routing, inclusions, payment terms and refund or cancellation conditions before issuing a ticket or confirming accommodation.</p><a class="primary-button blog-read-button" href="#/request-service">Request travel support</a></article></main>${footer()}`;
+}
+
 function requestPage() {
   const selected = queryParam("service");
   const selectedOption = serviceLaneData.some(([, , value]) => value === selected) ? selected : "";
@@ -206,6 +214,7 @@ function getAgodaConfig() { return (window.TRAVEL_AFFILIATE_CONFIG || {}).agoda 
 function getBookingConfig() { return (window.TRAVEL_AFFILIATE_CONFIG || {}).booking || {}; }
 
 const AFFILIATE_HOSTS = Object.freeze({ agoda: "www.agoda.com", booking: "www.booking.com", amazon: "amzn.to" });
+const AGODA_FLIGHT_HOST = "flights.agoda.com";
 
 function trustedAffiliateBase(provider, fallback) {
   const config = window.TRAVEL_AFFILIATE_CONFIG || {};
@@ -229,15 +238,19 @@ function airportLookup(code) { return window.TRAVEL_AIRPORTS?.find((airport) => 
 
 function agodaFlightUrl(criteria) {
   const cfg = getAgodaConfig();
-  const url = trustedAffiliatePath("agoda", "/flights", "/flights");
+  // Use Agoda's dedicated Flights portal. Route-specific URLs can return 404 for
+  // some airport combinations, so the form always lands on the live flight portal.
+  const candidate = cfg.flightBase || `https://${AGODA_FLIGHT_HOST}`;
+  let url;
+  try {
+    const parsed = new URL(candidate);
+    const allowedHost = cfg.flightAllowedHost || AGODA_FLIGHT_HOST;
+    if (parsed.protocol !== "https:" || parsed.hostname !== allowedHost) throw new Error("Invalid Agoda flight host");
+    url = new URL("/", parsed);
+  } catch (_) {
+    url = new URL(`https://${AGODA_FLIGHT_HOST}/`);
+  }
   if (cfg.cid) url.searchParams.set("cid", String(cfg.cid));
-  if (criteria?.from) url.searchParams.set("origin", String(criteria.from).toUpperCase());
-  if (criteria?.to) url.searchParams.set("destination", String(criteria.to).toUpperCase());
-  if (criteria?.departureDate) url.searchParams.set("departureDate", criteria.departureDate);
-  if (criteria?.returnDate && criteria.mode === "round-trip") url.searchParams.set("returnDate", criteria.returnDate);
-  if (criteria?.travellers) url.searchParams.set("adults", criteria.travellers);
-  if (criteria?.cabin) url.searchParams.set("cabin", criteria.cabin);
-  if (criteria?.mode) url.searchParams.set("tripType", criteria.mode);
   return url.toString();
 }
 
@@ -419,6 +432,6 @@ function bindInteractions() {
   populateAirportSelects();
 }
 
-window.addEventListener("hashchange", render);
-window.addEventListener("popstate", render);
+window.addEventListener("hashchange", () => { render(); window.requestAnimationFrame(() => window.scrollTo({ top: 0, behavior: "smooth" })); });
+window.addEventListener("popstate", () => { render(); window.requestAnimationFrame(() => window.scrollTo({ top: 0, behavior: "smooth" })); });
 render();
