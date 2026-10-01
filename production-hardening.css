@@ -1,7 +1,0 @@
-/* Travel To Know production hardening — additive only; preserves the existing design. */
-:focus-visible{outline:3px solid rgba(255,116,19,.72);outline-offset:3px}
-button,a,input,select,textarea{-webkit-tap-highlight-color:transparent}
-.trust-reference-note{grid-column:2 / -1;margin:-14px 0 0;color:#68737d;font-size:11px;line-height:1.45}
-.payment-note{margin-top:24px}
-@media(max-width:900px){.trust-reference-note{grid-column:1;margin:0}}
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
