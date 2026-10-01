@@ -1,9 +1,0 @@
-Travel To Know update — corrected branding + payment method + Amazon affiliate preservation
-
-1. Replaced the footer "Designed & Developed by RegTech Nexus AI" with "Designed & Developed by RegTech Nexus AI" across the application pages.
-2. Preserved the existing Amazon affiliate integration and link: https://amzn.to/4AUcpLI
-3. Preserved Amazon tracking ID: traveltoknow2-20.
-4. Added BRAC Bank Bangla QR as a separate payment method directly under BRAC Bank PLC.
-5. Added BRAC Bank, bKash and Dutch-Bangla Bank logos above their payment names.
-6. Added Download QR and Open QR actions for the supplied BRAC Bank Bangla QR image.
-7. This is an update package for the existing repository. Keep existing styles.css and destination images in place.
