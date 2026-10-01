@@ -1,0 +1,19 @@
+/* Travel To Know production hardening — additive only; preserves the existing design. */
+:focus-visible{outline:3px solid rgba(255,116,19,.72);outline-offset:3px}
+button,a,input,select,textarea{-webkit-tap-highlight-color:transparent}
+.trust-reference-note{grid-column:2 / -1;margin:-14px 0 0;color:#68737d;font-size:11px;line-height:1.45}
+.payment-note{margin-top:24px}
+@media(max-width:900px){.trust-reference-note{grid-column:1;margin:0}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+
+
+/* Requested visual treatment: larger, colourful reference-logo cards and a persistent scroll-up control. */
+.trust-badges-logos{display:grid;grid-template-columns:repeat(2,minmax(120px,1fr));gap:12px;align-items:stretch}
+.trust-badges-logos .trust-logo-badge{min-width:0;min-height:92px;padding:10px;background:linear-gradient(145deg,#ffffff,#eef6fa);border:1px solid #dbe8ee;border-radius:14px;display:flex;align-items:center;gap:10px;text-align:left;box-shadow:0 8px 20px rgba(16,45,66,.12),inset 0 1px 0 rgba(255,255,255,.9)}
+.trust-badges-logos .trust-logo-badge img{width:58px;height:58px;object-fit:contain;border-radius:10px;background:#fff;padding:5px;box-shadow:0 4px 10px rgba(16,45,66,.12)}
+.trust-badges-logos .trust-badge-copy{display:block;min-width:0}
+.trust-badges-logos .trust-badge-copy strong{font-size:14px;color:#0b4e6b}
+.trust-badges-logos .trust-badge-copy small{display:block;margin-top:4px;color:#68737d;font-size:10px;line-height:1.25}
+.scroll-top-button{position:fixed;right:18px;bottom:18px;z-index:25;width:48px;height:48px;border:1px solid rgba(255,255,255,.4);border-radius:50%;background:linear-gradient(145deg,#ff8a2b,#e95c00);color:#fff;font-size:24px;font-weight:900;box-shadow:0 10px 24px rgba(16,45,66,.25);cursor:pointer}
+.scroll-top-button:hover{transform:translateY(-2px);filter:brightness(.98)}
+@media(max-width:650px){.trust-badges-logos{grid-template-columns:1fr 1fr}.trust-badges-logos .trust-logo-badge{min-height:82px;padding:8px}.trust-badges-logos .trust-logo-badge img{width:48px;height:48px}.scroll-top-button{right:14px;bottom:14px;width:44px;height:44px}}

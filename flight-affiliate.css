@@ -1,0 +1,4 @@
+.flight-booking-card .flight-airport-select{width:100%;min-height:46px;padding:0 12px;border:1px solid #dce6eb;border-radius:8px;background:#fff;color:#173b4d;font:inherit;outline:none;}
+.flight-booking-card .flight-airport-select:focus{border-color:#0f6078;box-shadow:0 0 0 3px rgba(15,96,120,.1);}
+.flight-booking-card .flight-airport-select option{font-size:.92rem;}
+@media (max-width:700px){.flight-booking-card .flight-airport-select{min-height:48px;font-size:.9rem;}}

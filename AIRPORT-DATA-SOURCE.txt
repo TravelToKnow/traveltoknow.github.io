@@ -1,0 +1,6 @@
+Travel To Know — Airport Data Source
+
+Runtime airport dropdown source:
+https://davidmegginson.github.io/ourairports-data/airports.csv
+
+The site filters valid three-letter IATA airport codes and falls back to a built-in set of common airports if the remote CSV is unavailable.
