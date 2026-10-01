@@ -118,8 +118,9 @@ function bookingForm(type) {
   if (type === "hotels") return `<div class="booking-card" data-form="hotels"><div class="mode-row"><span class="mode active">Stay More, Pay Less — Book Your Dream Hotel Now! 🏨💫</span></div><div class="form-grid"><div class="field"><label>CITY / HOTEL / RESORT / AREA</label><input name="hotelDestination" type="text" value="Dhaka, Bangladesh" placeholder="City, hotel, resort or area" aria-label="Hotel destination"></div><div class="field"><label>CHECK IN DATE</label><input class="date-input" name="checkIn" type="date" min="${dateOffsetISO(0)}" value="${dateOffsetISO(1)}"></div><div class="field"><label>CHECK OUT DATE</label><input class="date-input" name="checkOut" type="date" min="${dateOffsetISO(0)}" value="${dateOffsetISO(4)}"></div><div class="field"><label>ROOMS &amp; GUESTS</label><select name="roomsGuests"><option value="1|2">1 Room, 2 Guests</option><option value="2|4">2 Rooms, 4 Guests</option><option value="3|6">3 Rooms, 6 Guests</option><option value="1|1">1 Room, 1 Guest</option><option value="1|3">1 Room, 3 Guests</option><option value="1|4">1 Room, 4 Guests</option></select></div><button class="primary-button" data-hotel-search type="button">Search Hotel</button></div></div>`;
   if (type === "holidays") return `<div class="booking-card" data-form="holidays"><div class="mode-row"><span class="mode active">Explore More, Pay Less — Book Your Dream Tour Today! 🌍✨</span></div><div class="form-grid"><div class="field"><label>SELECT YOUR TOUR DESTINATION CITY</label><select data-holiday-destination><option>Cox's Bazar — BANGLADESH</option><option>Dubai — UAE</option><option>Kuala Lumpur — MALAYSIA</option><option>Bangkok — THAILAND</option><option>Singapore</option><option>Bali</option><option>Colombo</option><option>Jeddah</option><option>London</option><option>New York</option></select></div><div></div><div></div><button class="primary-button" data-holiday-search type="button">Search Holiday</button></div></div>`;
   if (type === "visa") return `<div class="booking-card" data-form="visa"><div class="mode-row"><span class="mode active">Hassle-Free Visa Services — Apply With Us For Fast Approval! 🛂✈️</span></div><div class="form-grid"><div class="field"><label>SELECT YOUR VISA CITY</label><select><option>Select country</option><option>Singapore</option><option>Thailand</option><option>Malaysia</option><option>Vietnam</option><option>Uzbekistan</option></select></div><div class="field"><label>SELECT TRAVELER(S)</label><select><option>1 Traveler</option><option>2 Travelers</option><option>3 Travelers</option></select></div><div></div><button class="primary-button" data-demo-search="Visa">Find Visa Info</button></div></div>`;
-  return `<div class="booking-card flight-booking-card" data-form="flights"><div class="mode-row"><button class="mode active" aria-pressed="true" data-flight-mode="one-way">One-way</button><button class="mode" aria-pressed="false" data-flight-mode="round-trip">Round-trip</button><button class="mode" aria-pressed="false" data-flight-mode="multi-city">Multi-city</button></div><div class="form-grid"><div class="field"><label>From</label><select class="flight-airport-select" name="from" aria-label="Departure airport"><option value="DAC" selected>DAC — Dhaka — Hazrat Shahjalal International Airport</option></select></div><div class="field"><label>To</label><select class="flight-airport-select" name="to" aria-label="Arrival airport"><option value="CXB" selected>CXB — Cox's Bazar — Cox's Bazar Airport</option></select></div><div class="field"><label>Departure date</label><input class="date-input" name="departureDate" type="date" min="${dateOffsetISO(0)}" value="${dateOffsetISO(1)}"></div><div class="field"><label>Return date</label><input class="date-input" name="returnDate" type="date" min="${dateOffsetISO(0)}" value="${dateOffsetISO(4)}"><span class="hint">Used for round-trip searches</span></div><div class="field"><label>TRAVELERS</label><select name="travellers"><option value="1">1 Traveler</option><option value="2">2 Travelers</option><option value="3">3 Travelers</option><option value="4">4 Travelers</option><option value="5">5 Travelers</option><option value="6">6 Travelers</option><option value="7">7 Travelers</option><option value="8">8 Travelers</option><option value="9">9 Travelers</option></select></div><div class="field"><label>CLASS</label><select name="cabin"><option value="Economy">Economy</option><option value="Premium Economy">Premium Economy</option><option value="Business">Business</option><option value="First Class">First Class</option></select></div><div></div><button class="primary-button" data-flight-search type="button">Search Flight</button></div></div>`;
+  return `<div class="booking-card flight-booking-card" data-form="flights"><div class="mode-row"><button class="mode active" aria-pressed="true" data-flight-mode="one-way">One-way</button><button class="mode" aria-pressed="false" data-flight-mode="round-trip">Round-trip</button><button class="mode" aria-pressed="false" data-flight-mode="multi-city">Multi-city</button></div><div class="form-grid"><div class="field"><label>From</label><select class="flight-airport-select" name="from" aria-label="Departure airport"><option value="DAC" selected>DAC — Dhaka</option></select></div><div class="field"><label>To</label><select class="flight-airport-select" name="to" aria-label="Arrival airport"><option value="DXB" selected>DXB — Dubai</option></select></div><div class="field"><label>Departure date</label><input class="date-input" name="departureDate" type="date" min="${dateOffsetISO(0)}" value="${dateOffsetISO(1)}"></div><div class="field return-date-field" data-return-field hidden><label>Return date</label><input class="date-input" name="returnDate" type="date" min="${dateOffsetISO(0)}" value=""><span class="hint">Required for round-trip searches</span></div><div class="field"><label>TRAVELERS</label><select name="travellers"><option value="1">1 Traveler</option><option value="2">2 Travelers</option><option value="3">3 Travelers</option><option value="4">4 Travelers</option><option value="5">5 Travelers</option><option value="6">6 Travelers</option><option value="7">7 Travelers</option><option value="8">8 Travelers</option><option value="9">9 Travelers</option></select></div><div class="field"><label>CLASS</label><select name="cabin"><option value="Economy">Economy</option><option value="Premium Economy">Premium Economy</option><option value="Business">Business</option><option value="First Class">First Class</option></select></div><div></div><button class="primary-button" data-flight-search type="button">Search Flight</button></div></div>`;
 }
+
 function heroPage(type = "flights", activeRoute = `/${type}`) {
   const copy = { flights: ["Explore the Best Flight Options", "Uncover unbeatable offers on global travel destinations"], hotels: ["Discover Your Perfect Vacation Stay", "Discover amazing deals to destinations worldwide"], holidays: ["Discover Your Next Tour", "Discover amazing deals to destinations worldwide"], visa: ["Visa processing Services Available!", "Visa depends on your profile and financial conditions!"] }[type];
   return `${header(activeRoute, true)}<main><section class="hero"><div class="hero-inner"><div class="hero-copy"><h1>${copy[0]}</h1><p>${copy[1]}</p><div class="hero-actions"><a class="primary-button" href="#/request-service">Plan Your Next Journey</a><a class="hero-call" href="tel:+8801772282925">Call +88 01772 282925</a></div></div><div class="booking-shell">${serviceTabMarkup(type)}${bookingForm(type)}</div></div></section>${serviceLanes()}${trustStrip()}${offers()}${amazonAffiliateSection()}${destinationSection()}${featuresSection()}${placesSection()}${newsletter()}</main>${footer()}`;
@@ -228,19 +229,13 @@ function airportLookup(code) { return window.TRAVEL_AIRPORTS?.find((airport) => 
 
 function agodaFlightUrl(criteria) {
   const cfg = getAgodaConfig();
-  const from = airportLookup(criteria?.from);
-  const to = airportLookup(criteria?.to);
-  const fromSlug = airportSlug(from?.city || from?.name || criteria?.from);
-  const toSlug = airportSlug(to?.city || to?.name || criteria?.to);
-  const routeSlug = `${fromSlug}-${toSlug}`.replace(/-+/g, "-").replace(/^-|-$/g, "");
-  const fromCode = String(criteria?.from || "").toLowerCase();
-  const toCode = String(criteria?.to || "").toLowerCase();
-  const path = fromCode && toCode && routeSlug ? `/flights/airport/${fromCode}/${toCode}/${routeSlug}.html` : (cfg.flightPath || "/flights");
-  const url = trustedAffiliatePath("agoda", path, "/flights");
+  const url = trustedAffiliatePath("agoda", "/flights", "/flights");
   if (cfg.cid) url.searchParams.set("cid", String(cfg.cid));
+  if (criteria?.from) url.searchParams.set("origin", String(criteria.from).toUpperCase());
+  if (criteria?.to) url.searchParams.set("destination", String(criteria.to).toUpperCase());
   if (criteria?.departureDate) url.searchParams.set("departureDate", criteria.departureDate);
-  if (criteria?.returnDate && criteria.mode !== "one-way") url.searchParams.set("returnDate", criteria.returnDate);
-  if (criteria?.travellers) url.searchParams.set("travellers", criteria.travellers);
+  if (criteria?.returnDate && criteria.mode === "round-trip") url.searchParams.set("returnDate", criteria.returnDate);
+  if (criteria?.travellers) url.searchParams.set("adults", criteria.travellers);
   if (criteria?.cabin) url.searchParams.set("cabin", criteria.cabin);
   if (criteria?.mode) url.searchParams.set("tripType", criteria.mode);
   return url.toString();
@@ -281,7 +276,7 @@ function populateAirportSelects() {
       airports.forEach((a) => {
         const option = document.createElement("option");
         option.value = a.iata;
-        option.textContent = `${a.iata} — ${a.city || a.name} — ${a.name}${a.country ? `, ${a.country}` : ""}`;
+        option.textContent = `${a.iata} — ${a.city || a.name}`;
         fragment.appendChild(option);
       });
       select.replaceChildren(fragment);
@@ -410,7 +405,17 @@ function bindInteractions() {
   document.querySelector("[data-login-form]")?.addEventListener("submit", (event) => { event.preventDefault(); showModal("Demo sign-in", "Authentication is not connected in this static GitHub Pages build. Add your backend auth endpoint to activate it."); });
   document.querySelector("[data-signup-form]")?.addEventListener("submit", (event) => { event.preventDefault(); showModal("Demo sign-up", "Account creation is not connected in this static build. Add your backend auth endpoint to activate it."); });
   document.querySelector("[data-forgot-form]")?.addEventListener("submit", (event) => { event.preventDefault(); showModal("Demo password recovery", "OTP delivery requires a secure backend email/SMS service."); });
-  document.querySelectorAll("[data-flight-mode]").forEach((button) => button.addEventListener("click", () => { document.querySelectorAll("[data-flight-mode]").forEach((item) => { item.classList.remove("active"); item.setAttribute("aria-pressed", "false"); }); button.classList.add("active"); button.setAttribute("aria-pressed", "true"); }));
+  document.querySelectorAll("[data-flight-mode]").forEach((button) => button.addEventListener("click", () => {
+    const card = button.closest("[data-form=flights]");
+    document.querySelectorAll("[data-flight-mode]").forEach((item) => { item.classList.remove("active"); item.setAttribute("aria-pressed", "false"); });
+    button.classList.add("active"); button.setAttribute("aria-pressed", "true");
+    const isRoundTrip = button.dataset.flightMode === "round-trip";
+    const returnField = card?.querySelector("[data-return-field]");
+    if (returnField) returnField.hidden = !isRoundTrip;
+    const departure = card?.querySelector('[name="departureDate"]')?.value || dateOffsetISO(1);
+    const returnInput = card?.querySelector('[name="returnDate"]');
+    if (returnInput) { returnInput.min = departure; if (!isRoundTrip) returnInput.value = ""; }
+  }));
   populateAirportSelects();
 }
 
