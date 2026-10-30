@@ -178,7 +178,8 @@ function infoPage(route) {
   const pages = {
     "/contact-us": `<h1>Contact Us</h1><p class="intro">We’d love to hear from you! Whether you have a question, need assistance, or want to start planning your next journey, our team is here to help.</p><h2>Get In Touch</h2><div class="contact-row"><strong>Address</strong><span>28/A-2 Toyenbee Circular Road (1st Floor), Motijheel, Dhaka-1000, Bangladesh</span></div><div class="contact-row"><strong>MoCAT</strong><span>Certificate No.: 0013575</span></div><div class="contact-row"><strong>IATA</strong><span>Certificate No.: 42341666</span></div><div class="contact-row"><strong>DBID</strong><span>License No.: 717571834</span></div><div class="contact-row"><strong>Phone</strong><span><a class="text-link" href="tel:+8801772282925">01772 282925</a><br><a class="text-link" href="tel:+8801999192993">01999 192993</a> or <a class="text-link" href="tel:+8801999192994">01999 192994</a></span></div><div class="contact-row"><strong>Email</strong><a class="text-link" href="mailto:traveltoknowbd@gmail.com">traveltoknowbd@gmail.com</a></div><div class="contact-row"><strong>Office Hours</strong><span>Sat–Thu, 10:00 AM – 8:00 PM</span></div>`,
   };
-  const entry = typeof OFFICIAL_LEGAL_CONTENT === "object" ? OFFICIAL_LEGAL_CONTENT[route] : "";
+  const legalContent = window.OFFICIAL_LEGAL_CONTENT || (typeof OFFICIAL_LEGAL_CONTENT !== "undefined" ? OFFICIAL_LEGAL_CONTENT : {});
+  const entry = legalContent && typeof legalContent === "object" ? legalContent[route] : "";
   const language = localStorage.getItem("ttk-language") === "bn" ? "bn" : "en";
   const body = entry && typeof entry === "object" ? (entry[language] || entry.en || "") : (entry || pages[route] || `<h1>Page not found</h1><p>The requested page could not be found.</p>`);
   return `${header(route)}<main class="page-main"><div class="content-card legal-copy" lang="${language}">${body}</div></main>${footer()}`;
