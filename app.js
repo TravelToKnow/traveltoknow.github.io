@@ -174,6 +174,8 @@ function paymentPage() { return `${header("/payment-method")}<main class="page-m
 <div class="payment-card"><div class="payment-brand-logo-wrap"><img class="payment-brand-logo" src="dbbl-logo.png" alt="Dutch-Bangla Bank logo"></div><h3>Dutch-Bangla Bank PLC</h3><div class="type">Bank</div><dl><div><dt>Account Name</dt><dd>Travel To Know</dd></div><div><dt>Account Number</dt><dd>7017100453518</dd></div><div><dt>Branch</dt><dd>Agent Banking (Foreign Exchange Branch)</dd></div><div><dt>Routing</dt><dd>090270608</dd></div><div><dt>SWIFT Code</dt><dd>DBBLBDDH</dd></div></dl><a href="#/payment-method" data-demo-payment>Proceed to deposit →</a></div>
 </div><p class="hint payment-note">All payment methods should be verified with Travel To Know support before making a transfer.</p></div></main>${footer()}`; }
 function render() {
+  const requestedLanguage = queryParam("lang");
+  if (requestedLanguage === "en" || requestedLanguage === "bn") localStorage.setItem("ttk-language", requestedLanguage);
   const route = routeFromLocation();
   document.title = routeTitles[route] || routeTitles["/"];
   const app = document.getElementById("app");
