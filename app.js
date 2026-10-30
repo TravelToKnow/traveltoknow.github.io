@@ -90,7 +90,7 @@ function header(active = "", onHero = false) {
     <a class="brand" href="#/" aria-label="Travel To Know — Your Travel Partner"><img src="${ASSET}logo.png" alt="Travel To Know — Your Travel Partner"></a>
     <button class="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="primary-navigation" data-menu-toggle>☰</button>
     <nav id="primary-navigation" class="primary-nav" data-primary-nav>${nav.map(([route, label]) => `<a href="#${route}" class="${active === route ? "active" : ""}">${label}</a>`).join("")}</nav>
-    <a class="header-account" href="#/sign-in">Sign In</a><a class="signin" href="#/request-service">Request a quote</a>
+    <label class="language-switcher">Language <select data-language-select aria-label="Choose language"><option value="en">English</option><option value="bn">বাংলা</option></select></label><a class="header-account" href="#/sign-in">Sign In</a><a class="signin" href="#/request-service">Request a quote</a>
   </div></header>`;
 }
 
@@ -352,7 +352,7 @@ function searchFlightsFromForm(button) {
   window.location.assign(agodaFlightUrl(criteria));
 }
 
-function bindInteractions() {
+function bindInteractions() {\n  document.querySelector("[data-language-select]")?.addEventListener("change", (event) => { localStorage.setItem("ttk-language", event.target.value); render(); });\n  const languageSelect = document.querySelector("[data-language-select]"); if (languageSelect) languageSelect.value = localStorage.getItem("ttk-language") === "bn" ? "bn" : "en";
   document.querySelector("[data-scroll-top]")?.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
   document.querySelector("[data-dismiss-announcement]")?.addEventListener("click", (event) => { event.target.closest(".announcement")?.remove(); });
   document.querySelector("[data-menu-toggle]")?.addEventListener("click", (event) => { const button = event.currentTarget; const nav = document.querySelector("[data-primary-nav]"); const open = nav?.classList.toggle("open") || false; button.setAttribute("aria-expanded", String(open)); button.setAttribute("aria-label", open ? "Close menu" : "Open menu"); });
