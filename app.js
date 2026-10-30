@@ -66,8 +66,8 @@ function routeFromLocation() {
   const normalize = (value) => {
     let path = String(value || "").split("?")[0].trim();
     try { path = decodeURIComponent(path); } catch (_) {}
-    if (!path.startsWith("/")) path = `/${path}`;
-    path = path.replace(/\\/{2,}/g, "/").replace(/\\/+$/, "").toLowerCase();
+    if (!path.startsWith("/")) path = \`/\${path}\`;
+    path = path.replace(/\/{2,}/g, "/").replace(/\/+$/, "").toLowerCase();
     return path || "/";
   };
 
@@ -80,14 +80,11 @@ function routeFromLocation() {
     if (embeddedHashRoute) return embeddedHashRoute;
   }
 
-  let path = normalize(window.location.pathname);
-  // GitHub Project Pages may include the repository name as the first path segment.
-  if (path === "/traveltoknow.github.io" || path === "/traveltoknow.github.io/index.html") return "/";
+  const path = normalize(window.location.pathname);
   const exactPathRoute = known.find((route) => route.toLowerCase() === path);
   if (exactPathRoute) return exactPathRoute;
   return known.find((route) => route !== "/" && path.endsWith(route.toLowerCase())) || "/";
 }
-
 function go(route) {
   window.location.hash = route;
   window.scrollTo({ top: 0, behavior: "instant" });
