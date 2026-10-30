@@ -90,7 +90,7 @@ function header(active = "", onHero = false) {
     <a class="brand" href="#/" aria-label="Travel To Know — Your Travel Partner"><img src="${ASSET}logo.png" alt="Travel To Know — Your Travel Partner"></a>
     <button class="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="primary-navigation" data-menu-toggle>☰</button>
     <nav id="primary-navigation" class="primary-nav" data-primary-nav>${nav.map(([route, label]) => `<a href="#${route}" class="${active === route ? "active" : ""}">${label}</a>`).join("")}</nav>
-    <a class="header-account" href="#/sign-in">Sign In</a><a class="signin" href="#/request-service">Request a quote</a>
+    <label class="language-switcher">Language <select data-language-select aria-label="Choose language"><option value="en">English</option><option value="bn">বাংলা</option></select></label><a class="header-account" href="#/sign-in">Sign In</a><a class="signin" href="#/request-service">Request a quote</a>
   </div></header>`;
 }
 
@@ -162,9 +162,10 @@ function infoPage(route) {
   const pages = {
     "/contact-us": `<h1>Contact Us</h1><p class="intro">We’d love to hear from you! Whether you have a question, need assistance, or want to start planning your next journey, our team is here to help.</p><h2>Get In Touch</h2><div class="contact-row"><strong>Address</strong><span>28/A-2 Toyenbee Circular Road (1st Floor), Motijheel, Dhaka-1000, Bangladesh</span></div><div class="contact-row"><strong>MoCAT</strong><span>Certificate No.: 0013575</span></div><div class="contact-row"><strong>IATA</strong><span>Certificate No.: 42341666</span></div><div class="contact-row"><strong>DBID</strong><span>License No.: 717571834</span></div><div class="contact-row"><strong>Phone</strong><span><a class="text-link" href="tel:+8801772282925">01772 282925</a><br><a class="text-link" href="tel:+8801999192993">01999 192993</a> or <a class="text-link" href="tel:+8801999192994">01999 192994</a></span></div><div class="contact-row"><strong>Email</strong><a class="text-link" href="mailto:traveltoknowbd@gmail.com">traveltoknowbd@gmail.com</a></div><div class="contact-row"><strong>Office Hours</strong><span>Sat–Thu, 10:00 AM – 8:00 PM</span></div>`,
   };
-  const official = typeof OFFICIAL_LEGAL_CONTENT === "object" ? OFFICIAL_LEGAL_CONTENT[route] : "";
-  const body = official || pages[route] || `<h1>Page not found</h1><p>The requested page could not be found.</p>`;
-  return `${header(route)}<main class="page-main"><div class="content-card legal-copy">${body}</div></main>${footer()}`;
+  const entry = typeof OFFICIAL_LEGAL_CONTENT === "object" ? OFFICIAL_LEGAL_CONTENT[route] : "";
+  const language = localStorage.getItem("ttk-language") === "bn" ? "bn" : "en";
+  const body = entry && typeof entry === "object" ? (entry[language] || entry.en || "") : (entry || pages[route] || `<h1>Page not found</h1><p>The requested page could not be found.</p>`);
+  return `${header(route)}<main class="page-main"><div class="content-card legal-copy" lang="${language}">${body}</div></main>${footer()}`;
 }
 function paymentPage() { return `${header("/payment-method")}<main class="page-main"><div class="content-card"><h1>Payment Methods</h1><p class="intro">Available payment methods are listed below. Verify the current details with Travel To Know support before payment.</p><h2>Available Methods</h2><div class="payment-grid">
 <div class="payment-card"><div class="payment-brand-logo-wrap"><img class="payment-brand-logo" src="brac-bank-logo.png" alt="BRAC Bank logo"></div><h3>BRAC Bank PLC</h3><div class="type">Bank</div><dl><div><dt>Account Name</dt><dd>Travel To Know</dd></div><div><dt>Account Number</dt><dd>2060728030001</dd></div><div><dt>Branch</dt><dd>Motijheel Branch</dd></div><div><dt>Routing</dt><dd>060274247</dd></div><div><dt>SWIFT Code</dt><dd>BRAKBDDH</dd></div></dl><a href="#/payment-method" data-demo-payment>Proceed to deposit →</a></div>
@@ -353,6 +354,12 @@ function searchFlightsFromForm(button) {
 }
 
 function bindInteractions() {
+  document.querySelector("[data-language-select]")?.addEventListener("change", (event) => {
+    localStorage.setItem("ttk-language", event.target.value);
+    render();
+  });
+  const languageSelect = document.querySelector("[data-language-select]");
+  if (languageSelect) languageSelect.value = localStorage.getItem("ttk-language") === "bn" ? "bn" : "en";
   document.querySelector("[data-scroll-top]")?.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
   document.querySelector("[data-dismiss-announcement]")?.addEventListener("click", (event) => { event.target.closest(".announcement")?.remove(); });
   document.querySelector("[data-menu-toggle]")?.addEventListener("click", (event) => { const button = event.currentTarget; const nav = document.querySelector("[data-primary-nav]"); const open = nav?.classList.toggle("open") || false; button.setAttribute("aria-expanded", String(open)); button.setAttribute("aria-label", open ? "Close menu" : "Open menu"); });
