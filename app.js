@@ -62,11 +62,30 @@ const routeTitles = {
 };
 
 function routeFromLocation() {
-  const hash = window.location.hash.replace(/^#/, "");
-  if (hash) return hash.startsWith("/") ? hash.split("?")[0] : `/${hash.split("?")[0]}`;
-  const path = window.location.pathname.replace(/\/+$/, "") || "/";
   const known = Object.keys(routeTitles).sort((a, b) => b.length - a.length);
-  return known.find((route) => path === route || path.endsWith(route)) || "/";
+  const normalize = (value) => {
+    let path = String(value || "").split("?")[0].trim();
+    try { path = decodeURIComponent(path); } catch (_) {}
+    if (!path.startsWith("/")) path = `/${path}`;
+    path = path.replace(/\\/{2,}/g, "/").replace(/\\/+$/, "").toLowerCase();
+    return path || "/";
+  };
+
+  const rawHash = window.location.hash.replace(/^#/, "");
+  if (rawHash) {
+    const hashPath = normalize(rawHash);
+    const exactHashRoute = known.find((route) => route.toLowerCase() === hashPath);
+    if (exactHashRoute) return exactHashRoute;
+    const embeddedHashRoute = known.find((route) => route !== "/" && hashPath.endsWith(route.toLowerCase()));
+    if (embeddedHashRoute) return embeddedHashRoute;
+  }
+
+  let path = normalize(window.location.pathname);
+  // GitHub Project Pages may include the repository name as the first path segment.
+  if (path === "/traveltoknow.github.io" || path === "/traveltoknow.github.io/index.html") return "/";
+  const exactPathRoute = known.find((route) => route.toLowerCase() === path);
+  if (exactPathRoute) return exactPathRoute;
+  return known.find((route) => route !== "/" && path.endsWith(route.toLowerCase())) || "/";
 }
 
 function go(route) {
