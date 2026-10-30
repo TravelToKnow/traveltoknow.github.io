@@ -66,7 +66,7 @@ function routeFromLocation() {
   const normalize = (value) => {
     let path = String(value || "").split("?")[0].trim();
     try { path = decodeURIComponent(path); } catch (_) {}
-    if (!path.startsWith("/")) path = \`/\${path}\`;
+    if (!path.startsWith("/")) path = "/" + path;
     path = path.replace(/\/{2,}/g, "/").replace(/\/+$/, "").toLowerCase();
     return path || "/";
   };
