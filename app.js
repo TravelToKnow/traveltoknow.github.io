@@ -227,10 +227,10 @@ function showModal(title, message, options = {}) {
   const heading = document.createElement("h2"); heading.textContent = title;
   modal.append(close, heading);
   if (options.mailto) {
-    const p = document.createElement("p"); p.textContent = "Your enquiry has been saved for this browser session. Use the button below to open your email client and send it to Travel To Know.";
-    const actions = document.createElement("p"); const mail = document.createElement("a"); mail.className = "primary-button modal-mail"; mail.href = options.mailto; mail.textContent = "Open email draft"; actions.append(mail); modal.append(p, actions);
+    const p = document.createElement("p"); p.textContent = window.TTK_I18N ? window.TTK_I18N.translateText("Your enquiry has been saved for this browser session. Use the button below to open your email client and send it to Travel To Know.") : "Your enquiry has been saved for this browser session. Use the button below to open your email client and send it to Travel To Know.";
+    const actions = document.createElement("p"); const mail = document.createElement("a"); mail.className = "primary-button modal-mail"; mail.href = options.mailto; mail.textContent = window.TTK_I18N ? window.TTK_I18N.translateText("Open email draft") : "Open email draft"; actions.append(mail); modal.append(p, actions);
   } else { const p = document.createElement("p"); p.textContent = message; modal.append(p); }
-  const done = document.createElement("button"); done.type = "button"; done.setAttribute("data-close-modal", ""); done.textContent = "Close"; modal.append(done);
+  const done = document.createElement("button"); done.type = "button"; done.setAttribute("data-close-modal", ""); done.textContent = window.TTK_I18N ? window.TTK_I18N.translateText("Close") : "Close"; modal.append(done);
   backdrop.append(modal); document.body.appendChild(backdrop); close.focus();
   backdrop.addEventListener("click", (event) => { if (event.target === backdrop || event.target.closest("[data-close-modal]")) backdrop.remove(); });
 }
