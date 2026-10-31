@@ -380,6 +380,7 @@ function parseAirportCsv(csv) {
 function searchFlightsFromForm(button) {
   const card = button.closest("[data-form=flights]");
   const mode = card?.querySelector(".mode.active")?.dataset.flightMode || "one-way";
+  if (mode === "multi-city") { toast("Multi-city flight search is not available yet. Please choose one-way or round-trip."); return; }
   const criteria = {
     mode,
     from: (card?.querySelector('[name="from"]')?.value || "").trim().toUpperCase(),
