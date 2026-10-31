@@ -258,6 +258,22 @@ function trustedAffiliatePath(provider, path, fallbackPath) {
   return url.origin === base.origin ? url : new URL(fallbackPath || "/", base);
 }
 
+function trustedAgodaFlightPath(path) {
+  const cfg = getAgodaConfig();
+  const fallback = `https://${AGODA_FLIGHT_HOST}`;
+  try {
+    const base = new URL(cfg.flightBase || fallback);
+    const allowedHost = String(cfg.flightAllowedHost || AGODA_FLIGHT_HOST).toLowerCase();
+    if (base.protocol !== "https:" || base.hostname.toLowerCase() !== AGODA_FLIGHT_HOST || allowedHost !== AGODA_FLIGHT_HOST) {
+      return new URL("/flights/results", fallback);
+    }
+    const url = new URL(String(path || "/flights/results"), base);
+    return url.origin === base.origin ? url : new URL("/flights/results", fallback);
+  } catch (_) {
+    return new URL("/flights/results", fallback);
+  }
+}
+
 function airportSlug(value) { return String(value || "").toLowerCase().trim().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, ""); }
 function airportLookup(code) { return window.TRAVEL_AIRPORTS?.find((airport) => airport.iata === String(code || "").toUpperCase()) || null; }
 
@@ -266,7 +282,7 @@ function agodaFlightUrl(criteria) {
   // Agoda accepts flight searches on its /flights/results route. The former
   // implementation redirected to flights.agoda.com/ (the portal only), so
   // none of the customer's selected search criteria reached Agoda.
-  const url = trustedAffiliatePath("agoda", "/flights/results", "/flights/results");
+  const url = trustedAgodaFlightPath("/flights/results");
   const from = String(criteria.from || "").trim().toUpperCase();
   const to = String(criteria.to || "").trim().toUpperCase();
   const departureDate = String(criteria.departureDate || "").trim();
