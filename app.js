@@ -195,7 +195,7 @@ function render() {
   const requestedLanguage = queryParam("lang");
   if (requestedLanguage === "en" || requestedLanguage === "bn") localStorage.setItem("ttk-language", requestedLanguage);
   const route = routeFromLocation();
-  document.title = routeTitles[route] || routeTitles["/"];
+  document.title = window.TTK_I18N && localStorage.getItem("ttk-language") === "bn" ? window.TTK_I18N.translateText(routeTitles[route] || routeTitles["/"]) : (routeTitles[route] || routeTitles["/"]);
   const app = document.getElementById("app");
   if (["/", "/flights", "/hotels", "/holidays", "/visa"].includes(route)) app.innerHTML = heroPage(route === "/" ? "flights" : route.slice(1), route);
   else if (["/about-us", "/contact-us", "/privacy-policy", "/terms-and-conditions", "/refund-policy"].includes(route)) app.innerHTML = infoPage(route);
