@@ -314,6 +314,111 @@ function agodaHolidayUrl(destination) {
   return url.toString();
 }
 
+function mountAirportPicker(select, airports) {
+  const existing = select.closest(".airport-picker");
+  if (existing) {
+    existing._airports = airports;
+    refreshAirportPicker(existing);
+    return;
+  }
+
+  const picker = document.createElement("div");
+  picker.className = "airport-picker";
+  picker._airports = airports;
+  picker.innerHTML = `
+    <button class="airport-picker-trigger" type="button" aria-haspopup="listbox" aria-expanded="false">
+      <span class="airport-picker-value"></span><span class="airport-picker-chevron" aria-hidden="true">▾</span>
+    </button>
+    <div class="airport-picker-panel" hidden>
+      <input class="airport-picker-search" type="search" autocomplete="off" placeholder="Search airport, city or code…" aria-label="Search airports">
+      <div class="airport-picker-results" role="listbox" aria-label="Airport options"></div>
+    </div>`;
+  select.classList.add("airport-native-select");
+  select.parentNode.insertBefore(picker, select);
+  picker.appendChild(select);
+
+  const trigger = picker.querySelector(".airport-picker-trigger");
+  const search = picker.querySelector(".airport-picker-search");
+  const panel = picker.querySelector(".airport-picker-panel");
+
+  const close = () => {
+    panel.hidden = true;
+    trigger.setAttribute("aria-expanded", "false");
+  };
+  const open = () => {
+    document.querySelectorAll(".airport-picker-panel").forEach((item) => { item.hidden = true; });
+    document.querySelectorAll(".airport-picker-trigger").forEach((item) => item.setAttribute("aria-expanded", "false"));
+    panel.hidden = false;
+    trigger.setAttribute("aria-expanded", "true");
+    search.value = "";
+    refreshAirportPicker(picker);
+    search.focus();
+  };
+
+  trigger.addEventListener("click", () => panel.hidden ? open() : close());
+  search.addEventListener("input", () => refreshAirportPicker(picker));
+  picker.querySelector(".airport-picker-results").addEventListener("click", (event) => {
+    const option = event.target.closest("[data-airport-code]");
+    if (!option) return;
+    select.value = option.dataset.airportCode;
+    select.dispatchEvent(new Event("change", { bubbles: true }));
+    refreshAirportPicker(picker);
+    close();
+    trigger.focus();
+  });
+  search.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") { close(); trigger.focus(); }
+    if (event.key === "Enter") {
+      const first = picker.querySelector(".airport-picker-option");
+      if (first) { event.preventDefault(); first.click(); }
+    }
+  });
+  document.addEventListener("click", (event) => {
+    if (!picker.contains(event.target)) close();
+  });
+  refreshAirportPicker(picker);
+}
+
+function refreshAirportPicker(picker) {
+  const select = picker.querySelector(".flight-airport-select");
+  const triggerValue = picker.querySelector(".airport-picker-value");
+  const search = picker.querySelector(".airport-picker-search");
+  const results = picker.querySelector(".airport-picker-results");
+  const selected = picker._airports.find((airport) => airport.iata === select.value);
+  triggerValue.textContent = selected ? `${selected.iata} — ${selected.city || selected.name}` : (select.value || "Select airport");
+  const term = String(search.value || "").trim().toLowerCase();
+  const matches = picker._airports.filter((airport) => [
+    airport.iata, airport.city, airport.name, airport.country
+  ].some((value) => String(value || "").toLowerCase().includes(term))).slice(0, 120);
+
+  results.replaceChildren();
+  if (!matches.length) {
+    const empty = document.createElement("p");
+    empty.className = "airport-picker-empty";
+    empty.textContent = "No matching airports found. Try another city or code.";
+    results.appendChild(empty);
+    return;
+  }
+  const fragment = document.createDocumentFragment();
+  matches.forEach((airport) => {
+    const option = document.createElement("button");
+    option.type = "button";
+    option.className = "airport-picker-option";
+    option.dataset.airportCode = airport.iata;
+    option.setAttribute("role", "option");
+    option.setAttribute("aria-selected", String(airport.iata === select.value));
+    const main = document.createElement("span");
+    main.className = "airport-option-main";
+    main.textContent = `${airport.iata} — ${airport.city || airport.name}`;
+    const detail = document.createElement("small");
+    detail.className = "airport-option-detail";
+    detail.textContent = [airport.name, airport.country].filter(Boolean).join(" · ");
+    option.append(main, detail);
+    fragment.appendChild(option);
+  });
+  results.appendChild(fragment);
+}
+
 function populateAirportSelects() {
   const selects = document.querySelectorAll(".flight-airport-select");
   if (!selects.length) return;
@@ -325,30 +430,32 @@ function populateAirportSelects() {
     selects.forEach((select) => {
       const selected = select.value;
       const fragment = document.createDocumentFragment();
-      airports.forEach((a) => {
+      airports.forEach((airport) => {
         const option = document.createElement("option");
-        option.value = a.iata;
-        option.textContent = `${a.iata} — ${a.city || a.name}`;
+        option.value = airport.iata;
+        option.textContent = `${airport.iata} — ${airport.city || airport.name}`;
         fragment.appendChild(option);
       });
       select.replaceChildren(fragment);
-      if (airports.some((a) => a.iata === selected)) select.value = selected;
+      if (airports.some((airport) => airport.iata === selected)) select.value = selected;
+      else if (select.name === "from" && airports.some((airport) => airport.iata === "DAC")) select.value = "DAC";
+      else if (select.name === "to" && airports.some((airport) => airport.iata === "DXB")) select.value = "DXB";
+      mountAirportPicker(select, airports);
     });
   };
   const fallbackAirports = fallback.map(([iata, city, name, country]) => ({ iata, city, name, country }));
-  window.TRAVEL_AIRPORTS = fallbackAirports;
+  render(fallbackAirports);
   fetch("https://davidmegginson.github.io/ourairports-data/airports.csv", { mode: "cors" })
     .then((response) => { if (!response.ok) throw new Error("Airport data unavailable"); return response.text(); })
     .then((csv) => {
       const rows = parseAirportCsv(csv);
       const airports = rows.filter((row) => /^[A-Z]{3}$/.test(row.iata)).map((row) => ({ iata: row.iata, city: row.city, name: row.name, country: row.country }));
       const unique = new Map();
-      airports.forEach((a) => { if (!unique.has(a.iata)) unique.set(a.iata, a); });
-      render(Array.from(unique.values()).sort((a, b) => `${a.iata} ${a.name}`.localeCompare(`${b.iata} ${b.name}`)));
+      airports.forEach((airport) => { if (!unique.has(airport.iata)) unique.set(airport.iata, airport); });
+      render(Array.from(unique.values()).sort((a, b) => `${a.iata} ${a.city} ${a.name}`.localeCompare(`${b.iata} ${b.city} ${b.name}`)));
     })
     .catch(() => render(fallbackAirports));
 }
-
 function parseAirportCsv(csv) {
   const rows = [];
   let row = [], field = "", quoted = false;
