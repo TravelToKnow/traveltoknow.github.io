@@ -69,7 +69,7 @@
 
 
 /* Flights page: multicolour accents and individually tinted service cards */
-.travel-landing-page { position: relative; overflow: hidden; }
+.travel-landing-page { position: relative; }
 .flights-color-shape {
   width: min(300px, 72vw);
   height: 18px;
