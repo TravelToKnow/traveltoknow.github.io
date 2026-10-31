@@ -111,6 +111,7 @@
     "Open a new account | Travel To Know":"নতুন অ্যাকাউন্ট খুলুন | Travel To Know",
     "Forgot your password | Travel To Know":"পাসওয়ার্ড ভুলে গেছেন | Travel To Know",
     "Request a Travel Service | Travel To Know":"ভ্রমণসেবা অনুরোধ | Travel To Know"
+  };
   const keys = Object.keys(dictionary).sort((a,b)=>b.length-a.length);
   function translateText(value) {
     let out = String(value);
