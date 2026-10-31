@@ -266,40 +266,30 @@ function trustedAgodaFlightPath(path) {
 function airportSlug(value) { return String(value || "").toLowerCase().trim().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, ""); }
 function airportLookup(code) { return window.TRAVEL_AIRPORTS?.find((airport) => airport.iata === String(code || "").toUpperCase()) || null; }
 
-function agodaFlightUrl(criteria) {
-  const cfg = getAgodaConfig();
-  // Agoda accepts flight searches on its /flights/results route. The former
-  // implementation redirected to flights.agoda.com/ (the portal only), so
-  // none of the customer's selected search criteria reached Agoda.
-  const url = trustedAgodaFlightPath("/flights/results");
+function kayakFlightUrl(criteria) {
+  // KAYAK powers Agoda's flight comparison experience and supports path-based
+  // search deep links. Use the supported route format rather than Agoda's
+  // unverified /flights/results query route.
   const from = String(criteria.from || "").trim().toUpperCase();
   const to = String(criteria.to || "").trim().toUpperCase();
   const departureDate = String(criteria.departureDate || "").trim();
   const returnDate = String(criteria.returnDate || "").trim();
   const mode = criteria.mode === "round-trip" ? "round-trip" : "one-way";
   const cabinMap = {
-    "Economy": "Economy",
-    "Premium Economy": "Premium Economy",
-    "Business": "Business",
-    "First Class": "First"
+    "Economy": "e",
+    "Premium Economy": "p",
+    "Business": "b",
+    "First Class": "f"
   };
-  const cabin = cabinMap[criteria.cabin] || "Economy";
+  const cabin = cabinMap[criteria.cabin] || "e";
   const adults = Math.max(1, Math.min(9, Number.parseInt(criteria.travellers, 10) || 1));
 
-  // Airport IATA codes are the values submitted by the customer's selectors.
-  url.searchParams.set("departureFrom", from);
-  url.searchParams.set("departureFromType", "1");
-  url.searchParams.set("arrivalTo", to);
-  url.searchParams.set("arrivalToType", "1");
-  url.searchParams.set("departDate", departureDate);
-  url.searchParams.set("searchType", "1");
-  url.searchParams.set("cabinType", cabin);
-  url.searchParams.set("adults", String(adults));
-  url.searchParams.set("children", "0");
-  url.searchParams.set("infants", "0");
-  url.searchParams.set("sort", "8");
-  if (mode === "round-trip" && returnDate) url.searchParams.set("returnDate", returnDate);
-  if (cfg.cid) url.searchParams.set("cid", String(cfg.cid));
+  const segments = [`${from}-${to}`, departureDate];
+  if (mode === "round-trip" && returnDate) segments.push(returnDate);
+  segments.push(`${adults}adults`, cabin);
+
+  const url = new URL(`https://www.kayak.com/flights/${segments.map(encodeURIComponent).join("/")}`);
+  url.searchParams.set("sort", "bestflight_a");
   return url.toString();
 }
 
@@ -399,7 +389,7 @@ function searchFlightsFromForm(button) {
   if (criteria.returnDate && criteria.returnDate < criteria.departureDate) { toast("Return date must be on or after departure date."); return; }
   const travellers = Number(criteria.travellers);
   if (!Number.isInteger(travellers) || travellers < 1 || travellers > 9) { toast("Please select 1–9 travellers."); return; }
-  window.location.assign(agodaFlightUrl(criteria));
+  window.location.assign(kayakFlightUrl(criteria));
 }
 
 function bindInteractions() {
