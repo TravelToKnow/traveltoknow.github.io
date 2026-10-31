@@ -115,30 +115,19 @@
   const keys = Object.keys(dictionary).sort((a,b)=>b.length-a.length);
   function translateText(value) {
     let out = String(value);
-    // Protect the registered brand name and legal/business identifiers from token translation.
     const protectedValues = [];
-    const protect = (text) => {
+    out = out.replace(/Travel\s+To\s+Know/gi, (match) => {
       const token = "\uE000" + protectedValues.length + "\uE001";
-      protectedValues.push(text);
+      protectedValues.push(match);
       return token;
-    };
-    out = out.replace(/Travel\\s+To\\s+Know/gi, (match) => protect(match));
+    });
     for (const key of keys) {
-      if (out === key) return dictionary[key];
-    }
-    for (const key of keys) {
-      const escaped = key.replace(/[.*+?^${}()|[\\]\\\\]/g, "\\\\  function translateText(value) {
-    let out = String(value);
-    for (const key of keys) {
-      if (out === key) return dictionary[key];
-    }
-    for (const key of keys) out = out.split(key).join(dictionary[key]);
-    return out;
-  }");
+      if (out === key) { out = dictionary[key]; break; }
+      const escaped = key.split("").map((ch) => "\\.^$*+?()[]{}|".includes(ch) ? "\\" + ch : ch).join("");
       const pattern = new RegExp("(?<![A-Za-z0-9])" + escaped + "(?![A-Za-z0-9])", "g");
       out = out.replace(pattern, dictionary[key]);
     }
-    out = out.replace(/\\uE000(\\d+)\\uE001/g, (_, index) => protectedValues[Number(index)]);
+    out = out.replace(/\uE000(\d+)\uE001/g, (_, index) => protectedValues[Number(index)]);
     return out;
   }
   function apply(root) {
