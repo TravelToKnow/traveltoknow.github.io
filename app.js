@@ -259,21 +259,10 @@ function trustedAffiliatePath(provider, path, fallbackPath) {
 }
 
 function trustedAgodaFlightPath(path) {
-  const cfg = getAgodaConfig();
-  const fallback = `https://${AGODA_FLIGHT_HOST}`;
-  try {
-    const base = new URL(cfg.flightBase || fallback);
-    const allowedHost = String(cfg.flightAllowedHost || AGODA_FLIGHT_HOST).toLowerCase();
-    if (base.protocol !== "https:" || base.hostname.toLowerCase() !== AGODA_FLIGHT_HOST || allowedHost !== AGODA_FLIGHT_HOST) {
-      return new URL("/flights/results", fallback);
-    }
-    const url = new URL(String(path || "/flights/results"), base);
-    return url.origin === base.origin ? url : new URL("/flights/results", fallback);
-  } catch (_) {
-    return new URL("/flights/results", fallback);
-  }
+  // Agoda's documented public flight-results route is hosted on www.agoda.com.
+  // flights.agoda.com/flights/results can redirect to an empty flight form.
+  return trustedAffiliatePath("agoda", path || "/flights/results", "/flights/results");
 }
-
 function airportSlug(value) { return String(value || "").toLowerCase().trim().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, ""); }
 function airportLookup(code) { return window.TRAVEL_AIRPORTS?.find((airport) => airport.iata === String(code || "").toUpperCase()) || null; }
 
@@ -308,10 +297,6 @@ function agodaFlightUrl(criteria) {
   url.searchParams.set("adults", String(adults));
   url.searchParams.set("children", "0");
   url.searchParams.set("infants", "0");
-  url.searchParams.set("flightAdults", String(adults));
-  url.searchParams.set("flightChildren", "0");
-  url.searchParams.set("flightInfants", "0");
-  url.searchParams.set("flightSearchType", "1");
   url.searchParams.set("sort", "8");
   if (mode === "round-trip" && returnDate) url.searchParams.set("returnDate", returnDate);
   if (cfg.cid) url.searchParams.set("cid", String(cfg.cid));
