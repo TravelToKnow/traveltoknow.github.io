@@ -68,6 +68,26 @@
 }
 
 
+/* Site-wide card treatment: one consistent, slim multicolour outline */
+:where(.booking-card, .segment-card, .amazon-affiliate-card, .destination-card,
+       .feature, .place-card, .content-card, .blog-card, .support-card, .payment-card) {
+  position: relative;
+  isolation: isolate;
+}
+:where(.booking-card, .segment-card, .amazon-affiliate-card, .destination-card,
+       .feature, .place-card, .content-card, .blog-card, .support-card, .payment-card)::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  padding: 1.5px;
+  border-radius: inherit;
+  background: linear-gradient(115deg, #087eaa 0%, #20a78b 34%, #f3a23b 67%, #e66b83 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
 /* Flights page: multicolour accents and individually tinted service cards */
 .travel-landing-page { position: relative; }
 .flights-color-shape {
