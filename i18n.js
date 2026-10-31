@@ -83,6 +83,7 @@
     "Airport":"বিমানবন্দর","Search":"খুঁজুন","Loading…":"লোড হচ্ছে…","Submit":"জমা দিন",
     "Name":"নাম","Phone":"ফোন","Address":"ঠিকানা","Office Hours":"অফিস সময়","Get In Touch":"যোগাযোগ করুন",
     "Available Methods":"উপলভ্য পদ্ধতি","Payment Methods":"পেমেন্ট পদ্ধতি",
+    "Multi-city flight search is not available yet. Please choose one-way or round-trip.":"একাধিক শহরের ফ্লাইট অনুসন্ধান এখনো চালু হয়নি। অনুগ্রহ করে একমুখী অথবা যাওয়া-আসার বিকল্প নির্বাচন করুন।",
     "Choose language":"ভাষা নির্বাচন করুন","Dismiss announcement":"ঘোষণা বন্ধ করুন","Open menu":"মেনু খুলুন","Close menu":"মেনু বন্ধ করুন",
     "Travel Guidance &amp; Support":"ভ্রমণ নির্দেশনা ও সহায়তা","Practical travel guidance, planning notes and service insights for business, family and international journeys.":"ব্যবসা, পরিবার ও আন্তর্জাতিক ভ্রমণের জন্য ব্যবহারিক নির্দেশনা, পরিকল্পনা ও সেবাবিষয়ক তথ্য।",
     "Travel Planning":"ভ্রমণ পরিকল্পনা","Corporate Travel Planning &amp; Cost Control":"করপোরেট ভ্রমণ পরিকল্পনা ও ব্যয় নিয়ন্ত্রণ",
