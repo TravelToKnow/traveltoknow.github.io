@@ -88,32 +88,9 @@
   mask-composite: exclude;
   pointer-events: none;
 }
-/* Flights page: multicolour accents and individually tinted service cards */
 .travel-landing-page { position: relative; }
-.flights-color-shape {
-  width: min(300px, 72vw);
-  height: 18px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 7px;
-  position: relative;
-  z-index: 1;
-}
-.flights-color-shape span {
-  display: block;
-  height: 12px;
-  flex: 1;
-  border-radius: 999px;
-  transform: skewX(-24deg);
-}
-.flights-color-shape span:nth-child(1) { background: #087eaa; }
-.flights-color-shape span:nth-child(2) { background: #20a78b; }
-.flights-color-shape span:nth-child(3) { background: #f3a23b; }
-.flights-color-shape span:nth-child(4) { background: #e66b83; }
-.flights-color-shape-top { margin-top: 14px; margin-bottom: 14px; }
-.flights-color-shape-bottom { margin-top: 42px; margin-bottom: 8px; }
+/* Keep the landing-page footer directly below the newsletter without a spacer. */
+.travel-landing-page + .site-footer { margin-top: 0; }
 .features-grid .feature {
   border: 1px solid transparent;
   box-shadow: 0 9px 24px rgba(16,45,66,.055);
@@ -131,7 +108,5 @@
 .features-grid .feature p { color: #56636d; }
 .features-grid .feature:hover { transform: translateY(-3px); box-shadow: 0 13px 28px rgba(16,45,66,.10); }
 @media (max-width:650px) {
-  .flights-color-shape-top { margin-top: 10px; margin-bottom: 10px; }
-  .flights-color-shape-bottom { margin-top: 30px; }
   .features-grid .feature { min-height: 145px; }
 }
