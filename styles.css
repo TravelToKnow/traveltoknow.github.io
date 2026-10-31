@@ -43,3 +43,26 @@
   .signin { order: 4; flex: 0 0 auto; padding: 8px 9px !important; font-size: 11px !important; white-space: nowrap; }
   .mobile-menu-login { display: block !important; margin-top: 6px; padding: 12px 8px !important; border-top: 1px solid rgba(255,255,255,.22); color: #ffd2ad !important; font-weight: 800; }
 }
+
+
+/* Searchable airport selector: keeps the existing IATA select value for flight search. */
+.airport-picker { position: relative; width: 100%; }
+.airport-native-select { display: none !important; }
+.airport-picker-trigger { width: 100%; min-height: 55px; padding: 12px 14px; border: 1px solid #d7dde3; border-radius: 8px; background: #fff; color: var(--ink); display: flex; align-items: center; justify-content: space-between; gap: 10px; text-align: left; }
+.airport-picker-trigger:focus-visible { outline: 3px solid rgba(255,116,19,.25); border-color: var(--orange); }
+.airport-picker-chevron { color: #68737d; flex: 0 0 auto; }
+.airport-picker-panel { position: absolute; z-index: 30; top: calc(100% + 5px); left: 0; right: 0; padding: 9px; border: 1px solid #d7dde3; border-radius: 11px; background: #fff; box-shadow: 0 14px 36px rgba(16,45,66,.2); }
+.airport-picker-panel[hidden] { display: none !important; }
+.airport-picker-search { position: sticky; top: 0; width: 100%; min-height: 45px; margin: 0 0 7px; padding: 10px 12px; border: 1px solid #cbd5dc; border-radius: 7px; background: #fff; color: var(--ink); }
+.airport-picker-results { max-height: 260px; overflow-y: auto; overscroll-behavior: contain; }
+.airport-picker-option { display: block; width: 100%; padding: 10px 9px; border: 0; border-bottom: 1px solid #edf0f2; background: #fff; color: var(--ink); text-align: left; }
+.airport-picker-option:hover, .airport-picker-option:focus-visible, .airport-picker-option[aria-selected="true"] { background: #fff3e9; outline: none; }
+.airport-option-main, .airport-option-detail { display: block; }
+.airport-option-main { font-weight: 700; font-size: 14px; }
+.airport-option-detail { margin-top: 3px; color: #68737d; font-size: 11px; line-height: 1.35; }
+.airport-picker-empty { margin: 0; padding: 14px 8px; color: #68737d; font-size: 13px; }
+@media (max-width: 650px) {
+  .airport-picker-trigger { min-height: 46px; padding: 9px 11px; font-size: 14px; }
+  .airport-picker-panel { max-height: 55vh; }
+  .airport-picker-results { max-height: min(42vh, 300px); }
+}
