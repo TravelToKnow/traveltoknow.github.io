@@ -66,3 +66,52 @@
   .airport-picker-panel { max-height: 55vh; }
   .airport-picker-results { max-height: min(42vh, 300px); }
 }
+
+
+/* Flights page: multicolour accents and individually tinted service cards */
+.travel-landing-page { position: relative; overflow: hidden; }
+.flights-color-shape {
+  width: min(300px, 72vw);
+  height: 18px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 7px;
+  position: relative;
+  z-index: 1;
+}
+.flights-color-shape span {
+  display: block;
+  height: 12px;
+  flex: 1;
+  border-radius: 999px;
+  transform: skewX(-24deg);
+}
+.flights-color-shape span:nth-child(1) { background: #087eaa; }
+.flights-color-shape span:nth-child(2) { background: #20a78b; }
+.flights-color-shape span:nth-child(3) { background: #f3a23b; }
+.flights-color-shape span:nth-child(4) { background: #e66b83; }
+.flights-color-shape-top { margin-top: 14px; margin-bottom: 14px; }
+.flights-color-shape-bottom { margin-top: 42px; margin-bottom: 8px; }
+.features-grid .feature {
+  border: 1px solid transparent;
+  box-shadow: 0 9px 24px rgba(16,45,66,.055);
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.features-grid .feature:nth-child(1) { background: #eaf5fb; border-color: #d5eaf5; }
+.features-grid .feature:nth-child(2) { background: #fff3e8; border-color: #f8e2cf; }
+.features-grid .feature:nth-child(3) { background: #eaf7f1; border-color: #d7eee3; }
+.features-grid .feature:nth-child(4) { background: #f2effb; border-color: #e3dcf5; }
+.features-grid .feature:nth-child(1) .feature-icon { color: #126b91; }
+.features-grid .feature:nth-child(2) .feature-icon { color: #a85a18; }
+.features-grid .feature:nth-child(3) .feature-icon { color: #247b58; }
+.features-grid .feature:nth-child(4) .feature-icon { color: #66519a; }
+.features-grid .feature h3 { color: #1c2b36; }
+.features-grid .feature p { color: #56636d; }
+.features-grid .feature:hover { transform: translateY(-3px); box-shadow: 0 13px 28px rgba(16,45,66,.10); }
+@media (max-width:650px) {
+  .flights-color-shape-top { margin-top: 10px; margin-bottom: 10px; }
+  .flights-color-shape-bottom { margin-top: 30px; }
+  .features-grid .feature { min-height: 145px; }
+}
