@@ -82,8 +82,35 @@
     "Check-out date must be after check-in date.":"চেক-আউটের তারিখ চেক-ইনের পর হতে হবে।",
     "Airport":"বিমানবন্দর","Search":"খুঁজুন","Loading…":"লোড হচ্ছে…","Submit":"জমা দিন",
     "Name":"নাম","Phone":"ফোন","Address":"ঠিকানা","Office Hours":"অফিস সময়","Get In Touch":"যোগাযোগ করুন",
-    "Available Methods":"উপলভ্য পদ্ধতি","Payment Methods":"পেমেন্ট পদ্ধতি"
-  };
+    "Available Methods":"উপলভ্য পদ্ধতি","Payment Methods":"পেমেন্ট পদ্ধতি",
+    "Choose language":"ভাষা নির্বাচন করুন","Dismiss announcement":"ঘোষণা বন্ধ করুন","Open menu":"মেনু খুলুন","Close menu":"মেনু বন্ধ করুন",
+    "Travel Guidance &amp; Support":"ভ্রমণ নির্দেশনা ও সহায়তা","Practical travel guidance, planning notes and service insights for business, family and international journeys.":"ব্যবসা, পরিবার ও আন্তর্জাতিক ভ্রমণের জন্য ব্যবহারিক নির্দেশনা, পরিকল্পনা ও সেবাবিষয়ক তথ্য।",
+    "Travel Planning":"ভ্রমণ পরিকল্পনা","Corporate Travel Planning &amp; Cost Control":"করপোরেট ভ্রমণ পরিকল্পনা ও ব্যয় নিয়ন্ত্রণ",
+    "Practical ways to structure business travel requests, compare options and keep travel records clear.":"ব্যবসায়িক ভ্রমণের অনুরোধ সাজানো, বিকল্প তুলনা এবং ভ্রমণের নথি সুশৃঙ্খল রাখার ব্যবহারিক উপায়।",
+    "Read article":"প্রবন্ধ পড়ুন","← Back to Blog":"← ব্লগে ফিরে যান","TRAVEL TO KNOW · TRAVEL GUIDANCE":"TRAVEL TO KNOW · ভ্রমণ নির্দেশনা",
+    "A practical framework for organising business travel while keeping approvals, traveller needs and costs visible.":"অনুমোদন, যাত্রীর প্রয়োজন ও ব্যয় স্বচ্ছ রেখে ব্যবসায়িক ভ্রমণ ব্যবস্থাপনার একটি ব্যবহারিক কাঠামো।",
+    "Start with a clear travel brief":"স্পষ্ট ভ্রমণ-সংক্ষিপ্ত বিবরণ দিয়ে শুরু করুন",
+    "Record the traveller, route, dates, flexibility, cabin preference, baggage needs and approval requirements before searching. A complete brief reduces repeated changes and makes supplier comparisons easier.":"অনুসন্ধানের আগে যাত্রীর নাম, রুট, তারিখ, সময়ের নমনীয়তা, কেবিন পছন্দ, ব্যাগেজের প্রয়োজন ও অনুমোদনের শর্ত লিখে রাখুন। পূর্ণাঙ্গ তথ্য বারবার পরিবর্তন কমায় এবং সরবরাহকারীর বিকল্প তুলনা সহজ করে।",
+    "Compare the full travel cost":"ভ্রমণের মোট ব্যয় তুলনা করুন",
+    "Look beyond the headline fare. Consider baggage, change conditions, cancellation terms, hotel location, transport needs and any service charges that apply before confirmation.":"শুধু প্রদর্শিত ভাড়ার দিকে নয়—ব্যাগেজ, পরিবর্তনের শর্ত, বাতিলকরণ, হোটেলের অবস্থান, যাতায়াত এবং নিশ্চিত করার আগে প্রযোজ্য সার্ভিস চার্জ বিবেচনা করুন।",
+    "Keep approvals and records together":"অনুমোদন ও নথি একসঙ্গে সংরক্ষণ করুন",
+    "For business travel, retain the approved itinerary, traveller details, supplier terms and final confirmation in one accessible record. This supports later reconciliation and makes changes easier to track.":"ব্যবসায়িক ভ্রমণে অনুমোদিত ভ্রমণসূচি, যাত্রীর তথ্য, সরবরাহকারীর শর্ত ও চূড়ান্ত নিশ্চিতকরণ সহজে পাওয়া যায় এমন এক জায়গায় সংরক্ষণ করুন। এতে পরবর্তী হিসাব মিলানো ও পরিবর্তন অনুসরণ সহজ হয়।",
+    "Review before confirmation":"নিশ্চিত করার আগে যাচাই করুন",
+    "Confirm names, dates, routing, inclusions, payment terms and refund or cancellation conditions before issuing a ticket or confirming accommodation.":"টিকিট ইস্যু বা আবাসন নিশ্চিত করার আগে নাম, তারিখ, রুট, অন্তর্ভুক্ত সুবিধা, পেমেন্টের শর্ত এবং রিফান্ড/বাতিলকরণের শর্ত যাচাই করুন।",
+    "Request travel support":"ভ্রমণ সহায়তা অনুরোধ করুন",
+    "Travel To Know | Your Travel Partner":"Travel To Know | আপনার ভ্রমণসঙ্গী",
+    "Flights | Travel To Know":"ফ্লাইট | Travel To Know","Hotels | Travel To Know":"হোটেল | Travel To Know",
+    "Holiday Packages | Travel To Know":"ছুটির প্যাকেজ | Travel To Know","Visa Processing Services | Travel To Know":"ভিসা প্রসেসিং সেবা | Travel To Know",
+    "Umrah Packages 2026-2027 | Travel To Know":"ওমরাহ প্যাকেজ ২০২৬–২০২৭ | Travel To Know",
+    "About us - Travel To Know":"আমাদের সম্পর্কে | Travel To Know","Contact us - Travel To Know":"যোগাযোগ | Travel To Know",
+    "Privacy policy - Travel To Know":"গোপনীয়তা নীতি | Travel To Know","Terms and Condition - Travel To Know":"শর্তাবলি | Travel To Know",
+    "Refund & Cancellation Policy | Travel To Know":"রিফান্ড ও বাতিলকরণ নীতি | Travel To Know",
+    "Payment Methods | Travel To Know":"পেমেন্ট পদ্ধতি | Travel To Know",
+    "Travel To Know | Travel Guidance & Support":"Travel To Know | ভ্রমণ নির্দেশনা ও সহায়তা",
+    "Login to your account | Travel To Know":"আপনার অ্যাকাউন্টে প্রবেশ | Travel To Know",
+    "Open a new account | Travel To Know":"নতুন অ্যাকাউন্ট খুলুন | Travel To Know",
+    "Forgot your password | Travel To Know":"পাসওয়ার্ড ভুলে গেছেন | Travel To Know",
+    "Request a Travel Service | Travel To Know":"ভ্রমণসেবা অনুরোধ | Travel To Know"
   const keys = Object.keys(dictionary).sort((a,b)=>b.length-a.length);
   function translateText(value) {
     let out = String(value);
