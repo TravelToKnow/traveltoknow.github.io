@@ -206,16 +206,20 @@ function render() {
   else if (route === "/umrah-packages") app.innerHTML = umrahPage();
   else if (route === "/request-service") app.innerHTML = requestPage();
   else app.innerHTML = infoPage("/missing");
+  if (window.TTK_I18N) window.TTK_I18N.apply(app);
+  document.documentElement.lang = localStorage.getItem("ttk-language") === "bn" ? "bn" : "en";
   bindInteractions();
 }
 
 function toast(message) {
+  if (window.TTK_I18N) message = window.TTK_I18N.translateText(message);
   document.querySelector(".toast")?.remove();
   const node = document.createElement("div"); node.className = "toast"; node.setAttribute("role", "status"); node.setAttribute("aria-live", "polite"); node.textContent = message; document.body.appendChild(node);
   setTimeout(() => node.remove(), 4200);
 }
 
 function showModal(title, message, options = {}) {
+  if (window.TTK_I18N) { title = window.TTK_I18N.translateText(title); message = window.TTK_I18N.translateText(message); }
   document.querySelector(".modal-backdrop")?.remove();
   const backdrop = document.createElement("div"); backdrop.className = "modal-backdrop";
   const modal = document.createElement("div"); modal.className = "modal"; modal.setAttribute("role", "dialog"); modal.setAttribute("aria-modal", "true");
