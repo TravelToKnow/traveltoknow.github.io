@@ -27,3 +27,19 @@
   .flight-booking-card .primary-button { width: 100%; min-height: 48px !important; margin-top: 1px; }
 }
 @media (min-width: 651px) { .hero-copy .hero-actions { display: none !important; } }
+
+
+/* Mobile header: move Sign In into the hamburger menu and make room for the brand */
+.mobile-menu-login { display: none; }
+@media (max-width: 650px) {
+  .nav-wrap { min-height: 67px !important; padding: 0 10px !important; gap: 8px !important; }
+  .brand { flex: 0 0 auto; order: 1; }
+  .brand img { width: 76px !important; max-width: 76px; }
+  .menu-toggle { display: block; flex: 0 0 auto; order: 2; margin: 0 !important; padding: 4px !important; font-size: 25px !important; }
+  .primary-nav { order: 5; }
+  .language-switcher { order: 3; flex: 0 1 auto; min-width: 0; gap: 3px !important; margin: 0 !important; font-size: 10px !important; }
+  .language-switcher select { min-width: 0; max-width: 78px; padding: 6px 5px !important; font-size: 11px !important; }
+  .header-account { display: none !important; }
+  .signin { order: 4; flex: 0 0 auto; padding: 8px 9px !important; font-size: 11px !important; white-space: nowrap; }
+  .mobile-menu-login { display: block !important; margin-top: 6px; padding: 12px 8px !important; border-top: 1px solid rgba(255,255,255,.22); color: #ffd2ad !important; font-weight: 800; }
+}
