@@ -7,7 +7,7 @@
 
 /* 2026-10-31: compact mobile hero and booking-first layout */
 @media (max-width: 650px) {
-  .hero { min-height: 0 !important; padding: 108px 12px 24px !important; background-position: center center; }
+  .hero { min-height: 0 !important; padding: 22px 12px 24px !important; background-position: center center; }
   .hero-inner { max-width: 100%; }
   .hero-copy { margin: 0 0 12px !important; }
   .hero-copy h1, .hero-copy h2 { margin: 0 0 4px !important; font-size: clamp(1.25rem, 5.2vw, 1.65rem) !important; line-height: 1.12 !important; letter-spacing: -.025em; }
