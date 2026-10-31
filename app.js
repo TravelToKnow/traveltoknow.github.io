@@ -263,18 +263,41 @@ function airportLookup(code) { return window.TRAVEL_AIRPORTS?.find((airport) => 
 
 function agodaFlightUrl(criteria) {
   const cfg = getAgodaConfig();
-  // Use Agoda's dedicated Flights portal. Route-specific URLs can return 404 for
-  // some airport combinations, so the form always lands on the live flight portal.
-  const candidate = cfg.flightBase || `https://${AGODA_FLIGHT_HOST}`;
-  let url;
-  try {
-    const parsed = new URL(candidate);
-    const allowedHost = cfg.flightAllowedHost || AGODA_FLIGHT_HOST;
-    if (parsed.protocol !== "https:" || parsed.hostname !== allowedHost) throw new Error("Invalid Agoda flight host");
-    url = new URL("/", parsed);
-  } catch (_) {
-    url = new URL(`https://${AGODA_FLIGHT_HOST}/`);
-  }
+  // Agoda accepts flight searches on its /flights/results route. The former
+  // implementation redirected to flights.agoda.com/ (the portal only), so
+  // none of the customer's selected search criteria reached Agoda.
+  const url = trustedAffiliatePath("agoda", "/flights/results", "/flights/results");
+  const from = String(criteria.from || "").trim().toUpperCase();
+  const to = String(criteria.to || "").trim().toUpperCase();
+  const departureDate = String(criteria.departureDate || "").trim();
+  const returnDate = String(criteria.returnDate || "").trim();
+  const mode = criteria.mode === "round-trip" ? "round-trip" : "one-way";
+  const cabinMap = {
+    "Economy": "Economy",
+    "Premium Economy": "Premium Economy",
+    "Business": "Business",
+    "First Class": "First"
+  };
+  const cabin = cabinMap[criteria.cabin] || "Economy";
+  const adults = Math.max(1, Math.min(9, Number.parseInt(criteria.travellers, 10) || 1));
+
+  // Airport IATA codes are the values submitted by the customer's selectors.
+  url.searchParams.set("departureFrom", from);
+  url.searchParams.set("departureFromType", "1");
+  url.searchParams.set("arrivalTo", to);
+  url.searchParams.set("arrivalToType", "1");
+  url.searchParams.set("departDate", departureDate);
+  url.searchParams.set("searchType", "1");
+  url.searchParams.set("cabinType", cabin);
+  url.searchParams.set("adults", String(adults));
+  url.searchParams.set("children", "0");
+  url.searchParams.set("infants", "0");
+  url.searchParams.set("flightAdults", String(adults));
+  url.searchParams.set("flightChildren", "0");
+  url.searchParams.set("flightInfants", "0");
+  url.searchParams.set("flightSearchType", "1");
+  url.searchParams.set("sort", "8");
+  if (mode === "round-trip" && returnDate) url.searchParams.set("returnDate", returnDate);
   if (cfg.cid) url.searchParams.set("cid", String(cfg.cid));
   return url.toString();
 }
