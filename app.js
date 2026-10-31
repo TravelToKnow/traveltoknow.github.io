@@ -105,7 +105,7 @@ function header(active = "", onHero = false) {
   <header class="site-header ${onHero ? "on-hero" : ""}"><div class="nav-wrap">
     <a class="brand" href="#/" aria-label="Travel To Know — Your Travel Partner"><img src="${ASSET}logo.png" alt="Travel To Know — Your Travel Partner"></a>
     <button class="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="primary-navigation" data-menu-toggle>☰</button>
-    <nav id="primary-navigation" class="primary-nav" data-primary-nav>${nav.map(([route, label]) => `<a href="#${route}" class="${active === route ? "active" : ""}">${label}</a>`).join("")}</nav>
+    <nav id="primary-navigation" class="primary-nav" data-primary-nav>${nav.map(([route, label]) => `<a href="#${route}" class="${active === route ? "active" : ""}">${label}</a>`).join("")}<a class="mobile-menu-login" href="#/sign-in">Sign In</a></nav>
     <label class="language-switcher">Language <select data-language-select aria-label="Choose language"><option value="en">English</option><option value="bn">বাংলা</option></select></label><a class="header-account" href="#/sign-in">Sign In</a><a class="signin" href="#/request-service">Request a quote</a>
   </div></header>`;
 }
