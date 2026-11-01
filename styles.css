@@ -127,3 +127,59 @@
 .agoda-partner-link small{color:#65727c;font-size:13px}
 .agoda-partner-cta{display:inline-flex;align-items:center;gap:9px;padding:12px 17px;border-radius:8px;background:#087ca3;color:#fff;font-weight:800;font-size:13px;white-space:nowrap}
 @media(max-width:650px){.agoda-partner-strip{margin-top:16px;padding:0 12px}.agoda-partner-link{gap:13px;min-height:90px;padding:15px;flex-wrap:wrap}.agoda-partner-link img{width:104px;max-height:45px}.agoda-partner-link>span:nth-child(2){min-width:calc(100% - 125px)}.agoda-partner-link strong{font-size:14px}.agoda-partner-link small{font-size:12px}.agoda-partner-cta{width:100%;justify-content:center}}
+
+
+/* 2026-11-01: glossy orange finish — visual-only, keeps existing colours and behaviour. */
+:root {
+  --orange-gloss-top: #ffb267;
+  --orange-gloss-mid: #ff8a2b;
+  --orange-gloss-bottom: #ed6507;
+}
+.primary-button,
+.signin,
+.blog-read-button {
+  background: linear-gradient(180deg,
+    var(--orange-gloss-top) 0%,
+    var(--orange-gloss-mid) 38%,
+    var(--orange-gloss-bottom) 100%);
+  border: 1px solid rgba(190, 77, 0, .42);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.58),
+    inset 0 -2px 0 rgba(164,63,0,.16),
+    0 5px 14px rgba(226, 99, 8, .24);
+  text-shadow: 0 1px 1px rgba(125,48,0,.18);
+  transition: transform .18s ease, box-shadow .18s ease, filter .18s ease;
+}
+.primary-button:hover,
+.signin:hover,
+.blog-read-button:hover {
+  filter: saturate(1.08) brightness(1.035);
+  transform: translateY(-2px);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.68),
+    inset 0 -2px 0 rgba(164,63,0,.14),
+    0 8px 19px rgba(226, 99, 8, .32);
+}
+.primary-button:active,
+.signin:active,
+.blog-read-button:active {
+  transform: translateY(0);
+  box-shadow: inset 0 2px 4px rgba(130,48,0,.18), 0 2px 6px rgba(226,99,8,.2);
+}
+.service-tab.active {
+  background: linear-gradient(180deg, #fff8f1 0%, #ffead8 100%);
+  color: #e96508;
+  box-shadow: inset 0 1px 0 #fff, inset 0 -2px 0 rgba(236,105,8,.12);
+}
+.mode.active {
+  background: linear-gradient(180deg, #fff9f3 0%, #ffead9 100%);
+  color: #e96508;
+  box-shadow: inset 0 1px 0 #fff, 0 2px 7px rgba(226,99,8,.08);
+}
+.primary-nav a.active:after {
+  background: linear-gradient(90deg, #ffb267, #f36b0a);
+  box-shadow: 0 1px 7px rgba(255,116,19,.38);
+}
+@media (prefers-reduced-motion: reduce) {
+  .primary-button, .signin, .blog-read-button { transition: none; }
+}
