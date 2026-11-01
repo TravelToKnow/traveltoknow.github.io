@@ -137,9 +137,27 @@ function bookingForm(type) {
   return `<div class="booking-card flight-booking-card" data-form="flights"><div class="mode-row"><button class="mode active" aria-pressed="true" data-flight-mode="one-way">One-way</button><button class="mode" aria-pressed="false" data-flight-mode="round-trip">Round-trip</button><button class="mode" aria-pressed="false" data-flight-mode="multi-city">Multi-city</button></div><div class="form-grid"><div class="field"><label>From</label><select class="flight-airport-select" name="from" aria-label="Departure airport"><option value="DAC" selected>DAC — Dhaka</option></select></div><div class="field"><label>To</label><select class="flight-airport-select" name="to" aria-label="Arrival airport"><option value="DXB" selected>DXB — Dubai</option></select></div><div class="field"><label>Departure date</label><input class="date-input" name="departureDate" type="date" min="${dateOffsetISO(0)}" value="${dateOffsetISO(1)}"></div><div class="field return-date-field" data-return-field hidden><label>Return date</label><input class="date-input" name="returnDate" type="date" min="${dateOffsetISO(0)}" value=""><span class="hint">Required for round-trip searches</span></div><div class="field"><label>TRAVELERS</label><select name="travellers"><option value="1">1 Traveler</option><option value="2">2 Travelers</option><option value="3">3 Travelers</option><option value="4">4 Travelers</option><option value="5">5 Travelers</option><option value="6">6 Travelers</option><option value="7">7 Travelers</option><option value="8">8 Travelers</option><option value="9">9 Travelers</option></select></div><div class="field"><label>CLASS</label><select name="cabin"><option value="Economy">Economy</option><option value="Premium Economy">Premium Economy</option><option value="Business">Business</option><option value="First Class">First Class</option></select></div><div></div><button class="primary-button" data-flight-search type="button">Search Flight</button></div></div>`;
 }
 
+function agodaPartnerUrl() {
+  const cfg = getAgodaConfig();
+  const url = trustedAffiliatePath("agoda", cfg.destinationPath || "/search", "/search");
+  url.searchParams.set("textToSearch", "Hotels");
+  if (cfg.cid) url.searchParams.set("cid", String(cfg.cid));
+  return url.toString();
+}
+
+function agodaPartnerLogo() {
+  return `<section class="agoda-partner-strip" aria-label="Agoda hotel booking partner">
+    <a class="agoda-partner-link" href="${agodaPartnerUrl()}" target="_blank" rel="nofollow sponsored noopener noreferrer" aria-label="Book hotels on Agoda">
+      <img src="https://cdn6.agoda.net/images/kite-js/logo/agoda/color-default.svg" alt="Agoda" loading="lazy">
+      <span><strong>Book your stay with Agoda</strong><small>Explore hotels and accommodation worldwide</small></span>
+      <span class="agoda-partner-cta">Explore hotels <span aria-hidden="true">↗</span></span>
+    </a>
+  </section>`;
+}
+
 function heroPage(type = "flights", activeRoute = `/${type}`) {
   const copy = { flights: ["Explore the Best Flight Options", "Uncover unbeatable offers on global travel destinations"], hotels: ["Discover Your Perfect Vacation Stay", "Discover amazing deals to destinations worldwide"], holidays: ["Discover Your Next Tour", "Discover amazing deals to destinations worldwide"], visa: ["Visa processing Services Available!", "Visa depends on your profile and financial conditions!"] }[type];
-  return `${header(activeRoute, true)}<main class="travel-landing-page">${type === "flights" ? '' : ""}<section class="hero"><div class="hero-inner"><div class="hero-copy"><h1>${copy[0]}</h1><p>${copy[1]}</p></div><div class="booking-shell">${serviceTabMarkup(type)}${bookingForm(type)}</div></div></section>${serviceLanes()}${trustStrip()}${offers()}${amazonAffiliateSection()}${destinationSection()}${featuresSection()}${placesSection()}${newsletter()}${type === "flights" ? '' : ""}</main>${footer()}`;
+  return `${header(activeRoute, true)}<main class="travel-landing-page">${type === "flights" ? '' : ""}<section class="hero"><div class="hero-inner"><div class="hero-copy"><h1>${copy[0]}</h1><p>${copy[1]}</p></div><div class="booking-shell">${serviceTabMarkup(type)}${bookingForm(type)}</div></div></section>${agodaPartnerLogo()}${serviceLanes()}${trustStrip()}${offers()}${amazonAffiliateSection()}${destinationSection()}${featuresSection()}${placesSection()}${newsletter()}${type === "flights" ? '' : ""}</main>${footer()}`;
 }
 
 function serviceLanes() { return `<section class="section service-lanes"><div class="section-header"><h2>Travel support for the journeys that matter</h2><p>Tell us what you need. A Travel To Know specialist will review the request and respond with the next practical step.</p></div><div class="segment-grid">${serviceLaneData.map(([title, text, value], index) => `<a class="segment-card segment-${index + 1}" href="#/request-service?service=${encodeURIComponent(value)}"><span class="segment-number">0${index + 1}</span><h3>${title}</h3><p>${text}</p><span class="segment-link">Request support →</span></a>`).join("")}</div></section>`; }
