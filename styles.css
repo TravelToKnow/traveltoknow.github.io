@@ -538,3 +538,24 @@
   .service-lanes .segment-grid .segment-card,
   .service-lanes .segment-grid .segment-card .segment-link { transition:none; }
 }
+
+
+/* 2026-11-01: distinct silhouettes for the four pastel travel-support cards. */
+.service-lanes .segment-grid .segment-card:nth-child(1) {
+  border-radius: 42px 10px 42px 10px;
+}
+.service-lanes .segment-grid .segment-card:nth-child(2) {
+  border-radius: 10px 42px 10px 42px;
+}
+.service-lanes .segment-grid .segment-card:nth-child(3) {
+  border-radius: 52px 52px 14px 14px;
+}
+.service-lanes .segment-grid .segment-card:nth-child(4) {
+  border-radius: 12px 46px 12px 46px;
+}
+@media(max-width:650px) {
+  .service-lanes .segment-grid .segment-card:nth-child(1) { border-radius: 32px 8px 32px 8px; }
+  .service-lanes .segment-grid .segment-card:nth-child(2) { border-radius: 8px 32px 8px 32px; }
+  .service-lanes .segment-grid .segment-card:nth-child(3) { border-radius: 40px 40px 12px 12px; }
+  .service-lanes .segment-grid .segment-card:nth-child(4) { border-radius: 8px 36px 8px 36px; }
+}
