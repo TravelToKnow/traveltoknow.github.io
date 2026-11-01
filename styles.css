@@ -110,3 +110,9 @@
 @media (max-width:650px) {
   .features-grid .feature { min-height: 145px; }
 }
+
+.hotel-provider-actions{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.hotel-provider-actions .primary-button,.hotel-provider-secondary{width:100%;min-height:55px}
+.hotel-provider-secondary{border:1px solid #0b6082;border-radius:8px;background:#fff;color:#0b6082;font-weight:800;padding:0 21px;transition:.18s ease}
+.hotel-provider-secondary:hover{background:#eef7fa;transform:translateY(-1px)}
+@media(max-width:650px){.hotel-provider-actions{grid-template-columns:1fr;gap:9px}}
