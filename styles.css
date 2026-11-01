@@ -320,3 +320,81 @@
 @media(prefers-reduced-motion:reduce) {
   .trust-badges-logos .trust-logo-badge,.segment-grid .segment-card { transition:none; }
 }
+
+
+/* 2026-11-01: Photo 3 only — distinctive premium service-lane cards. */
+.service-lanes .segment-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+}
+.service-lanes .segment-grid .segment-card {
+  min-height: 300px;
+  padding: 26px 25px 24px;
+  border: 1px solid rgba(255,255,255,.22);
+  box-shadow: 0 15px 30px rgba(12,39,58,.15), inset 0 1px 0 rgba(255,255,255,.24);
+}
+.service-lanes .segment-grid .segment-card:nth-child(1) {
+  border-radius: 26px 8px 26px 8px;
+  background: linear-gradient(150deg,#126d8b 0%,#075071 62%,#063c5b 100%);
+}
+.service-lanes .segment-grid .segment-card:nth-child(2) {
+  border-radius: 8px 26px 8px 26px;
+  background: linear-gradient(150deg,#e9822c 0%,#c45b13 56%,#873708 100%);
+}
+.service-lanes .segment-grid .segment-card:nth-child(3) {
+  border-radius: 26px 8px 26px 8px;
+  background: linear-gradient(150deg,#527fa7 0%,#315b83 58%,#203d60 100%);
+}
+.service-lanes .segment-grid .segment-card:nth-child(4) {
+  border-radius: 8px 26px 8px 26px;
+  background: linear-gradient(150deg,#536079 0%,#39465f 58%,#252f45 100%);
+}
+.service-lanes .segment-grid .segment-card::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  top: 16px;
+  right: 18px;
+  width: 54px;
+  height: 4px;
+  border-radius: 99px;
+  background: rgba(255,255,255,.48);
+  box-shadow: 0 0 18px rgba(255,255,255,.24);
+  pointer-events: none;
+}
+.service-lanes .segment-grid .segment-card .segment-number {
+  min-width: 52px;
+  min-height: 38px;
+  border-radius: 12px 4px 12px 4px;
+  background: rgba(255,255,255,.14);
+  border-color: rgba(255,255,255,.42);
+  font-size: 15px;
+}
+.service-lanes .segment-grid .segment-card h3 {
+  margin-top: 28px;
+  font-size: clamp(1.18rem,1.65vw,1.48rem);
+  letter-spacing: -.015em;
+}
+.service-lanes .segment-grid .segment-card p {
+  font-size: 15px;
+  line-height: 1.65;
+}
+.service-lanes .segment-grid .segment-card .segment-link {
+  border-bottom: 0;
+  padding: 8px 0 2px;
+  text-decoration: underline;
+  text-decoration-color: rgba(255,255,255,.55);
+  text-underline-offset: 5px;
+}
+.service-lanes .segment-grid .segment-card:hover {
+  transform: translateY(-6px) scale(1.012);
+  box-shadow: 0 22px 38px rgba(12,39,58,.22), inset 0 1px 0 rgba(255,255,255,.28);
+}
+@media(max-width:900px) {
+  .service-lanes .segment-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+}
+@media(max-width:650px) {
+  .service-lanes .segment-grid { grid-template-columns: 1fr; gap: 13px; }
+  .service-lanes .segment-grid .segment-card { min-height: 225px; padding: 22px 20px; }
+  .service-lanes .segment-grid .segment-card h3 { margin-top: 22px; }
+}
