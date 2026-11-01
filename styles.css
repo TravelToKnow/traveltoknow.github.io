@@ -116,3 +116,14 @@
 .hotel-provider-secondary{border:1px solid #0b6082;border-radius:8px;background:#fff;color:#0b6082;font-weight:800;padding:0 21px;transition:.18s ease}
 .hotel-provider-secondary:hover{background:#eef7fa;transform:translateY(-1px)}
 @media(max-width:650px){.hotel-provider-actions{grid-template-columns:1fr;gap:9px}}
+
+/* Agoda affiliate partner logo strip */
+.agoda-partner-strip{max-width:1168px;margin:22px auto 0;padding:0 18px}
+.agoda-partner-link{display:flex;align-items:center;gap:22px;min-height:104px;padding:20px 26px;border:1px solid #e2eaf0;border-radius:15px;background:#fff;box-shadow:0 8px 24px rgba(16,45,66,.06);transition:transform .18s ease,box-shadow .18s ease}
+.agoda-partner-link:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(16,45,66,.1)}
+.agoda-partner-link img{width:132px;height:auto;max-height:56px;object-fit:contain;flex:0 0 auto}
+.agoda-partner-link>span:nth-child(2){display:grid;gap:5px;flex:1}
+.agoda-partner-link strong{color:#173b52;font-size:16px}
+.agoda-partner-link small{color:#65727c;font-size:13px}
+.agoda-partner-cta{display:inline-flex;align-items:center;gap:9px;padding:12px 17px;border-radius:8px;background:#087ca3;color:#fff;font-weight:800;font-size:13px;white-space:nowrap}
+@media(max-width:650px){.agoda-partner-strip{margin-top:16px;padding:0 12px}.agoda-partner-link{gap:13px;min-height:90px;padding:15px;flex-wrap:wrap}.agoda-partner-link img{width:104px;max-height:45px}.agoda-partner-link>span:nth-child(2){min-width:calc(100% - 125px)}.agoda-partner-link strong{font-size:14px}.agoda-partner-link small{font-size:12px}.agoda-partner-cta{width:100%;justify-content:center}}
