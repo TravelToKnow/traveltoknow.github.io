@@ -131,7 +131,7 @@ function dateOffsetISO(days) {
 }
 
 function bookingForm(type) {
-  if (type === "hotels") return `<div class="booking-card" data-form="hotels"><div class="mode-row"><span class="mode active">Stay More, Pay Less — Book Your Dream Hotel Now! 🏨💫</span></div><div class="form-grid"><div class="field"><label>CITY / HOTEL / RESORT / AREA</label><input name="hotelDestination" type="text" value="Dhaka, Bangladesh" placeholder="City, hotel, resort or area" aria-label="Hotel destination"></div><div class="field"><label>CHECK IN DATE</label><input class="date-input" name="checkIn" type="date" min="${dateOffsetISO(0)}" value="${dateOffsetISO(1)}"></div><div class="field"><label>CHECK OUT DATE</label><input class="date-input" name="checkOut" type="date" min="${dateOffsetISO(0)}" value="${dateOffsetISO(4)}"></div><div class="field"><label>ROOMS &amp; GUESTS</label><select name="roomsGuests"><option value="1|2">1 Room, 2 Guests</option><option value="2|4">2 Rooms, 4 Guests</option><option value="3|6">3 Rooms, 6 Guests</option><option value="1|1">1 Room, 1 Guest</option><option value="1|3">1 Room, 3 Guests</option><option value="1|4">1 Room, 4 Guests</option></select></div><button class="primary-button" data-hotel-search type="button">Search Hotel</button></div></div>`;
+  if (type === "hotels") return `<div class="booking-card" data-form="hotels"><div class="mode-row"><span class="mode active">Stay More, Pay Less — Book Your Dream Hotel Now! 🏨💫</span></div><div class="form-grid"><div class="field"><label>CITY / HOTEL / RESORT / AREA</label><input name="hotelDestination" type="text" value="Dhaka, Bangladesh" placeholder="City, hotel, resort or area" aria-label="Hotel destination"></div><div class="field"><label>CHECK IN DATE</label><input class="date-input" name="checkIn" type="date" min="${dateOffsetISO(0)}" value="${dateOffsetISO(1)}"></div><div class="field"><label>CHECK OUT DATE</label><input class="date-input" name="checkOut" type="date" min="${dateOffsetISO(0)}" value="${dateOffsetISO(4)}"></div><div class="field"><label>ROOMS &amp; GUESTS</label><select name="roomsGuests"><option value="1|2">1 Room, 2 Guests</option><option value="2|4">2 Rooms, 4 Guests</option><option value="3|6">3 Rooms, 6 Guests</option><option value="1|1">1 Room, 1 Guest</option><option value="1|3">1 Room, 3 Guests</option><option value="1|4">1 Room, 4 Guests</option></select></div><div class="hotel-provider-actions"><button class="primary-button" data-hotel-search type="button">Search on Agoda</button><button class="hotel-provider-secondary" data-booking-search type="button">Search on Booking.com</button></div></div></div>`;
   if (type === "holidays") return `<div class="booking-card" data-form="holidays"><div class="mode-row"><span class="mode active">Explore More, Pay Less — Book Your Dream Tour Today! 🌍✨</span></div><div class="form-grid"><div class="field"><label>SELECT YOUR TOUR DESTINATION CITY</label><select data-holiday-destination><option>Cox's Bazar — BANGLADESH</option><option>Dubai — UAE</option><option>Kuala Lumpur — MALAYSIA</option><option>Bangkok — THAILAND</option><option>Singapore</option><option>Bali</option><option>Colombo</option><option>Jeddah</option><option>London</option><option>New York</option></select></div><div></div><div></div><button class="primary-button" data-holiday-search type="button">Search Holiday</button></div></div>`;
   if (type === "visa") return `<div class="booking-card" data-form="visa"><div class="mode-row"><span class="mode active">Hassle-Free Visa Services — Apply With Us For Fast Approval! 🛂✈️</span></div><div class="form-grid"><div class="field"><label>SELECT YOUR VISA CITY</label><select><option>Select country</option><option>Singapore</option><option>Thailand</option><option>Malaysia</option><option>Vietnam</option><option>Uzbekistan</option></select></div><div class="field"><label>SELECT TRAVELER(S)</label><select><option>1 Traveler</option><option>2 Travelers</option><option>3 Travelers</option></select></div><div></div><button class="primary-button" data-demo-search="Visa">Find Visa Info</button></div></div>`;
   return `<div class="booking-card flight-booking-card" data-form="flights"><div class="mode-row"><button class="mode active" aria-pressed="true" data-flight-mode="one-way">One-way</button><button class="mode" aria-pressed="false" data-flight-mode="round-trip">Round-trip</button><button class="mode" aria-pressed="false" data-flight-mode="multi-city">Multi-city</button></div><div class="form-grid"><div class="field"><label>From</label><select class="flight-airport-select" name="from" aria-label="Departure airport"><option value="DAC" selected>DAC — Dhaka</option></select></div><div class="field"><label>To</label><select class="flight-airport-select" name="to" aria-label="Arrival airport"><option value="DXB" selected>DXB — Dubai</option></select></div><div class="field"><label>Departure date</label><input class="date-input" name="departureDate" type="date" min="${dateOffsetISO(0)}" value="${dateOffsetISO(1)}"></div><div class="field return-date-field" data-return-field hidden><label>Return date</label><input class="date-input" name="returnDate" type="date" min="${dateOffsetISO(0)}" value=""><span class="hint">Required for round-trip searches</span></div><div class="field"><label>TRAVELERS</label><select name="travellers"><option value="1">1 Traveler</option><option value="2">2 Travelers</option><option value="3">3 Travelers</option><option value="4">4 Travelers</option><option value="5">5 Travelers</option><option value="6">6 Travelers</option><option value="7">7 Travelers</option><option value="8">8 Travelers</option><option value="9">9 Travelers</option></select></div><div class="field"><label>CLASS</label><select name="cabin"><option value="Economy">Economy</option><option value="Premium Economy">Premium Economy</option><option value="Business">Business</option><option value="First Class">First Class</option></select></div><div></div><button class="primary-button" data-flight-search type="button">Search Flight</button></div></div>`;
@@ -303,6 +303,18 @@ function bookingHotelUrl(criteria) {
   url.searchParams.set("group_children", "0");
   url.searchParams.set("no_rooms", criteria.rooms || "1");
   if (cfg.aid && cfg.aid !== "YOUR_BOOKING_AID") url.searchParams.set("aid", String(cfg.aid));
+  return url.toString();
+}
+
+function agodaHotelUrl(criteria) {
+  const cfg = getAgodaConfig();
+  const url = trustedAffiliatePath("agoda", cfg.destinationPath || "/search", "/search");
+  url.searchParams.set("textToSearch", String(criteria.destination || "").trim());
+  if (criteria.checkIn) url.searchParams.set("checkIn", criteria.checkIn);
+  if (criteria.checkOut) url.searchParams.set("checkOut", criteria.checkOut);
+  url.searchParams.set("rooms", String(criteria.rooms || "1"));
+  url.searchParams.set("adults", String(criteria.adults || "2"));
+  if (cfg.cid) url.searchParams.set("cid", String(cfg.cid));
   return url.toString();
 }
 
@@ -512,21 +524,29 @@ function bindInteractions() {
   document.querySelectorAll("[data-service-tab]").forEach((button) => button.addEventListener("click", () => go(`/${button.dataset.serviceTab}`)));
   document.querySelectorAll("[data-demo-search]").forEach((button) => button.addEventListener("click", () => showModal(`${button.dataset.demoSearch} search demo`, "This service remains connected to the existing Travel To Know enquiry flow. Live supplier fares and availability require the relevant secure API connection.")));
   document.querySelectorAll("[data-flight-search]").forEach((button) => button.addEventListener("click", () => searchFlightsFromForm(button)));
-  document.querySelectorAll("[data-hotel-search]").forEach((button) => button.addEventListener("click", () => {
+  function readHotelCriteria(button) {
     const card = button.closest("[data-form=hotels]");
     const [rooms, adults] = String(card?.querySelector('[name="roomsGuests"]')?.value || "1|2").split("|");
     const criteria = {
-      destination: card?.querySelector('[name="hotelDestination"]')?.value?.trim() || "Dhaka, Bangladesh",
+      destination: card?.querySelector('[name="hotelDestination"]')?.value?.trim() || "",
       checkIn: card?.querySelector('[name="checkIn"]')?.value || "",
       checkOut: card?.querySelector('[name="checkOut"]')?.value || "",
       rooms: rooms || "1",
       adults: adults || "2"
     };
-    if (!criteria.destination) { toast("Please enter a hotel destination."); return; }
-    if (!criteria.checkIn || !criteria.checkOut) { toast("Please select check-in and check-out dates."); return; }
-    if (criteria.checkIn < dateOffsetISO(0)) { toast("Check-in date cannot be in the past."); return; }
-    if (criteria.checkOut <= criteria.checkIn) { toast("Check-out date must be after check-in date."); return; }
-    window.location.assign(bookingHotelUrl(criteria));
+    if (!criteria.destination) { toast("Please enter a hotel destination."); return null; }
+    if (!criteria.checkIn || !criteria.checkOut) { toast("Please select check-in and check-out dates."); return null; }
+    if (criteria.checkIn < dateOffsetISO(0)) { toast("Check-in date cannot be in the past."); return null; }
+    if (criteria.checkOut <= criteria.checkIn) { toast("Check-out date must be after check-in date."); return null; }
+    return criteria;
+  }
+  document.querySelectorAll("[data-hotel-search]").forEach((button) => button.addEventListener("click", () => {
+    const criteria = readHotelCriteria(button);
+    if (criteria) window.location.assign(agodaHotelUrl(criteria));
+  }));
+  document.querySelectorAll("[data-booking-search]").forEach((button) => button.addEventListener("click", () => {
+    const criteria = readHotelCriteria(button);
+    if (criteria) window.location.assign(bookingHotelUrl(criteria));
   }));
   document.querySelectorAll("[data-holiday-search]").forEach((button) => button.addEventListener("click", () => {
     const destination = document.querySelector("[data-holiday-destination]")?.value || "";
