@@ -398,3 +398,143 @@
   .service-lanes .segment-grid .segment-card { min-height: 225px; padding: 22px 20px; }
   .service-lanes .segment-grid .segment-card h3 { margin-top: 22px; }
 }
+
+
+/* 2026-11-01: replace dark service-lane cards with the approved light pastel design. */
+.service-lanes .segment-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
+  align-items: stretch;
+}
+.service-lanes .segment-grid .segment-card {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-height: 300px;
+  padding: 25px 24px 23px;
+  overflow: hidden;
+  color: #15334a;
+  border: 1.5px solid var(--lane-border);
+  box-shadow: 0 13px 28px rgba(25,65,88,.09), inset 0 1px 0 rgba(255,255,255,.95);
+  transition: transform .22s ease, box-shadow .22s ease;
+}
+.service-lanes .segment-grid .segment-card:nth-child(1) {
+  --lane-accent:#078da0; --lane-border:#39b9c2;
+  border-radius: 34px 12px 34px 12px;
+  background: linear-gradient(145deg,#e9fbfc 0%,#d8f4f7 72%,#c8edf0 100%);
+}
+.service-lanes .segment-grid .segment-card:nth-child(2) {
+  --lane-accent:#e87816; --lane-border:#f3b05f;
+  border-radius: 12px 34px 12px 34px;
+  background: linear-gradient(145deg,#fff8ed 0%,#fff0dc 72%,#ffe6c8 100%);
+}
+.service-lanes .segment-grid .segment-card:nth-child(3) {
+  --lane-accent:#176fc0; --lane-border:#8caaff;
+  border-radius: 34px 12px 34px 12px;
+  background: linear-gradient(145deg,#eff4ff 0%,#e4edff 72%,#d9e5ff 100%);
+}
+.service-lanes .segment-grid .segment-card:nth-child(4) {
+  --lane-accent:#7545a5; --lane-border:#c19be0;
+  border-radius: 12px 34px 12px 34px;
+  background: linear-gradient(145deg,#faf3ff 0%,#f2e9fb 72%,#eadcf7 100%);
+}
+.service-lanes .segment-grid .segment-card::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  width: 190px;
+  height: 150px;
+  right: -56px;
+  bottom: -82px;
+  border-radius: 58% 42% 0 0;
+  background: var(--lane-accent);
+  opacity: .10;
+  transform: rotate(-13deg);
+  pointer-events: none;
+}
+.service-lanes .segment-grid .segment-card:nth-child(2)::before,
+.service-lanes .segment-grid .segment-card:nth-child(4)::before {
+  width: 145px;
+  height: 145px;
+  right: -44px;
+  bottom: -72px;
+  border-radius: 50% 50% 12% 50%;
+  transform: rotate(24deg);
+}
+.service-lanes .segment-grid .segment-card::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  width: 92px;
+  height: 92px;
+  top: -42px;
+  right: -30px;
+  border: 1px solid var(--lane-accent);
+  border-radius: 50%;
+  opacity: .22;
+  pointer-events: none;
+}
+.service-lanes .segment-grid .segment-card > * { position: relative; z-index: 1; }
+.service-lanes .segment-grid .segment-card .segment-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 54px;
+  min-height: 48px;
+  padding: 6px 12px;
+  color: #fff;
+  background: var(--lane-accent);
+  border: 0;
+  border-radius: 50%;
+  box-shadow: 0 5px 13px color-mix(in srgb, var(--lane-accent) 24%, transparent), inset 0 1px 0 rgba(255,255,255,.3);
+  font-size: 15px;
+  font-weight: 800;
+}
+.service-lanes .segment-grid .segment-card h3 {
+  margin: 23px 0 10px;
+  color: #17364d;
+  font-size: clamp(1.12rem,1.55vw,1.4rem);
+  line-height: 1.38;
+}
+.service-lanes .segment-grid .segment-card p {
+  margin: 0 0 18px;
+  color: #40596b;
+  font-size: 15px;
+  line-height: 1.7;
+}
+.service-lanes .segment-grid .segment-card .segment-link {
+  display: inline-flex;
+  align-items: center;
+  margin-top: auto;
+  padding: 9px 17px;
+  color: #fff;
+  background: var(--lane-accent);
+  border: 0;
+  border-radius: 999px;
+  box-shadow: 0 5px 12px color-mix(in srgb, var(--lane-accent) 20%, transparent), inset 0 1px 0 rgba(255,255,255,.25);
+  font-weight: 800;
+  text-decoration: none;
+  transition: filter .2s ease, transform .2s ease;
+}
+.service-lanes .segment-grid .segment-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 19px 34px rgba(25,65,88,.14), inset 0 1px 0 rgba(255,255,255,.98);
+}
+.service-lanes .segment-grid .segment-card .segment-link:hover {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+@media(max-width:900px) {
+  .service-lanes .segment-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+}
+@media(max-width:650px) {
+  .service-lanes .segment-grid { grid-template-columns: 1fr; gap: 14px; }
+  .service-lanes .segment-grid .segment-card { min-height: 235px; padding: 22px 20px; }
+  .service-lanes .segment-grid .segment-card h3 { margin-top: 19px; }
+}
+@media(prefers-reduced-motion:reduce) {
+  .service-lanes .segment-grid .segment-card,
+  .service-lanes .segment-grid .segment-card .segment-link { transition:none; }
+}
