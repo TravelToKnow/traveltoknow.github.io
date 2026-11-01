@@ -559,3 +559,36 @@
   .service-lanes .segment-grid .segment-card:nth-child(3) { border-radius: 40px 40px 12px 12px; }
   .service-lanes .segment-grid .segment-card:nth-child(4) { border-radius: 8px 36px 8px 36px; }
 }
+
+
+/* Match the uploaded reference: four individual sculpted silhouettes, not simple corner-radius variations. */
+.service-lanes .segment-grid .segment-card:nth-child(1) {
+  border-radius: 30px 28px 34px 30px;
+  clip-path: polygon(0 0, 91% 0, 100% 78%, 96% 91%, 87% 100%, 0 100%);
+}
+.service-lanes .segment-grid .segment-card:nth-child(2) {
+  border-radius: 28px 30px 30px 28px;
+  clip-path: polygon(10% 0, 100% 0, 100% 79%, 96% 92%, 88% 100%, 0 100%, 0 13%, 3% 5%);
+}
+.service-lanes .segment-grid .segment-card:nth-child(3) {
+  border-radius: 50px 50px 30px 30px;
+  clip-path: polygon(0 17%, 3% 8%, 10% 2%, 20% 0, 80% 0, 91% 2%, 98% 9%, 100% 18%, 100% 88%, 96% 97%, 90% 100%, 10% 100%, 4% 96%, 0 88%);
+}
+.service-lanes .segment-grid .segment-card:nth-child(4) {
+  border-radius: 30px 34px 32px 28px;
+  clip-path: polygon(0 0, 84% 0, 92% 3%, 100% 22%, 100% 69%, 94% 83%, 88% 100%, 0 100%);
+}
+@media(max-width:650px) {
+  .service-lanes .segment-grid .segment-card:nth-child(1) {
+    clip-path: polygon(0 0, 91% 0, 100% 78%, 95% 93%, 86% 100%, 0 100%);
+  }
+  .service-lanes .segment-grid .segment-card:nth-child(2) {
+    clip-path: polygon(9% 0, 100% 0, 100% 80%, 88% 100%, 0 100%, 0 13%);
+  }
+  .service-lanes .segment-grid .segment-card:nth-child(3) {
+    clip-path: polygon(0 17%, 8% 2%, 20% 0, 80% 0, 92% 2%, 100% 17%, 100% 88%, 92% 100%, 8% 100%, 0 88%);
+  }
+  .service-lanes .segment-grid .segment-card:nth-child(4) {
+    clip-path: polygon(0 0, 84% 0, 100% 23%, 100% 70%, 88% 100%, 0 100%);
+  }
+}
