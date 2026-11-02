@@ -116,7 +116,7 @@ function footer() {
     <div><h3>Explore</h3><a href="#/about-us">About Us</a><a href="#/contact-us">Contact Us</a><a href="#/privacy-policy">Privacy Policy</a><a href="#/terms-and-conditions">Terms &amp; Conditions</a><a href="#/refund-policy">Refund &amp; Cancellation</a><a href="#/blog">Blog</a><a href="#/payment-method">Payment Method</a></div>
     <div><h3>Services</h3><a href="#/flights">Flight</a><a href="#/hotels">Hotel</a><a href="#/holidays">Holiday</a><a href="#/visa">Visa</a><a href="#/umrah-packages">Umrah</a></div>
     <div><h3>Corporate Office</h3><p>28/A-2 Toyenbee Circular Road (1st Floor), Motijheel C/A, Dhaka-1000, Bangladesh.</p><p>Sat–Thu, 10:00 AM – 8:00 PM</p><div class="socials"><a href="https://facebook.com/Travel2know0" target="_blank" rel="noopener noreferrer">f</a><a href="https://youtube.com/Travel2know0" target="_blank" rel="noopener noreferrer">▶</a><a href="https://instagram.com/Travel2know0" target="_blank" rel="noopener noreferrer">◎</a></div></div>
-  </div><div class="footer-bottom"><span>© 2026 Travel To Know. All rights reserved.</span><span>Designed &amp; Developed by <a href="https://regtechnexusai.com" target="_blank" rel="noopener noreferrer">RegTech Nexus AI</a></span></div><button class="scroll-top-button" type="button" aria-label="Scroll to top" title="Scroll to top" data-scroll-top>↑</button></footer>`;
+  </div><div class="footer-bottom"><span>© 2026 Travel To Know. All rights reserved.</span><span>Travel To Know — Your Travel Partner</span></div><button class="scroll-top-button" type="button" aria-label="Scroll to top" title="Scroll to top" data-scroll-top>↑</button></footer>`;
 }
 
 function serviceTabMarkup(active) {
@@ -601,7 +601,6 @@ function bindInteractions() {
     event.preventDefault();
     const form = new FormData(event.target);
     const data = Object.fromEntries(form.entries());
-    sessionStorage.setItem("travelToKnowLeadDraft", JSON.stringify({ ...data, savedAt: new Date().toISOString() }));
     const subject = encodeURIComponent(`Travel To Know enquiry — ${data.service || "Travel service"}`);
     const body = encodeURIComponent([`Service: ${data.service || ""}`, `Name: ${data.name || ""}`, `Phone / WhatsApp: ${data.phone || ""}`, `Email: ${data.email || ""}`, `Travel date: ${data.date || ""}`, `Origin: ${data.origin || ""}`, `Destination / route: ${data.destination || ""}`, `Travellers: ${data.travellers || ""}`, `Budget: ${data.budget || ""}`, `Notes: ${data.notes || ""}`].join("\n"));
     showModal("Enquiry prepared", "", { mailto: `mailto:traveltoknowbd@gmail.com?subject=${subject}&body=${body}` });
