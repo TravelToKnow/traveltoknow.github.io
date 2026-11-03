@@ -1,4 +1,4 @@
-const ASSET = "";
+const ASSET = "/";
 
 const destinations = [
   ["Bangladesh", "Jeddah", "King Abdulaziz International Airport", "JED", "SAUDI ARABIA", "jeddah.jpg"],
