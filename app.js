@@ -387,13 +387,11 @@ function trustedAgodaFlightPath(path) {
 }
 function agodaHotelServiceUrl() {
   const cfg = getAgodaConfig();
-  // Use the Agoda Partner Center search endpoint supplied by the site owner.
-  // The Agoda homepage is not a hotel-search entry point and may not route
-  // partner traffic into the hotel search flow.
-  const url = trustedAffiliatePath("agoda", "/partners/partnersearch.aspx", "/partners/partnersearch.aspx");
-  url.searchParams.set("pcs", "1");
+  // Agoda's official hotel-search interface is /en-gb/search.
+  // Use the search page rather than the general app/home landing page or
+  // Partner Center router, which opened the app home screen on mobile.
+  const url = trustedAffiliatePath("agoda", "/en-gb/search", "/en-gb/search");
   if (cfg.cid) url.searchParams.set("cid", String(cfg.cid));
-  url.searchParams.set("hl", "en-us");
   return url.toString();
 }
 function agodaFlightServiceUrl() {
