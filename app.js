@@ -154,7 +154,6 @@ function agodaPartnerLogo() {
       <span class="agoda-partner-cta">Explore hotels <span aria-hidden="true">↗</span></span>
     </a>
     <p class="affiliate-disclosure agoda-affiliate-disclosure">Affiliate notice: If a qualifying booking is successfully attributed through this Agoda link under an approved programme, Travel To Know may receive a commission at no additional cost to you. Agoda controls prices, availability and booking conditions.</p>
-    <p class="affiliate-disclosure agoda-affiliate-disclosure">Affiliate notice: If a qualifying booking is successfully attributed through this Agoda link under an approved programme, Travel To Know may receive a commission at no additional cost to you. Agoda controls prices, availability and booking conditions.</p>
   </section>`;
 }
 
