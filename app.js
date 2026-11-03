@@ -206,7 +206,7 @@ function authPage(route) {
     <p class="intro">${intro}</p>
     <div class="trust-actions">
       <a class="primary-button" href="#/request-service">${t("Request a travel service", "ভ্রমণসেবা enquiry করুন")}</a>
-      <a href="mailto:info@traveltoknow.com.bd">${t("Email our support team", "সাপোর্ট টিমকে ইমেইল করুন")}</a>
+      <a class="auth-support-email" href="mailto:info@traveltoknow.com.bd" aria-label="${t("Email Travel To Know support at info@traveltoknow.com.bd", "info@traveltoknow.com.bd ঠিকানায় Travel To Know সাপোর্টে ইমেইল করুন")}">${t("Email our support team", "সাপোর্ট টিমকে ইমেইল করুন")}<span class="auth-support-address">info@traveltoknow.com.bd</span></a>
     </div>
     <p class="microcopy">${t("For your security, do not email passwords, card details or other sensitive authentication information.", "আপনার নিরাপত্তার জন্য password, card details বা সংবেদনশীল authentication তথ্য ইমেইল করবেন না।")}</p>
   </section></main>${footer()}`;
