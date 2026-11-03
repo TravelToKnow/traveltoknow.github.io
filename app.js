@@ -139,7 +139,7 @@ function bookingForm(type) {
 }
 
 function agodaPartnerUrl() {
-  return agodaPartnerSearchUrl("");
+  return agodaHotelServiceUrl();
 }
 
 function agodaPartnerLogo() {
@@ -381,9 +381,21 @@ function trustedAffiliatePath(provider, path, fallbackPath) {
 }
 
 function trustedAgodaFlightPath(path) {
-  // Agoda's documented public flight-results route is hosted on www.agoda.com.
-  // flights.agoda.com/flights/results can redirect to an empty flight form.
-  return trustedAffiliatePath("agoda", path || "/flights/results", "/flights/results");
+  // Use Agoda's public Flights service page; do not deep-link to an unverified
+  // results route. The visitor completes the flight search on Agoda.
+  return trustedAffiliatePath("agoda", path || "/flights", "/flights");
+}
+function agodaHotelServiceUrl() {
+  const cfg = getAgodaConfig();
+  const url = trustedAffiliatePath("agoda", "/", "/");
+  if (cfg.cid) url.searchParams.set("cid", String(cfg.cid));
+  return url.toString();
+}
+function agodaFlightServiceUrl() {
+  const cfg = getAgodaConfig();
+  const url = trustedAgodaFlightPath("/flights");
+  if (cfg.cid) url.searchParams.set("cid", String(cfg.cid));
+  return url.toString();
 }
 function airportSlug(value) { return String(value || "").toLowerCase().trim().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, ""); }
 function airportLookup(code) { return window.TRAVEL_AIRPORTS?.find((airport) => airport.iata === String(code || "").toUpperCase()) || null; }
@@ -456,11 +468,13 @@ function agodaPartnerSearchUrl(destination) {
 }
 
 function agodaHotelUrl(criteria) {
-  return agodaPartnerSearchUrl(criteria.destination);
+  // Agoda's general hotel-search service page supports worldwide destination
+  // selection. City-specific search parameters are not assumed or fabricated.
+  return agodaHotelServiceUrl();
 }
 
 function agodaHolidayUrl(destination) {
-  return agodaPartnerSearchUrl(destination);
+  return agodaHotelServiceUrl();
 }
 
 function mountAirportPicker(select, airports) {
@@ -645,7 +659,7 @@ function searchFlightsFromForm(button) {
   if (criteria.returnDate && criteria.returnDate < criteria.departureDate) { toast("Return date must be on or after departure date."); return; }
   const travellers = Number(criteria.travellers);
   if (!Number.isInteger(travellers) || travellers < 1 || travellers > 9) { toast("Please select 1–9 travellers."); return; }
-  window.location.assign(kayakFlightUrl(criteria));
+  window.location.assign(agodaFlightServiceUrl());
 }
 
 function bindInteractions() {
@@ -706,10 +720,7 @@ function bindInteractions() {
       return;
     }
     if (config.agoda?.cid) {
-      const cityId = AGODA_VERIFIED_CITY_IDS[normalizeAgodaDestination(destination)];
-      const url = agodaPartnerSearchUrl(destination);
-      if (!cityId) toast("Agoda does not yet have a verified destination link for this city. Agoda will open its partner search page; select your destination there, or use Booking.com for a direct destination search.");
-      window.open(url, "_blank", "noopener,noreferrer");
+      window.open(agodaHotelServiceUrl(), "_blank", "noopener,noreferrer");
       return;
     }
     showModal(destination, "Hotel affiliate links are not configured yet.");
