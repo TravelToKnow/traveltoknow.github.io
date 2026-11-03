@@ -55,8 +55,9 @@ const routeTitles = {
   "/payment-method": "Payment Methods | Travel To Know",
   "/blog": "Travel To Know | Travel Guidance & Support",
   "/blog/corporate-travel-cost-control": "Corporate Travel Planning & Cost Control | Travel To Know",
-  "/sign-in": "Login to your account | Travel To Know",
-  "/sing-up": "Open a new account | Travel To Know",
+  "/sign-in": "Sign-in assistance | Travel To Know",
+  "/sign-up": "Account access enquiry | Travel To Know",
+  "/sing-up": "Account access enquiry | Travel To Know",
   "/forgot-password": "Forgot your password | Travel To Know",
   "/request-service": "Request a Travel Service | Travel To Know"
 };
@@ -186,6 +187,31 @@ function articlePage() {
   return `${header("/blog")}<main class="page-main blog-page"><article class="content-card article-card"><a class="back-link" href="#/blog">← Back to Blog</a><span class="eyebrow">TRAVEL TO KNOW · TRAVEL GUIDANCE</span><h1>Corporate Travel Planning &amp; Cost Control</h1><p class="intro">A practical framework for organising business travel while keeping approvals, traveller needs and costs visible.</p><h2>Start with a clear travel brief</h2><p>Record the traveller, route, dates, flexibility, cabin preference, baggage needs and approval requirements before searching. A complete brief reduces repeated changes and makes supplier comparisons easier.</p><h2>Compare the full travel cost</h2><p>Look beyond the headline fare. Consider baggage, change conditions, cancellation terms, hotel location, transport needs and any service charges that apply before confirmation.</p><h2>Keep approvals and records together</h2><p>For business travel, retain the approved itinerary, traveller details, supplier terms and final confirmation in one accessible record. This supports later reconciliation and makes changes easier to track.</p><h2>Review before confirmation</h2><p>Confirm names, dates, routing, inclusions, payment terms and refund or cancellation conditions before issuing a ticket or confirming accommodation.</p><a class="primary-button blog-read-button" href="#/request-service">Request travel support</a></article></main>${footer()}`;
 }
 
+function authPage(route) {
+  const bn = localStorage.getItem("ttk-language") === "bn";
+  const t = (en, bnText) => bn ? bnText : en;
+  const isForgot = route === "/forgot-password";
+  const isSignup = route === "/sign-up" || route === "/sing-up";
+  const title = isForgot
+    ? t("Password assistance", "পাসওয়ার্ড সহায়তা")
+    : isSignup ? t("Account access enquiry", "অ্যাকাউন্ট খোলার বিষয়ে যোগাযোগ") : t("Sign-in assistance", "সাইন-ইন সহায়তা");
+  const intro = isForgot
+    ? t("Online password reset is not currently available because customer account authentication has not been enabled on this website. Please contact our team for assistance.", "এই ওয়েবসাইটে গ্রাহক অ্যাকাউন্ট authentication চালু না থাকায় অনলাইনে password reset সুবিধা বর্তমানে উপলভ্য নয়। সহায়তার জন্য আমাদের সঙ্গে যোগাযোগ করুন।")
+    : isSignup
+      ? t("Online account registration is not currently available. Contact Travel To Know if you need an account or assistance with a travel request.", "অনলাইনে অ্যাকাউন্ট খোলার সুবিধা বর্তমানে চালু নেই। অ্যাকাউন্ট বা ভ্রমণসংক্রান্ত সহায়তা প্রয়োজন হলে Travel To Know-এর সঙ্গে যোগাযোগ করুন।")
+      : t("Online customer sign-in is not currently available on this website. You can still contact Travel To Know or submit a travel-service enquiry without creating an account.", "এই ওয়েবসাইটে অনলাইন customer sign-in সুবিধা বর্তমানে চালু নেই। অ্যাকাউন্ট ছাড়াই Travel To Know-এর সঙ্গে যোগাযোগ করতে বা ভ্রমণসেবা enquiry পাঠাতে পারবেন।");
+  return `${header()}<main class="page-main"><section class="content-card auth-page" aria-labelledby="auth-page-title">
+    <span class="eyebrow">TRAVEL TO KNOW · CUSTOMER SUPPORT</span>
+    <h1 id="auth-page-title">${title}</h1>
+    <p class="intro">${intro}</p>
+    <div class="trust-actions">
+      <a class="primary-button" href="#/request-service">${t("Request a travel service", "ভ্রমণসেবা enquiry করুন")}</a>
+      <a href="mailto:info@traveltoknow.com.bd">${t("Email our support team", "সাপোর্ট টিমকে ইমেইল করুন")}</a>
+    </div>
+    <p class="microcopy">${t("For your security, do not email passwords, card details or other sensitive authentication information.", "আপনার নিরাপত্তার জন্য password, card details বা সংবেদনশীল authentication তথ্য ইমেইল করবেন না।")}</p>
+  </section></main>${footer()}`;
+}
+
 function umrahPage() {
   const bn = localStorage.getItem("ttk-language") === "bn";
   const t = (en, bnText) => bn ? bnText : en;
@@ -286,7 +312,7 @@ function render() {
   else if (route === "/payment-method") app.innerHTML = paymentPage();
   else if (route === "/blog") app.innerHTML = blogPage();
   else if (route === "/blog/corporate-travel-cost-control") app.innerHTML = articlePage();
-  else if (["/sign-in", "/sing-up", "/forgot-password"].includes(route)) app.innerHTML = authPage(route);
+  else if (["/sign-in", "/sign-up", "/sing-up", "/forgot-password"].includes(route)) app.innerHTML = authPage(route);
   else if (route === "/umrah-packages") app.innerHTML = umrahPage();
   else if (route === "/request-service") app.innerHTML = requestPage();
   else app.innerHTML = infoPage("/missing");
