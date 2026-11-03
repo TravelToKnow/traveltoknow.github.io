@@ -55,3 +55,28 @@ button,a,input,select,textarea{-webkit-tap-highlight-color:transparent}
 
 /* Affiliate verification readiness — disclosures and hotel editorial content. */
 .affiliate-disclosure,.affiliate-legal-notice{margin:12px auto;padding:12px 15px;max-width:1120px;color:#34495a;background:#f4f7fa;border:1px solid #d8e2ea;border-radius:10px;font-size:13px;line-height:1.65}.hotel-guide-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:22px}.hotel-guide-card,.hotel-checklist{padding:22px;background:#fff;border:1px solid #dce6ed;border-radius:16px}.agoda-affiliate-disclosure{margin-top:10px}.kayak-search-notice{margin:18px auto}.affiliate-legal-notice{margin:24px 0 0}.hotel-editorial{padding-top:34px;padding-bottom:38px}.hotel-guide-card h3,.hotel-checklist h3{margin:0 0 10px;color:#163c56}.hotel-guide-card p,.hotel-checklist li,.hotel-provider-note{color:#40596b;line-height:1.7}.hotel-checklist{margin-top:18px}.hotel-checklist ul{padding-left:20px}.hotel-provider-note{margin-top:16px;font-size:13px}@media(max-width:700px){.hotel-guide-grid{grid-template-columns:1fr;gap:12px}.hotel-guide-card,.hotel-checklist{padding:18px}.affiliate-disclosure{margin-left:12px;margin-right:12px}}
+
+
+/* Compact, unified booking and affiliate disclosure. */
+.booking-affiliate-notice{
+  max-width:1120px;
+  margin:8px auto 18px;
+  padding:8px 12px;
+  border:1px solid #e0e7ec;
+  border-radius:8px;
+  background:#f7f9fb;
+  color:#64717c;
+  font-size:11px;
+  line-height:1.45;
+  font-weight:400;
+  box-shadow:none;
+}
+.booking-affiliate-notice strong{color:#435462;font-weight:600}
+@media(max-width:700px){
+  .booking-affiliate-notice{
+    margin:7px 12px 14px;
+    padding:7px 10px;
+    font-size:10.5px;
+    line-height:1.4;
+  }
+}
