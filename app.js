@@ -153,7 +153,6 @@ function agodaPartnerLogo() {
       <span><strong>Book your stay with Agoda</strong><small>Explore hotels and accommodation worldwide</small></span>
       <span class="agoda-partner-cta">Explore hotels <span aria-hidden="true">↗</span></span>
     </a>
-    <p class="affiliate-disclosure agoda-affiliate-disclosure">Affiliate notice: If a qualifying booking is successfully attributed through this Agoda link under an approved programme, Travel To Know may receive a commission at no additional cost to you. Agoda controls prices, availability and booking conditions.</p>
   </section>`;
 }
 
@@ -166,12 +165,12 @@ function hotelEditorialSection() {
     '<p class="hotel-provider-note">Searches on Agoda or other external providers open the provider’s website. The provider controls its prices, inventory, payment process, booking confirmation and customer-service terms.</p></section>';
 }
 
-function kayakSearchNotice() {
-  return '<section class="affiliate-disclosure kayak-search-notice" aria-label="KAYAK external search notice"><strong>External flight-search notice:</strong> The flight search button opens KAYAK. This is currently an external search link; Travel To Know does not claim that this link is an approved KAYAK affiliate link or that a booking will be attributed to Travel To Know. Please review KAYAK’s own terms and prices before booking.</section>';
+function bookingAffiliateNotice() {
+  return '<aside class="affiliate-disclosure booking-affiliate-notice" aria-label="Booking and affiliate information"><strong>Booking &amp; affiliate information:</strong> Travel To Know may earn a commission from qualifying Agoda hotel bookings successfully attributed under an approved partner programme, at no extra cost to you. Flight searches currently open KAYAK as an external search link and are not represented as affiliate-tracked. Agoda and KAYAK control their own prices, availability, booking and payment terms.</aside>';
 }
 function heroPage(type = "flights", activeRoute = `/${type}`) {
   const copy = { flights: ["Explore the Best Flight Options", "Uncover unbeatable offers on global travel destinations"], hotels: ["Discover Your Perfect Vacation Stay", "Discover amazing deals to destinations worldwide"], holidays: ["Discover Your Next Tour", "Discover amazing deals to destinations worldwide"], visa: ["Visa processing Services Available!", "Visa depends on your profile and financial conditions!"] }[type];
-  return `${header(activeRoute, true)}<main class="travel-landing-page">${type === "flights" ? '' : ""}<section class="hero"><div class="hero-inner"><div class="hero-copy"><h1>${copy[0]}</h1><p>${copy[1]}</p></div><div class="booking-shell">${serviceTabMarkup(type)}${bookingForm(type)}</div></div></section>${agodaPartnerLogo()}${type === "hotels" ? hotelEditorialSection() : ""}${type === "flights" ? kayakSearchNotice() : ""}${serviceLanes()}${trustStrip()}${offers()}${amazonAffiliateSection()}${destinationSection()}${featuresSection()}${placesSection()}${newsletter()}${type === "flights" ? '' : ""}</main>${footer()}`;
+  return `${header(activeRoute, true)}<main class="travel-landing-page">${type === "flights" ? '' : ""}<section class="hero"><div class="hero-inner"><div class="hero-copy"><h1>${copy[0]}</h1><p>${copy[1]}</p></div><div class="booking-shell">${serviceTabMarkup(type)}${bookingForm(type)}</div></div></section>${agodaPartnerLogo()}${bookingAffiliateNotice()}${type === "hotels" ? hotelEditorialSection() : ""}${serviceLanes()}${trustStrip()}${offers()}${amazonAffiliateSection()}${destinationSection()}${featuresSection()}${placesSection()}${newsletter()}${type === "flights" ? '' : ""}</main>${footer()}`;
 }
 
 function serviceLanes() { return `<section class="section service-lanes"><div class="section-header"><h2>Travel support for the journeys that matter</h2><p>Tell us what you need. A Travel To Know specialist will review the request and respond with the next practical step.</p></div><div class="segment-grid">${serviceLaneData.map(([title, text, value], index) => `<a class="segment-card segment-${index + 1}" href="#/request-service?service=${encodeURIComponent(value)}"><span class="segment-number">0${index + 1}</span><h3>${title}</h3><p>${text}</p><span class="segment-link">Request support →</span></a>`).join("")}</div></section>`; }
@@ -435,10 +434,16 @@ function bookingHotelUrl(criteria) {
 
 function agodaHotelUrl(criteria) {
   const cfg = getAgodaConfig();
-  const url = trustedAffiliatePath("agoda", cfg.destinationPath || "/search", "/search");
+  // Agoda's /search route expects a resolved city identifier. Free-text
+  // destinations are sent to the destination entry point instead.
+  const url = trustedAffiliatePath("agoda", "/", "/");
   url.searchParams.set("textToSearch", String(criteria.destination || "").trim());
   if (criteria.checkIn) url.searchParams.set("checkIn", criteria.checkIn);
   if (criteria.checkOut) url.searchParams.set("checkOut", criteria.checkOut);
+  const nights = criteria.checkIn && criteria.checkOut
+    ? Math.max(1, Math.round((new Date(criteria.checkOut + "T00:00:00") - new Date(criteria.checkIn + "T00:00:00")) / 86400000))
+    : 1;
+  url.searchParams.set("los", String(nights));
   url.searchParams.set("rooms", String(criteria.rooms || "1"));
   url.searchParams.set("adults", String(criteria.adults || "2"));
   if (cfg.cid) url.searchParams.set("cid", String(cfg.cid));
