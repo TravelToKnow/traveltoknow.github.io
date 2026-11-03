@@ -295,7 +295,7 @@ function updatePageMetadata(route) {
   canonicalTag.href = "https://traveltoknow.com.bd" + canonicalPath;
   let robotsTag = document.querySelector('meta[name="robots"]');
   if (!robotsTag) { robotsTag = document.createElement("meta"); robotsTag.name = "robots"; document.head.appendChild(robotsTag); }
-  const privateRoutes = ["/sign-in", "/sing-up", "/forgot-password", "/missing"];
+  const privateRoutes = ["/sign-in", "/sign-up", "/sing-up", "/forgot-password", "/missing"];
   robotsTag.content = privateRoutes.includes(route) ? "noindex, nofollow" : "index, follow";
   document.title = title;
 }
@@ -632,7 +632,7 @@ function bindInteractions() {
   document.querySelector("[data-dismiss-announcement]")?.addEventListener("click", (event) => { event.target.closest(".announcement")?.remove(); });
   document.querySelector("[data-menu-toggle]")?.addEventListener("click", (event) => { const button = event.currentTarget; const nav = document.querySelector("[data-primary-nav]"); const open = nav?.classList.toggle("open") || false; button.setAttribute("aria-expanded", String(open)); button.setAttribute("aria-label", open ? "Close menu" : "Open menu"); });
   document.querySelectorAll("[data-service-tab]").forEach((button) => button.addEventListener("click", () => go(`/${button.dataset.serviceTab}`)));
-  document.querySelectorAll("[data-demo-search]").forEach((button) => button.addEventListener("click", () => { if (button.dataset.demoSearch === "Visa") { window.location.assign("https://traveltoknow.com.bd/flights/?utm_source=chatgpt.com#/request-service?service=Migrant%20and%20family%20travel"); return; } showModal(`${button.dataset.demoSearch} search demo`, "This service remains connected to the existing Travel To Know enquiry flow. Live supplier fares and availability require the relevant secure API connection."); }));
+  document.querySelectorAll("[data-demo-search]").forEach((button) => button.addEventListener("click", () => { if (button.dataset.demoSearch === "Visa") { window.location.assign("https://traveltoknow.com.bd/flights/#/request-service?service=Visa%20assistance"); return; } showModal(`${button.dataset.demoSearch} search demo`, "This service remains connected to the existing Travel To Know enquiry flow. Live supplier fares and availability require the relevant secure API connection."); }));
   document.querySelectorAll("[data-umrah-enquiry]").forEach((link) => link.addEventListener("click", (event) => {
     event.preventDefault();
     window.location.assign("https://traveltoknow.com.bd/flights/?utm_source=chatgpt.com#/request-service?service=Umrah%20and%20religious%20travel");
