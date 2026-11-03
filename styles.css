@@ -687,3 +687,39 @@
   .service-lanes .segment-grid { grid-template-columns: 1fr !important; }
   .service-lanes .segment-grid .segment-card { min-height: 0 !important; }
 }
+
+
+/* 2026-11-04: restore the previously approved pastel colours on the four travel-support cards. */
+.service-lanes .segment-grid .segment-card:nth-child(1) {
+  --lane-accent: #078da0 !important;
+  --lane-border: #39b9c2 !important;
+  background: linear-gradient(145deg, #e9fbfc 0%, #d8f4f7 72%, #c8edf0 100%) !important;
+}
+.service-lanes .segment-grid .segment-card:nth-child(2) {
+  --lane-accent: #e87816 !important;
+  --lane-border: #f3b05f !important;
+  background: linear-gradient(145deg, #fff8ed 0%, #fff0dc 72%, #ffe6c8 100%) !important;
+}
+.service-lanes .segment-grid .segment-card:nth-child(3) {
+  --lane-accent: #176fc0 !important;
+  --lane-border: #8caaff !important;
+  background: linear-gradient(145deg, #eff4ff 0%, #e4edff 72%, #d9e5ff 100%) !important;
+}
+.service-lanes .segment-grid .segment-card:nth-child(4) {
+  --lane-accent: #7545a5 !important;
+  --lane-border: #c19be0 !important;
+  background: linear-gradient(145deg, #faf3ff 0%, #f2e9fb 72%, #eadcf7 100%) !important;
+}
+.service-lanes .segment-grid .segment-card h3 { color: #17364d !important; }
+.service-lanes .segment-grid .segment-card p { color: #40596b !important; opacity: 1 !important; }
+.service-lanes .segment-grid .segment-card .segment-number {
+  color: #fff !important;
+  background: var(--lane-accent) !important;
+  border: 0 !important;
+  box-shadow: 0 5px 13px color-mix(in srgb, var(--lane-accent) 24%, transparent), inset 0 1px 0 rgba(255,255,255,.3) !important;
+}
+.service-lanes .segment-grid .segment-card .segment-link {
+  color: #fff !important;
+  background: var(--lane-accent) !important;
+  box-shadow: 0 5px 12px color-mix(in srgb, var(--lane-accent) 20%, transparent), inset 0 1px 0 rgba(255,255,255,.25) !important;
+}
