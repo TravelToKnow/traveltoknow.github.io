@@ -1,7 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://traveltoknow.com.bd/</loc>
-    <lastmod>2026-11-03</lastmod>
-  </url>
+  <url><loc>https://traveltoknow.com.bd/</loc><lastmod>2026-11-03</lastmod></url>
+  <url><loc>https://traveltoknow.com.bd/flights/</loc><lastmod>2026-11-03</lastmod></url>
+  <url><loc>https://traveltoknow.com.bd/hotels/</loc><lastmod>2026-11-03</lastmod></url>
+  <url><loc>https://traveltoknow.com.bd/holidays/</loc><lastmod>2026-11-03</lastmod></url>
+  <url><loc>https://traveltoknow.com.bd/visa/</loc><lastmod>2026-11-03</lastmod></url>
+  <url><loc>https://traveltoknow.com.bd/umrah-packages/</loc><lastmod>2026-11-03</lastmod></url>
+  <url><loc>https://traveltoknow.com.bd/about-us/</loc><lastmod>2026-11-03</lastmod></url>
+  <url><loc>https://traveltoknow.com.bd/contact-us/</loc><lastmod>2026-11-03</lastmod></url>
+  <url><loc>https://traveltoknow.com.bd/privacy-policy/</loc><lastmod>2026-11-03</lastmod></url>
+  <url><loc>https://traveltoknow.com.bd/terms-and-conditions/</loc><lastmod>2026-11-03</lastmod></url>
+  <url><loc>https://traveltoknow.com.bd/refund-policy/</loc><lastmod>2026-11-03</lastmod></url>
+  <url><loc>https://traveltoknow.com.bd/payment-method/</loc><lastmod>2026-11-03</lastmod></url>
+  <url><loc>https://traveltoknow.com.bd/blog/</loc><lastmod>2026-11-03</lastmod></url>
+  <url><loc>https://traveltoknow.com.bd/blog/corporate-travel-cost-control/</loc><lastmod>2026-11-03</lastmod></url>
+  <url><loc>https://traveltoknow.com.bd/request-service/</loc><lastmod>2026-11-03</lastmod></url>
 </urlset>
