@@ -432,18 +432,32 @@ function bookingHotelUrl(criteria) {
   return url.toString();
 }
 
+function agodaDestinationPath(destination) {
+  const normalized = String(destination || "").normalize("NFKC").toLowerCase()
+    .replace(/[’']/g, "").replace(/[^a-z0-9]+/g, " ").trim().replace(/\s+/g, " ");
+  // Verified Agoda city landing pages. Keep this allow-list explicit: Agoda city
+  // slugs are not safely derivable from arbitrary free-text destinations.
+  const destinations = {
+    "bangkok": "/city/bangkok-th.html",
+    "bangkok thailand": "/city/bangkok-th.html",
+    "mecca": "/city/mecca-sa.html",
+    "makkah": "/city/mecca-sa.html",
+    "makkah saudi arabia": "/city/mecca-sa.html",
+    "mecca saudi arabia": "/city/mecca-sa.html"
+  };
+  return destinations[normalized] || "";
+}
+
 function agodaHotelUrl(criteria) {
   const cfg = getAgodaConfig();
-  // Agoda's /search route expects a resolved city identifier. Free-text
-  // destinations are sent to the destination entry point instead.
-  const url = trustedAffiliatePath("agoda", "/", "/");
-  url.searchParams.set("textToSearch", String(criteria.destination || "").trim());
-  if (criteria.checkIn) url.searchParams.set("checkIn", criteria.checkIn);
-  if (criteria.checkOut) url.searchParams.set("checkOut", criteria.checkOut);
-  const nights = criteria.checkIn && criteria.checkOut
-    ? Math.max(1, Math.round((new Date(criteria.checkOut + "T00:00:00") - new Date(criteria.checkIn + "T00:00:00")) / 86400000))
-    : 1;
-  url.searchParams.set("los", String(nights));
+  const destination = String(criteria.destination || "").trim();
+  const destinationPath = agodaDestinationPath(destination);
+  // Use Agoda's published city landing pages for destinations with verified
+  // slugs; do not send these searches to the generic Agoda homepage.
+  const url = trustedAffiliatePath("agoda", destinationPath || "/", "/");
+  if (!destinationPath) url.searchParams.set("textToSearch", destination);
+  if (criteria.checkIn) url.searchParams.set("checkin", criteria.checkIn);
+  if (criteria.checkOut) url.searchParams.set("checkout", criteria.checkOut);
   url.searchParams.set("rooms", String(criteria.rooms || "1"));
   url.searchParams.set("adults", String(criteria.adults || "2"));
   if (cfg.cid) url.searchParams.set("cid", String(cfg.cid));
@@ -452,8 +466,9 @@ function agodaHotelUrl(criteria) {
 
 function agodaHolidayUrl(destination) {
   const cfg = getAgodaConfig();
-  const url = trustedAffiliatePath("agoda", cfg.destinationPath || "/search", "/search");
-  url.searchParams.set("textToSearch", String(destination || "").trim());
+  const destinationPath = agodaDestinationPath(destination);
+  const url = trustedAffiliatePath("agoda", destinationPath || "/", "/");
+  if (!destinationPath) url.searchParams.set("textToSearch", String(destination || "").trim());
   if (cfg.cid) url.searchParams.set("cid", String(cfg.cid));
   return url.toString();
 }
@@ -701,8 +716,9 @@ function bindInteractions() {
       return;
     }
     if (config.agoda?.cid) {
-      const url = trustedAffiliatePath("agoda", config.agoda.destinationPath || "/search", "/search");
-      url.searchParams.set("textToSearch", destination);
+      const destinationPath = agodaDestinationPath(destination);
+      const url = trustedAffiliatePath("agoda", destinationPath || "/", "/");
+      if (!destinationPath) url.searchParams.set("textToSearch", destination);
       url.searchParams.set("cid", String(config.agoda.cid));
       window.open(url.toString(), "_blank", "noopener,noreferrer");
       return;
