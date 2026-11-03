@@ -80,3 +80,13 @@ button,a,input,select,textarea{-webkit-tap-highlight-color:transparent}
     line-height:1.4;
   }
 }
+
+
+/* 2026-11-03: justify affiliate and booking disclosure copy for consistent mobile/desktop reading. */
+.booking-affiliate-notice,
+.affiliate-disclosure,
+.affiliate-legal-notice,
+.agoda-affiliate-disclosure {
+  text-align: justify;
+  text-justify: inter-word;
+}
