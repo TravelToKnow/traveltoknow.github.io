@@ -471,9 +471,21 @@ function agodaPartnerSearchUrl(destination) {
 }
 
 function agodaHotelUrl(criteria) {
-  // Agoda's general hotel-search service page supports worldwide destination
-  // selection. City-specific search parameters are not assumed or fabricated.
-  return agodaHotelServiceUrl();
+  // Agoda's public search URL accepts a verified numeric city ID plus stay
+  // dates and occupancy. Never invent a city ID for an unverified destination.
+  const cfg = getAgodaConfig();
+  const destination = String(criteria?.destination || "").trim();
+  const cityId = AGODA_VERIFIED_CITY_IDS[normalizeAgodaDestination(destination)];
+  const url = trustedAffiliatePath("agoda", "/search", "/search");
+  if (cityId) url.searchParams.set("city", cityId);
+  if (criteria?.checkIn) url.searchParams.set("checkIn", criteria.checkIn);
+  if (criteria?.checkOut) url.searchParams.set("checkOut", criteria.checkOut);
+  if (criteria?.adults) url.searchParams.set("adults", String(criteria.adults));
+  if (criteria?.rooms) url.searchParams.set("rooms", String(criteria.rooms));
+  if (cfg.cid) url.searchParams.set("cid", String(cfg.cid));
+  // Unknown destinations still open Agoda's search interface with dates and
+  // occupancy retained; Agoda may require the visitor to select the location.
+  return url.toString();
 }
 
 function agodaHolidayUrl(destination) {
