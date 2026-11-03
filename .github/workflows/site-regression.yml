@@ -1,0 +1,25 @@
+name: Travel To Know site regression
+on:
+  push:
+    branches: [main, chore/seo-regression-remediation-20261103]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  regression:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Check JavaScript syntax
+        run: |
+          node --check app.js
+          node --check legal-content.js
+          node --check api-client.js
+          node --check i18n.js
+      - name: Run SEO and route regression checks
+        run: node scripts/site-regression.mjs
