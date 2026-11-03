@@ -142,12 +142,18 @@ function agodaPartnerUrl() {
   return agodaPartnerSearchUrl("");
 }
 
-function agodaPartnerLogo() {
-  return `<section class="agoda-partner-strip" aria-label="Agoda hotel booking partner">
-    <a class="agoda-partner-link" href="${agodaPartnerUrl()}" target="_blank" rel="nofollow sponsored noopener noreferrer" aria-label="Book hotels on Agoda">
+function agodaPartnerLogo(service = "hotels") {
+  const isFlightService = service === "flights";
+  const servicePath = isFlightService ? "/flights/" : "/hotels/";
+  const serviceLabel = isFlightService ? "Explore flight services" : "Explore hotel services";
+  const serviceDescription = isFlightService
+    ? "View flight search and travel assistance options"
+    : "View hotel search and accommodation options";
+  return `<section class="agoda-partner-strip" aria-label="Travel To Know service options">
+    <a class="agoda-partner-link" href="${servicePath}" aria-label="${serviceLabel}">
       <img src="https://cdn6.agoda.net/images/kite-js/logo/agoda/color-default.svg" alt="Agoda" loading="lazy">
-      <span><strong>Book your stay with Agoda</strong><small>Explore hotels and accommodation worldwide</small></span>
-      <span class="agoda-partner-cta">Explore hotels <span aria-hidden="true">↗</span></span>
+      <span><strong>${serviceLabel}</strong><small>${serviceDescription}</small></span>
+      <span class="agoda-partner-cta">View options <span aria-hidden="true">↗</span></span>
     </a>
   </section>`;
 }
@@ -166,7 +172,7 @@ function bookingAffiliateNotice() {
 }
 function heroPage(type = "flights", activeRoute = `/${type}`) {
   const copy = { flights: ["Explore the Best Flight Options", "Uncover unbeatable offers on global travel destinations"], hotels: ["Discover Your Perfect Vacation Stay", "Discover amazing deals to destinations worldwide"], holidays: ["Discover Your Next Tour", "Discover amazing deals to destinations worldwide"], visa: ["Visa processing Services Available!", "Visa depends on your profile and financial conditions!"] }[type];
-  return `${header(activeRoute, true)}<main class="travel-landing-page">${type === "flights" ? '' : ""}<section class="hero"><div class="hero-inner"><div class="hero-copy"><h1>${copy[0]}</h1><p>${copy[1]}</p></div><div class="booking-shell">${serviceTabMarkup(type)}${bookingForm(type)}</div></div></section>${agodaPartnerLogo()}${bookingAffiliateNotice()}${type === "hotels" ? hotelEditorialSection() : ""}${serviceLanes()}${trustStrip()}${offers()}${amazonAffiliateSection()}${destinationSection()}${featuresSection()}${placesSection()}${newsletter()}${type === "flights" ? '' : ""}</main>${footer()}`;
+  return `${header(activeRoute, true)}<main class="travel-landing-page">${type === "flights" ? '' : ""}<section class="hero"><div class="hero-inner"><div class="hero-copy"><h1>${copy[0]}</h1><p>${copy[1]}</p></div><div class="booking-shell">${serviceTabMarkup(type)}${bookingForm(type)}</div></div></section>${agodaPartnerLogo(type === "hotels" ? "hotels" : "flights")}${bookingAffiliateNotice()}${type === "hotels" ? hotelEditorialSection() : ""}${serviceLanes()}${trustStrip()}${offers()}${amazonAffiliateSection()}${destinationSection()}${featuresSection()}${placesSection()}${newsletter()}${type === "flights" ? '' : ""}</main>${footer()}`;
 }
 
 function serviceLanes() { return `<section class="section service-lanes"><div class="section-header"><h2>Travel support for the journeys that matter</h2><p>Tell us what you need. A Travel To Know specialist will review the request and respond with the next practical step.</p></div><div class="segment-grid">${serviceLaneData.map(([title, text, value], index) => `<a class="segment-card segment-${index + 1}" href="#/request-service?service=${encodeURIComponent(value)}"><span class="segment-number">0${index + 1}</span><h3>${title}</h3><p>${text}</p><span class="segment-link">Request support →</span></a>`).join("")}</div></section>`; }
