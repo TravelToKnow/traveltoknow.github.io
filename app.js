@@ -164,13 +164,13 @@ function serviceLanes() { return `<section class="section service-lanes"><div cl
 
 function trustStrip() { return `<section class="trust-strip"><div class="trust-wrap"><div><span class="eyebrow">WHY TRAVEL TO KNOW</span><h2>Your journey. Our priority.</h2><p>Reliable travel solutions for business, leisure and journeys beyond borders—with human support when the details matter.</p></div><div class="trust-badges trust-badges-logos" aria-label="Travel To Know registration and association references"><div class="trust-badge trust-logo-badge trust-badge-mocat"><img src="${ASSET}mocat-logo.jpg" alt="MoCAT reference logo" loading="lazy"><span class="trust-badge-copy"><strong>MoCAT</strong><small>0013575</small></span></div><div class="trust-badge trust-logo-badge trust-badge-atab"><img src="${ASSET}atab-logo.jpg" alt="ATAB reference logo" loading="lazy"><span class="trust-badge-copy"><strong>ATAB</strong><small>Travel Agents of Bangladesh</small></span></div><div class="trust-badge trust-logo-badge trust-badge-dbid"><img src="${ASSET}dbid-logo.jpg" alt="DBID reference logo" loading="lazy"><span class="trust-badge-copy"><strong>DBID</strong><small>717571834</small></span></div><div class="trust-badge trust-logo-badge trust-badge-iata"><img src="${ASSET}iata-logo.jpg" alt="IATA reference logo" loading="lazy"><span class="trust-badge-copy"><strong>IATA</strong><small>Accredited agency</small></span></div></div><p class="trust-reference-note">Reference details are shown for identification. Please verify current status directly with the relevant issuing or membership organization.</p><div class="trust-actions"><a class="primary-button" href="#/request-service">Start an enquiry</a><a href="#/contact-us">View contact &amp; office details</a><a href="#/terms-and-conditions">Read refund &amp; cancellation terms</a></div></div></section>`; }
 
-function offers() { return `<section class="section compact"><div class="section-header"><h2>Exclusive Offers</h2><p>Discover unbeatable offers that won't last long. Grab these premium deals before they're gone!</p></div><div class="empty-state">No offer found</div></section>`; }
+function offers() { return ""; }
 
 function amazonAffiliateSection() {
   const link = "https://amzn.to/4AUcpLI";
   return `<section class="section amazon-affiliate-section" aria-labelledby="amazon-travel-essentials-title"><div class="amazon-affiliate-card"><div class="amazon-affiliate-copy"><span class="eyebrow">TRAVEL ESSENTIALS</span><h2 id="amazon-travel-essentials-title">Travel Essentials on Amazon</h2><p>Find useful travel gear and accessories through our Amazon Associate link.</p><a class="amazon-affiliate-button" href="${link}" target="_blank" rel="nofollow sponsored noopener noreferrer">🛒 Check Price on Amazon</a><p class="amazon-disclosure">As an Amazon Associate I earn from qualifying purchases.</p></div><div class="amazon-affiliate-badge" aria-hidden="true"><img src="${ASSET}amazon-logo.gif" alt="Amazon" loading="lazy"></div></div></section>`; }
 
-function destinationSection() { return `<section class="section"><div class="section-header"><h2>Popular Destinations</h2><p>Click on a destination to explore exciting flight deals.</p></div><div class="destination-grid">${destinations.map(([from, to, airport, code, country, image]) => `<button class="destination-card affiliate-clickable" data-destination="${to}" data-affiliate-destination="${to}" aria-label="Explore flight deals to ${to}"><img src="${ASSET}${image}" alt="${from} to ${to}"><div class="destination-info"><h3>${from} <span>${to}</span></h3><p>${airport}</p><div class="destination-meta"><span>${country}</span><span class="tag">Flight Deals</span></div></div></button>`).join("")}</div></section>`; }
+function destinationSection() { return `<section class="section"><div class="section-header"><h2>Popular Destinations</h2><p>Click on a destination to explore exciting flight deals.</p></div><div class="destination-grid">${destinations.map(([from, to, airport, code, country, image]) => `<button class="destination-card affiliate-clickable" data-destination="${to}" data-affiliate-destination="${to}" aria-label="Explore flight deals to ${to}"><img src="${ASSET}${image}" alt="Flights from ${from} to ${to}"><div class="destination-info"><h3>${from} <span>${to}</span></h3><p>${airport}</p><div class="destination-meta"><span>${country}</span><span class="tag">Flight Deals</span></div></div></button>`).join("")}</div></section>`; }
 
 function featuresSection() { return `<section class="section"><div class="section-header"><h2>Our Services at a Glance</h2><p>Discover a variety of features designed to enhance and simplify your travel journey.</p></div><div class="features-grid">${features.map(([icon, title, text]) => `<div class="feature"><div class="feature-icon">${icon}</div><h3>${title}</h3><p>${text}</p></div>`).join("")}</div></section>`; }
 
@@ -209,11 +209,47 @@ function paymentPage() { const bn = localStorage.getItem("ttk-language") === "bn
 <div class="payment-card"><div class="payment-brand-logo-wrap"><img class="payment-brand-logo" src="bkash-logo.png" alt="bKash logo"></div><h3>bKash (${t("Payment Only", "শুধুমাত্র পেমেন্ট")})</h3><div class="type">${t("MFS", "মোবাইল ফাইন্যান্সিয়াল সার্ভিস (MFS)")}</div><dl><div><dt>${t("Account Name", "হিসাবের নাম")}</dt><dd>Travel To Know</dd></div><div><dt>${t("Account Number", "হিসাব নম্বর")}</dt><dd>01772282925</dd></div></dl><a href="#/payment-method" data-demo-payment>${t("Proceed to deposit →", "জমা দিতে এগিয়ে যান →")}</a></div>
 <div class="payment-card"><div class="payment-brand-logo-wrap"><img class="payment-brand-logo" src="dbbl-logo.png" alt="Dutch-Bangla Bank logo"></div><h3>Dutch-Bangla Bank PLC</h3><div class="type">${t("Bank", "ব্যাংক")}</div><dl><div><dt>${t("Account Name", "হিসাবের নাম")}</dt><dd>Travel To Know</dd></div><div><dt>${t("Account Number", "হিসাব নম্বর")}</dt><dd>7017100453518</dd></div><div><dt>${t("Branch", "শাখা")}</dt><dd>${t("Agent Banking (Foreign Exchange Branch)", "এজেন্ট ব্যাংকিং (ফরেন এক্সচেঞ্জ শাখা)")}</dd></div><div><dt>${t("Routing", "রাউটিং নম্বর")}</dt><dd>090270608</dd></div><div><dt>${t("SWIFT Code", "SWIFT কোড")}</dt><dd>DBBLBDDH</dd></div></dl><a href="#/payment-method" data-demo-payment>${t("Proceed to deposit →", "জমা দিতে এগিয়ে যান →")}</a></div>
 </div><p class="hint payment-note">${t("All payment methods should be verified with Travel To Know support before making a transfer.", "টাকা স্থানান্তরের আগে Travel To Know-এর সাপোর্ট টিমের সঙ্গে যোগাযোগ করে সব পেমেন্ট তথ্য যাচাই করে নিন।")}</p></div></main>${footer()}`; }
+const routeDescriptions = {
+  "/": "Travel To Know helps travellers from Bangladesh plan flights, hotels, holidays, visa assistance and Umrah journeys with practical support.",
+  "/flights": "Explore domestic and international flight options from Bangladesh with Travel To Know. Request fare assistance and review booking conditions before confirmation.",
+  "/hotels": "Explore hotel and accommodation options in Bangladesh and worldwide with Travel To Know. Compare stay details and supplier conditions before booking.",
+  "/holidays": "Plan your next holiday with Travel To Know. Explore destinations, package options and practical travel support for your journey.",
+  "/visa": "Get travel-document guidance and visa assistance from Travel To Know. Visa decisions remain with the relevant embassy or immigration authority.",
+  "/umrah-packages": "Explore Umrah travel planning with Travel To Know, including flight, accommodation and journey coordination support.",
+  "/about-us": "Learn about Travel To Know, its travel services, customer support approach and corporate office in Motijheel, Dhaka.",
+  "/contact-us": "Contact Travel To Know for flight, hotel, holiday, visa and Umrah enquiries. Find our Dhaka office address, phone numbers and support hours.",
+  "/privacy-policy": "Read the Travel To Know privacy policy to understand the personal information collected for enquiries, bookings, travel services and website use.",
+  "/terms-and-conditions": "Review Travel To Know booking terms, payment conditions, supplier responsibilities, amendments, cancellations and customer obligations.",
+  "/refund-policy": "Review Travel To Know refund and cancellation conditions for flight tickets, hotels, visa assistance and third-party services.",
+  "/payment-method": "Review payment methods published by Travel To Know and verify account details with customer support before making a transfer.",
+  "/blog": "Read practical travel planning guidance and service insights from Travel To Know for business, family and international journeys.",
+  "/blog/corporate-travel-cost-control": "Learn practical ways to organise business travel, compare full trip costs, maintain approvals and review booking conditions.",
+  "/request-service": "Send a travel enquiry to Travel To Know for flights, hotels, visa assistance, holiday packages, corporate travel and Umrah support."
+};
+
+function updatePageMetadata(route) {
+  const description = routeDescriptions[route] || "The requested page could not be found on Travel To Know.";
+  const title = routeTitles[route] || "Page not found | Travel To Know";
+  let descriptionTag = document.querySelector('meta[name="description"]');
+  if (!descriptionTag) { descriptionTag = document.createElement("meta"); descriptionTag.name = "description"; document.head.appendChild(descriptionTag); }
+  descriptionTag.content = description;
+  let canonicalTag = document.querySelector('link[rel="canonical"]');
+  if (!canonicalTag) { canonicalTag = document.createElement("link"); canonicalTag.rel = "canonical"; document.head.appendChild(canonicalTag); }
+  const canonicalPath = route === "/" ? "/" : route.replace(/\/+$/, "") + "/";
+  canonicalTag.href = "https://traveltoknow.com.bd" + canonicalPath;
+  let robotsTag = document.querySelector('meta[name="robots"]');
+  if (!robotsTag) { robotsTag = document.createElement("meta"); robotsTag.name = "robots"; document.head.appendChild(robotsTag); }
+  const privateRoutes = ["/sign-in", "/sing-up", "/forgot-password", "/missing"];
+  robotsTag.content = privateRoutes.includes(route) ? "noindex, nofollow" : "index, follow";
+  document.title = title;
+}
+
 function render() {
   const requestedLanguage = queryParam("lang");
   if (requestedLanguage === "en" || requestedLanguage === "bn") localStorage.setItem("ttk-language", requestedLanguage);
   const route = routeFromLocation();
-  document.title = window.TTK_I18N && localStorage.getItem("ttk-language") === "bn" ? window.TTK_I18N.translateText(routeTitles[route] || routeTitles["/"]) : (routeTitles[route] || routeTitles["/"]);
+  updatePageMetadata(route);
+  if (window.TTK_I18N && localStorage.getItem("ttk-language") === "bn") document.title = window.TTK_I18N.translateText(routeTitles[route] || routeTitles["/"]);
   const app = document.getElementById("app");
   if (["/", "/flights", "/hotels", "/holidays", "/visa"].includes(route)) app.innerHTML = heroPage(route === "/" ? "flights" : route.slice(1), route);
   else if (["/about-us", "/contact-us", "/privacy-policy", "/terms-and-conditions", "/refund-policy"].includes(route)) app.innerHTML = infoPage(route);
