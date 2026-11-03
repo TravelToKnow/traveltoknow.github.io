@@ -186,6 +186,36 @@ function articlePage() {
   return `${header("/blog")}<main class="page-main blog-page"><article class="content-card article-card"><a class="back-link" href="#/blog">← Back to Blog</a><span class="eyebrow">TRAVEL TO KNOW · TRAVEL GUIDANCE</span><h1>Corporate Travel Planning &amp; Cost Control</h1><p class="intro">A practical framework for organising business travel while keeping approvals, traveller needs and costs visible.</p><h2>Start with a clear travel brief</h2><p>Record the traveller, route, dates, flexibility, cabin preference, baggage needs and approval requirements before searching. A complete brief reduces repeated changes and makes supplier comparisons easier.</p><h2>Compare the full travel cost</h2><p>Look beyond the headline fare. Consider baggage, change conditions, cancellation terms, hotel location, transport needs and any service charges that apply before confirmation.</p><h2>Keep approvals and records together</h2><p>For business travel, retain the approved itinerary, traveller details, supplier terms and final confirmation in one accessible record. This supports later reconciliation and makes changes easier to track.</p><h2>Review before confirmation</h2><p>Confirm names, dates, routing, inclusions, payment terms and refund or cancellation conditions before issuing a ticket or confirming accommodation.</p><a class="primary-button blog-read-button" href="#/request-service">Request travel support</a></article></main>${footer()}`;
 }
 
+function umrahPage() {
+  const bn = localStorage.getItem("ttk-language") === "bn";
+  const t = (en, bnText) => bn ? bnText : en;
+  const enquiryHref = "#/request-service?service=Umrah%20and%20religious%20travel";
+  return `${header("/umrah-packages")}
+  <main class="page-main">
+    <section class="content-card umrah-page" aria-labelledby="umrah-page-title">
+      <span class="eyebrow">${t("TRAVEL TO KNOW · UMRAH TRAVEL SUPPORT", "TRAVEL TO KNOW · ওমরাহ ভ্রমণ সহায়তা")}</span>
+      <h1 id="umrah-page-title">${t("Plan Your Umrah Journey with Confidence", "পরিকল্পিতভাবে আপনার ওমরাহ যাত্রার প্রস্তুতি নিন")}</h1>
+      <p class="intro">${t("We help you coordinate the travel arrangements for your Umrah journey, including flight planning, accommodation enquiries and practical travel support. Share your preferred dates and requirements so our team can review the next steps with you.", "ওমরাহ যাত্রার জন্য ফ্লাইট পরিকল্পনা, আবাসনসংক্রান্ত enquiry এবং প্রয়োজনীয় ভ্রমণ সহায়তা সমন্বয়ে আমরা সহযোগিতা করি। আপনার সম্ভাব্য তারিখ ও প্রয়োজনীয় তথ্য জানালে আমাদের টিম পরবর্তী পদক্ষেপ পর্যালোচনা করবে।")}</p>
+      <div class="trust-actions">
+        <a class="primary-button" href="${enquiryHref}" data-umrah-enquiry>${t("Enquire about Umrah", "ওমরাহ সম্পর্কে enquiry করুন")}</a>
+        <a href="tel:+8801772282925">${t("Call Travel To Know", "Travel To Know-এ ফোন করুন")}</a>
+      </div>
+    </section>
+    <section class="content-card">
+      <h2>${t("Discuss your travel requirements", "আপনার ভ্রমণসংক্রান্ত প্রয়োজন জানান")}</h2>
+      <p>${t("When you enquire, please share your intended travel period, number of travellers, departure city and any accommodation preferences. These details help us assess the request.", "enquiry করার সময় সম্ভাব্য ভ্রমণের সময়, যাত্রীর সংখ্যা, যাত্রার শহর এবং আবাসনসংক্রান্ত পছন্দ জানালে অনুরোধটি পর্যালোচনা করতে সুবিধা হবে।")}</p>
+      <ul>
+        <li>${t("Flight options and travel dates", "ফ্লাইটের বিকল্প ও ভ্রমণের তারিখ")}</li>
+        <li>${t("Accommodation requirements", "আবাসনের প্রয়োজনীয়তা")}</li>
+        <li>${t("Visa and travel-document guidance", "ভিসা ও ভ্রমণ নথি বিষয়ে নির্দেশনা")}</li>
+        <li>${t("Group size and coordination needs", "দলের সদস্যসংখ্যা ও সমন্বয়ের প্রয়োজন")}</li>
+      </ul>
+      <p class="microcopy">${t("Package inclusions, departure dates, availability, visa requirements, supplier conditions and all prices must be confirmed directly with Travel To Know before any booking or payment. No live availability or fixed package price is represented on this page.", "প্যাকেজের অন্তর্ভুক্ত বিষয়, যাত্রার তারিখ, আসন/রুমের প্রাপ্যতা, ভিসার শর্ত, সরবরাহকারীর নিয়ম এবং মূল্য বুকিং বা পেমেন্টের আগে Travel To Know-এর সঙ্গে সরাসরি নিশ্চিত করতে হবে। এই পেজে live availability বা নির্দিষ্ট প্যাকেজ মূল্য প্রদর্শনের দাবি করা হচ্ছে না।")}</p>
+      <a class="primary-button" href="${enquiryHref}" data-umrah-enquiry>${t("Start an Umrah enquiry", "ওমরাহ enquiry শুরু করুন")}</a>
+    </section>
+  </main>${footer()}`;
+}
+
 function requestPage() {
   const selected = queryParam("service");
   const selectedOption = serviceLaneData.some(([, , value]) => value === selected) ? selected : "";
@@ -577,15 +607,10 @@ function bindInteractions() {
   document.querySelector("[data-menu-toggle]")?.addEventListener("click", (event) => { const button = event.currentTarget; const nav = document.querySelector("[data-primary-nav]"); const open = nav?.classList.toggle("open") || false; button.setAttribute("aria-expanded", String(open)); button.setAttribute("aria-label", open ? "Close menu" : "Open menu"); });
   document.querySelectorAll("[data-service-tab]").forEach((button) => button.addEventListener("click", () => go(`/${button.dataset.serviceTab}`)));
   document.querySelectorAll("[data-demo-search]").forEach((button) => button.addEventListener("click", () => { if (button.dataset.demoSearch === "Visa") { window.location.assign("https://traveltoknow.com.bd/flights/?utm_source=chatgpt.com#/request-service?service=Migrant%20and%20family%20travel"); return; } showModal(`${button.dataset.demoSearch} search demo`, "This service remains connected to the existing Travel To Know enquiry flow. Live supplier fares and availability require the relevant secure API connection."); }));
-  // Umrah search actions should open the same service-enquiry route as Visa.
-  document.addEventListener("click", (event) => {
-    if (routeFromLocation() !== "/umrah-packages") return;
-    const button = event.target.closest("button");
-    if (!button || !/search|find|check availability/i.test(button.textContent || "")) return;
+  document.querySelectorAll("[data-umrah-enquiry]").forEach((link) => link.addEventListener("click", (event) => {
     event.preventDefault();
-    event.stopImmediatePropagation();
-    window.location.assign("https://traveltoknow.com.bd/flights/?utm_source=chatgpt.com#/request-service?service=Migrant%20and%20family%20travel");
-  }, true);
+    window.location.assign("https://traveltoknow.com.bd/flights/?utm_source=chatgpt.com#/request-service?service=Umrah%20and%20religious%20travel");
+  }));
   document.querySelectorAll("[data-flight-search]").forEach((button) => button.addEventListener("click", () => searchFlightsFromForm(button)));
   function readHotelCriteria(button) {
     const card = button.closest("[data-form=hotels]");
