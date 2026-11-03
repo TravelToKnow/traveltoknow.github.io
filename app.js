@@ -316,6 +316,13 @@ function render() {
   else if (route === "/umrah-packages") app.innerHTML = umrahPage();
   else if (route === "/request-service") app.innerHTML = requestPage();
   else app.innerHTML = infoPage("/missing");
+  // Defer off-screen content images; keep hero-area imagery eager for the initial viewport.
+  app.querySelectorAll("img").forEach((img) => {
+    if (!img.closest(".hero")) {
+      if (!img.hasAttribute("loading")) img.loading = "lazy";
+      if (!img.hasAttribute("decoding")) img.decoding = "async";
+    }
+  });
   if (window.TTK_I18N) window.TTK_I18N.apply(app);
   document.documentElement.lang = localStorage.getItem("ttk-language") === "bn" ? "bn" : "en";
   bindInteractions();
