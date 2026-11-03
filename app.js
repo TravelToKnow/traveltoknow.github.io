@@ -576,7 +576,16 @@ function bindInteractions() {
   document.querySelector("[data-dismiss-announcement]")?.addEventListener("click", (event) => { event.target.closest(".announcement")?.remove(); });
   document.querySelector("[data-menu-toggle]")?.addEventListener("click", (event) => { const button = event.currentTarget; const nav = document.querySelector("[data-primary-nav]"); const open = nav?.classList.toggle("open") || false; button.setAttribute("aria-expanded", String(open)); button.setAttribute("aria-label", open ? "Close menu" : "Open menu"); });
   document.querySelectorAll("[data-service-tab]").forEach((button) => button.addEventListener("click", () => go(`/${button.dataset.serviceTab}`)));
-  document.querySelectorAll("[data-demo-search]").forEach((button) => button.addEventListener("click", () => showModal(`${button.dataset.demoSearch} search demo`, "This service remains connected to the existing Travel To Know enquiry flow. Live supplier fares and availability require the relevant secure API connection.")));
+  document.querySelectorAll("[data-demo-search]").forEach((button) => button.addEventListener("click", () => { if (button.dataset.demoSearch === "Visa") { window.location.assign("https://traveltoknow.com.bd/flights/?utm_source=chatgpt.com#/request-service?service=Migrant%20and%20family%20travel"); return; } showModal(`${button.dataset.demoSearch} search demo`, "This service remains connected to the existing Travel To Know enquiry flow. Live supplier fares and availability require the relevant secure API connection."); }));
+  // Umrah search actions should open the same service-enquiry route as Visa.
+  document.addEventListener("click", (event) => {
+    if (routeFromLocation() !== "/umrah-packages") return;
+    const button = event.target.closest("button");
+    if (!button || !/search|find|check availability/i.test(button.textContent || "")) return;
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    window.location.assign("https://traveltoknow.com.bd/flights/?utm_source=chatgpt.com#/request-service?service=Migrant%20and%20family%20travel");
+  }, true);
   document.querySelectorAll("[data-flight-search]").forEach((button) => button.addEventListener("click", () => searchFlightsFromForm(button)));
   function readHotelCriteria(button) {
     const card = button.closest("[data-form=hotels]");
