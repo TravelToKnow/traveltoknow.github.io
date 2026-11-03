@@ -21,6 +21,7 @@ const home = read("index.html");
 assert.match(home, /rel="canonical" href="https:\/\/traveltoknow\.com\.bd\//);
 assert.match(home, /application\/ld\+json/);
 assert.match(app, /function updatePageMetadata\(route\)/);
+assert.match(app, /const ASSET = "\/";/, "assets must resolve from site root on nested routes");
 assert.match(app, /noindex, nofollow/);
 assert.doesNotMatch(app, /No offer found/i);
 assert.match(robots, /Sitemap: https:\/\/traveltoknow\.com\.bd\/sitemap\.xml/);
