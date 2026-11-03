@@ -139,11 +139,7 @@ function bookingForm(type) {
 }
 
 function agodaPartnerUrl() {
-  const cfg = getAgodaConfig();
-  const url = trustedAffiliatePath("agoda", cfg.destinationPath || "/search", "/search");
-  url.searchParams.set("textToSearch", "Hotels");
-  if (cfg.cid) url.searchParams.set("cid", String(cfg.cid));
-  return url.toString();
+  return agodaPartnerSearchUrl("");
 }
 
 function agodaPartnerLogo() {
@@ -432,45 +428,39 @@ function bookingHotelUrl(criteria) {
   return url.toString();
 }
 
-function agodaDestinationPath(destination) {
-  const normalized = String(destination || "").normalize("NFKC").toLowerCase()
+function normalizeAgodaDestination(destination) {
+  return String(destination || "").normalize("NFKC").toLowerCase()
     .replace(/[’']/g, "").replace(/[^a-z0-9]+/g, " ").trim().replace(/\s+/g, " ");
-  // Verified Agoda city landing pages. Keep this allow-list explicit: Agoda city
-  // slugs are not safely derivable from arbitrary free-text destinations.
-  const destinations = {
-    "bangkok": "/city/bangkok-th.html",
-    "bangkok thailand": "/city/bangkok-th.html",
-    "mecca": "/city/mecca-sa.html",
-    "makkah": "/city/mecca-sa.html",
-    "makkah saudi arabia": "/city/mecca-sa.html",
-    "mecca saudi arabia": "/city/mecca-sa.html"
-  };
-  return destinations[normalized] || "";
+}
+
+// City IDs copied from Agoda Partner Center-generated links and tested by the site owner.
+// Add destinations only after generating and checking their official Agoda Text Link.
+const AGODA_VERIFIED_CITY_IDS = Object.freeze({
+  "paris": "15470",
+  "paris france": "15470",
+  "tokyo": "5085",
+  "tokyo japan": "5085",
+  "dubai": "2994",
+  "dubai united arab emirates": "2994"
+});
+
+function agodaPartnerSearchUrl(destination) {
+  const cfg = getAgodaConfig();
+  const url = trustedAffiliatePath("agoda", "/partners/partnersearch.aspx", "/partners/partnersearch.aspx");
+  url.searchParams.set("pcs", "1");
+  url.searchParams.set("cid", String(cfg.cid || ""));
+  url.searchParams.set("hl", "en-us");
+  const cityId = AGODA_VERIFIED_CITY_IDS[normalizeAgodaDestination(destination)];
+  if (cityId) url.searchParams.set("city", cityId);
+  return url.toString();
 }
 
 function agodaHotelUrl(criteria) {
-  const cfg = getAgodaConfig();
-  const destination = String(criteria.destination || "").trim();
-  const destinationPath = agodaDestinationPath(destination);
-  // Use Agoda's published city landing pages for destinations with verified
-  // slugs; do not send these searches to the generic Agoda homepage.
-  const url = trustedAffiliatePath("agoda", destinationPath || "/", "/");
-  if (!destinationPath) url.searchParams.set("textToSearch", destination);
-  if (criteria.checkIn) url.searchParams.set("checkin", criteria.checkIn);
-  if (criteria.checkOut) url.searchParams.set("checkout", criteria.checkOut);
-  url.searchParams.set("rooms", String(criteria.rooms || "1"));
-  url.searchParams.set("adults", String(criteria.adults || "2"));
-  if (cfg.cid) url.searchParams.set("cid", String(cfg.cid));
-  return url.toString();
+  return agodaPartnerSearchUrl(criteria.destination);
 }
 
 function agodaHolidayUrl(destination) {
-  const cfg = getAgodaConfig();
-  const destinationPath = agodaDestinationPath(destination);
-  const url = trustedAffiliatePath("agoda", destinationPath || "/", "/");
-  if (!destinationPath) url.searchParams.set("textToSearch", String(destination || "").trim());
-  if (cfg.cid) url.searchParams.set("cid", String(cfg.cid));
-  return url.toString();
+  return agodaPartnerSearchUrl(destination);
 }
 
 function mountAirportPicker(select, airports) {
@@ -716,11 +706,10 @@ function bindInteractions() {
       return;
     }
     if (config.agoda?.cid) {
-      const destinationPath = agodaDestinationPath(destination);
-      const url = trustedAffiliatePath("agoda", destinationPath || "/", "/");
-      if (!destinationPath) url.searchParams.set("textToSearch", destination);
-      url.searchParams.set("cid", String(config.agoda.cid));
-      window.open(url.toString(), "_blank", "noopener,noreferrer");
+      const cityId = AGODA_VERIFIED_CITY_IDS[normalizeAgodaDestination(destination)];
+      const url = agodaPartnerSearchUrl(destination);
+      if (!cityId) toast("Agoda does not yet have a verified destination link for this city. Agoda will open its partner search page; select your destination there, or use Booking.com for a direct destination search.");
+      window.open(url, "_blank", "noopener,noreferrer");
       return;
     }
     showModal(destination, "Hotel affiliate links are not configured yet.");
