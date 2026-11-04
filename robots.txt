@@ -2,7 +2,8 @@ User-agent: *
 Allow: /
 
 # Account routes are not intended for search indexing.
-Disallow: /sign-in/\nDisallow: /sign-up/
+Disallow: /sign-in/
+Disallow: /sign-up/
 Disallow: /sing-up/
 Disallow: /forgot-password/
 

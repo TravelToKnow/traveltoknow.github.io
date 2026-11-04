@@ -674,7 +674,9 @@ function searchFlightsFromForm(button) {
   if (criteria.returnDate && criteria.returnDate < criteria.departureDate) { toast("Return date must be on or after departure date."); return; }
   const travellers = Number(criteria.travellers);
   if (!Number.isInteger(travellers) || travellers < 1 || travellers > 9) { toast("Please select 1–9 travellers."); return; }
-  window.location.assign(agodaFlightServiceUrl());
+  // Preserve the validated route, travel dates, passenger count and cabin in the external KAYAK search.
+  // KAYAK is an external search hand-off; it does not create a Travel To Know booking.
+  window.location.assign(kayakFlightUrl(criteria));
 }
 
 function bindInteractions() {
