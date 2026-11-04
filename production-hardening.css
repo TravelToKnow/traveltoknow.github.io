@@ -90,3 +90,27 @@ button,a,input,select,textarea{-webkit-tap-highlight-color:transparent}
   text-align: justify;
   text-justify: inter-word;
 }
+
+
+/* 2026-11-04: modestly enlarge footer social links for better visibility and tap targets. */
+.site-footer .socials { gap: 16px; }
+.site-footer .socials a {
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  min-height: 40px;
+  font-size: 18px;
+  line-height: 1;
+  flex: 0 0 40px;
+}
+@media (max-width: 650px) {
+  .site-footer .socials { gap: 16px; }
+  .site-footer .socials a {
+    width: 42px;
+    height: 42px;
+    min-width: 42px;
+    min-height: 42px;
+    font-size: 19px;
+    flex-basis: 42px;
+  }
+}
