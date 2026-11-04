@@ -4,7 +4,6 @@ Allow: /
 # Account routes are not intended for search indexing.
 Disallow: /sign-in/
 Disallow: /sign-up/
-Disallow: /sing-up/
 Disallow: /forgot-password/
 
 Sitemap: https://traveltoknow.com.bd/sitemap.xml
