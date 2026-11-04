@@ -135,7 +135,7 @@ function bookingForm(type) {
   if (type === "hotels") return `<div class="booking-card" data-form="hotels"><div class="mode-row"><span class="mode active">Stay More, Pay Less — Book Your Dream Hotel Now! 🏨💫</span></div><div class="form-grid"><div class="field"><label>CITY / HOTEL / RESORT / AREA</label><input name="hotelDestination" type="text" value="Dhaka, Bangladesh" placeholder="City, hotel, resort or area" aria-label="Hotel destination"></div><div class="field"><label>CHECK IN DATE</label><input class="date-input" name="checkIn" type="date" min="${dateOffsetISO(0)}" value="${dateOffsetISO(1)}"></div><div class="field"><label>CHECK OUT DATE</label><input class="date-input" name="checkOut" type="date" min="${dateOffsetISO(0)}" value="${dateOffsetISO(4)}"></div><div class="field"><label>ROOMS &amp; GUESTS</label><select name="roomsGuests"><option value="1|2">1 Room, 2 Guests</option><option value="2|4">2 Rooms, 4 Guests</option><option value="3|6">3 Rooms, 6 Guests</option><option value="1|1">1 Room, 1 Guest</option><option value="1|3">1 Room, 3 Guests</option><option value="1|4">1 Room, 4 Guests</option></select></div><div class="hotel-provider-actions"><button class="primary-button" data-hotel-search type="button">Search on Agoda</button><button class="hotel-provider-secondary" data-booking-search type="button">Search on Booking.com</button></div></div></div>`;
   if (type === "holidays") return `<div class="booking-card" data-form="holidays"><div class="mode-row"><span class="mode active">Explore More, Pay Less — Book Your Dream Tour Today! 🌍✨</span></div><div class="form-grid"><div class="field"><label>SELECT YOUR TOUR DESTINATION CITY</label><select data-holiday-destination><option>Cox's Bazar — BANGLADESH</option><option>Dubai — UAE</option><option>Kuala Lumpur — MALAYSIA</option><option>Bangkok — THAILAND</option><option>Singapore</option><option>Bali</option><option>Colombo</option><option>Jeddah</option><option>London</option><option>New York</option></select></div><div></div><div></div><button class="primary-button" data-holiday-search type="button">Search Holiday</button></div></div>`;
   if (type === "visa") return `<div class="booking-card" data-form="visa"><div class="mode-row"><span class="mode active">Hassle-Free Visa Services — Apply With Us For Fast Approval! 🛂✈️</span></div><div class="form-grid"><div class="field"><label>SELECT YOUR VISA CITY</label><select><option>Select country</option><option>Singapore</option><option>Thailand</option><option>Malaysia</option><option>Vietnam</option><option>Uzbekistan</option></select></div><div class="field"><label>SELECT TRAVELER(S)</label><select><option>1 Traveler</option><option>2 Travelers</option><option>3 Travelers</option></select></div><div></div><button class="primary-button" data-demo-search="Visa">Find Visa Info</button></div></div>`;
-  return `<div class="booking-card flight-booking-card" data-form="flights"><div class="mode-row"><button class="mode active" aria-pressed="true" data-flight-mode="one-way">One-way</button><button class="mode" aria-pressed="false" data-flight-mode="round-trip">Round-trip</button><button class="mode" aria-pressed="false" data-flight-mode="multi-city">Multi-city</button></div><div class="form-grid"><div class="field"><label>From</label><select class="flight-airport-select" name="from" aria-label="Departure airport"><option value="DAC" selected>DAC — Dhaka</option></select></div><div class="field"><label>To</label><select class="flight-airport-select" name="to" aria-label="Arrival airport"><option value="DXB" selected>DXB — Dubai</option></select></div><div class="field"><label>Departure date</label><input class="date-input" name="departureDate" type="date" min="${dateOffsetISO(0)}" value="${dateOffsetISO(1)}"></div><div class="field return-date-field" data-return-field hidden><label>Return date</label><input class="date-input" name="returnDate" type="date" min="${dateOffsetISO(0)}" value=""><span class="hint">Required for round-trip searches</span></div><div class="field"><label>TRAVELERS</label><select name="travellers"><option value="1">1 Traveler</option><option value="2">2 Travelers</option><option value="3">3 Travelers</option><option value="4">4 Travelers</option><option value="5">5 Travelers</option><option value="6">6 Travelers</option><option value="7">7 Travelers</option><option value="8">8 Travelers</option><option value="9">9 Travelers</option></select></div><div class="field"><label>CLASS</label><select name="cabin"><option value="Economy">Economy</option><option value="Premium Economy">Premium Economy</option><option value="Business">Business</option><option value="First Class">First Class</option></select></div><div></div><button class="primary-button" data-flight-search type="button">Search Flight</button></div></div>`;
+  return `<div class="booking-card flight-booking-card" data-form="flights"><div class="mode-row"><button class="mode active" aria-pressed="true" data-flight-mode="one-way">One-way</button><button class="mode" aria-pressed="false" data-flight-mode="round-trip">Round-trip</button><button class="mode" aria-pressed="false" data-flight-mode="multi-city">Multi-city</button></div><div class="form-grid"><div class="flight-basic-fields" data-basic-flight-fields><div class="field"><label>From</label><select class="flight-airport-select" name="from" aria-label="Departure airport"><option value="DAC" selected>DAC — Dhaka</option></select></div><div class="field"><label>To</label><select class="flight-airport-select" name="to" aria-label="Arrival airport"><option value="DXB" selected>DXB — Dubai</option></select></div><div class="field"><label>Departure date</label><input class="date-input" name="departureDate" type="date" min="${dateOffsetISO(0)}" value="${dateOffsetISO(1)}"></div><div class="field return-date-field" data-return-field hidden><label>Return date</label><input class="date-input" name="returnDate" type="date" min="${dateOffsetISO(0)}" value=""><span class="hint">Required for round-trip searches</span></div></div><div class="multi-city-panel" data-multi-city-panel hidden><div class="multi-city-heading"><strong>Flight segments</strong><span>Plan up to 6 legs in one itinerary</span></div><div class="multi-city-legs" data-multi-city-legs><div class="multi-city-leg" data-leg><div class="multi-city-leg-title">Flight 1</div><div class="field"><label>From</label><select class="flight-airport-select" name="multiFrom" aria-label="Flight 1 departure airport"><option value="DAC" selected>DAC — Dhaka</option></select></div><div class="field"><label>To</label><select class="flight-airport-select" name="multiTo" aria-label="Flight 1 arrival airport"><option value="DXB" selected>DXB — Dubai</option></select></div><div class="field"><label>Departure</label><input class="date-input" name="multiDate" type="date" min="${dateOffsetISO(0)}" value="${dateOffsetISO(1)}"></div></div><div class="multi-city-leg" data-leg><div class="multi-city-leg-title">Flight 2</div><div class="field"><label>From</label><select class="flight-airport-select" name="multiFrom" aria-label="Flight 2 departure airport"><option value="DXB" selected>DXB — Dubai</option></select></div><div class="field"><label>To</label><select class="flight-airport-select" name="multiTo" aria-label="Flight 2 arrival airport"><option value="DAC" selected>DAC — Dhaka</option></select></div><div class="field"><label>Departure</label><input class="date-input" name="multiDate" type="date" min="${dateOffsetISO(0)}" value="${dateOffsetISO(8)}"></div></div></div><button class="multi-city-add" type="button" data-add-flight-leg>+ Add another flight</button><p class="multi-city-help">Each segment is searched together on KAYAK. Check the dates, airports and fare conditions before booking.</p></div><div class="field"><label>TRAVELERS</label><select name="travellers"><option value="1">1 Traveler</option><option value="2">2 Travelers</option><option value="3">3 Travelers</option><option value="4">4 Travelers</option><option value="5">5 Travelers</option><option value="6">6 Travelers</option><option value="7">7 Travelers</option><option value="8">8 Travelers</option><option value="9">9 Travelers</option></select></div><div class="field"><label>CLASS</label><select name="cabin"><option value="Economy">Economy</option><option value="Premium Economy">Premium Economy</option><option value="Business">Business</option><option value="First Class">First Class</option></select></div><div></div><button class="primary-button" data-flight-search type="button">Search Flight</button></div></div>`;
 }
 
 function agodaPartnerUrl() {
@@ -404,28 +404,21 @@ function airportSlug(value) { return String(value || "").toLowerCase().trim().re
 function airportLookup(code) { return window.TRAVEL_AIRPORTS?.find((airport) => airport.iata === String(code || "").toUpperCase()) || null; }
 
 function kayakFlightUrl(criteria) {
-  // KAYAK powers Agoda's flight comparison experience and supports path-based
-  // search deep links. Use the supported route format rather than Agoda's
-  // unverified /flights/results query route.
-  const from = String(criteria.from || "").trim().toUpperCase();
-  const to = String(criteria.to || "").trim().toUpperCase();
-  const departureDate = String(criteria.departureDate || "").trim();
-  const returnDate = String(criteria.returnDate || "").trim();
-  const mode = criteria.mode === "round-trip" ? "round-trip" : "one-way";
-  const cabinMap = {
-    "Economy": "e",
-    "Premium Economy": "p",
-    "Business": "b",
-    "First Class": "f"
-  };
+  const cabinMap = { "Economy": "e", "Premium Economy": "p", "Business": "b", "First Class": "f" };
   const cabin = cabinMap[criteria.cabin] || "e";
   const adults = Math.max(1, Math.min(9, Number.parseInt(criteria.travellers, 10) || 1));
-
-  const segments = [`${from}-${to}`, departureDate];
-  if (mode === "round-trip" && returnDate) segments.push(returnDate);
-  segments.push(`${adults}adults`, cabin);
-
-  const url = new URL(`https://www.kayak.com/flights/${segments.map(encodeURIComponent).join("/")}`);
+  let pathSegments = [];
+  if (criteria.mode === "multi-city") {
+    pathSegments = (criteria.legs || []).flatMap((leg) => [
+      `${String(leg.from).toUpperCase()}-${String(leg.to).toUpperCase()}`,
+      leg.date
+    ]);
+  } else {
+    pathSegments = [`${String(criteria.from).toUpperCase()}-${String(criteria.to).toUpperCase()}`, criteria.departureDate];
+    if (criteria.mode === "round-trip" && criteria.returnDate) pathSegments.push(criteria.returnDate);
+  }
+  pathSegments.push(`${adults}adults`, cabin);
+  const url = new URL(`https://www.kayak.com/flights/${pathSegments.map(encodeURIComponent).join("/")}`);
   url.searchParams.set("sort", "bestflight_a");
   return url.toString();
 }
@@ -653,10 +646,28 @@ function parseAirportCsv(csv) {
   return rows.map((r) => ({ iata: String(r[iata] || "").trim().toUpperCase(), name: r[name] || "", city: r[city] || "", country: r[country] || "" }));
 }
 
+function renumberMultiCityLegs(list) {
+  const rows = Array.from(list.querySelectorAll("[data-leg]"));
+  rows.forEach((row, index) => {
+    const title = row.querySelector(".multi-city-leg-title");
+    if (title) {
+      const remove = title.querySelector("[data-remove-flight-leg]");
+      title.textContent = `Flight ${index + 1}`;
+      if (remove) {
+        remove.textContent = "Remove";
+        remove.setAttribute("aria-label", `Remove flight ${index + 1}`);
+        title.appendChild(remove);
+      }
+    }
+  });
+  const addButton = list.closest("[data-multi-city-panel]")?.querySelector("[data-add-flight-leg]");
+  if (addButton) addButton.hidden = rows.length >= 6;
+  list.querySelectorAll("[data-remove-flight-leg]").forEach((button) => { button.hidden = rows.length <= 2; });
+}
+
 function searchFlightsFromForm(button) {
   const card = button.closest("[data-form=flights]");
   const mode = card?.querySelector(".mode.active")?.dataset.flightMode || "one-way";
-  if (mode === "multi-city") { toast("Multi-city flight search is not available yet. Please choose one-way or round-trip."); return; }
   const criteria = {
     mode,
     from: (card?.querySelector('[name="from"]')?.value || "").trim().toUpperCase(),
@@ -666,16 +677,34 @@ function searchFlightsFromForm(button) {
     travellers: card?.querySelector('[name="travellers"]')?.value || "1",
     cabin: card?.querySelector('[name="cabin"]')?.value || "Economy"
   };
-  if (!criteria.from || !criteria.to || criteria.from === criteria.to) { toast("Please select different departure and arrival airports."); return; }
-  if (!/^[A-Z]{3}$/.test(criteria.from) || !/^[A-Z]{3}$/.test(criteria.to)) { toast("Please select valid IATA airports."); return; }
-  if (!criteria.departureDate) { toast("Please select a departure date."); return; }
-  if (criteria.departureDate < dateOffsetISO(0)) { toast("Departure date cannot be in the past."); return; }
-  if (mode === "round-trip" && !criteria.returnDate) { toast("Please select a return date for a round-trip search."); return; }
-  if (criteria.returnDate && criteria.returnDate < criteria.departureDate) { toast("Return date must be on or after departure date."); return; }
+  if (mode === "multi-city") {
+    const rows = Array.from(card.querySelectorAll("[data-leg]"));
+    if (rows.length < 2 || rows.length > 6) { toast("A multi-city itinerary must contain 2–6 flight segments."); return; }
+    const legs = rows.map((row, index) => ({
+      from: (row.querySelector('[name="multiFrom"]')?.value || "").trim().toUpperCase(),
+      to: (row.querySelector('[name="multiTo"]')?.value || "").trim().toUpperCase(),
+      date: row.querySelector('[name="multiDate"]')?.value || "",
+      index
+    }));
+    for (let i = 0; i < legs.length; i += 1) {
+      const leg = legs[i];
+      if (!/^[A-Z]{3}$/.test(leg.from) || !/^[A-Z]{3}$/.test(leg.to) || leg.from === leg.to) { toast(`Please select different valid airports for flight ${i + 1}.`); return; }
+      if (!leg.date) { toast(`Please select a departure date for flight ${i + 1}.`); return; }
+      if (leg.date < dateOffsetISO(0)) { toast(`Flight ${i + 1} cannot depart in the past.`); return; }
+      if (i > 0 && leg.date < legs[i - 1].date) { toast("Multi-city flight dates must be in chronological order."); return; }
+    }
+    criteria.legs = legs;
+  } else {
+    if (!criteria.from || !criteria.to || criteria.from === criteria.to) { toast("Please select different departure and arrival airports."); return; }
+    if (!/^[A-Z]{3}$/.test(criteria.from) || !/^[A-Z]{3}$/.test(criteria.to)) { toast("Please select valid IATA airports."); return; }
+    if (!criteria.departureDate) { toast("Please select a departure date."); return; }
+    if (criteria.departureDate < dateOffsetISO(0)) { toast("Departure date cannot be in the past."); return; }
+    if (mode === "round-trip" && !criteria.returnDate) { toast("Please select a return date for a round-trip search."); return; }
+    if (criteria.returnDate && criteria.returnDate < criteria.departureDate) { toast("Return date must be on or after departure date."); return; }
+  }
   const travellers = Number(criteria.travellers);
   if (!Number.isInteger(travellers) || travellers < 1 || travellers > 9) { toast("Please select 1–9 travellers."); return; }
-  // Preserve the validated route, travel dates, passenger count and cabin in the external KAYAK search.
-  // KAYAK is an external search hand-off; it does not create a Travel To Know booking.
+  // KAYAK is an external search hand-off; this does not create a Travel To Know booking.
   window.location.assign(kayakFlightUrl(criteria));
 }
 
@@ -694,6 +723,40 @@ function bindInteractions() {
   document.querySelectorAll("[data-umrah-enquiry]").forEach((link) => link.addEventListener("click", (event) => {
     event.preventDefault();
     window.location.assign("https://traveltoknow.com.bd/flights/?utm_source=chatgpt.com#/request-service?service=Umrah%20and%20religious%20travel");
+  }));
+  document.querySelectorAll("[data-add-flight-leg]").forEach((button) => button.addEventListener("click", () => {
+    const card = button.closest("[data-form=flights]");
+    const list = card?.querySelector("[data-multi-city-legs]");
+    const count = list?.querySelectorAll("[data-leg]").length || 0;
+    if (!list || count >= 6) { toast("KAYAK supports up to 6 flight segments in one multi-city search."); return; }
+    const previous = list.querySelector("[data-leg]:last-child");
+    const previousTo = previous?.querySelector('[name="multiTo"]')?.value || "DAC";
+    const previousDate = previous?.querySelector('[name="multiDate"]')?.value || dateOffsetISO(1);
+    const nextDate = new Date(`${previousDate}T12:00:00`);
+    nextDate.setDate(nextDate.getDate() + 1);
+    const nextDateValue = `${nextDate.getFullYear()}-${String(nextDate.getMonth()+1).padStart(2,"0")}-${String(nextDate.getDate()).padStart(2,"0")}`;
+    const airports = window.TRAVEL_AIRPORTS || [];
+    const options = airports.map((airport) => `<option value="${escapeHtml(airport.iata)}">${escapeHtml(airport.iata)} — ${escapeHtml(airport.city || airport.name)}</option>`).join("");
+    const row = document.createElement("div");
+    row.className = "multi-city-leg";
+    row.setAttribute("data-leg", "");
+    row.innerHTML = `<div class="multi-city-leg-title">Flight ${count + 1}<button type="button" class="multi-city-remove" data-remove-flight-leg aria-label="Remove flight ${count + 1}">Remove</button></div><div class="field"><label>From</label><select class="flight-airport-select" name="multiFrom" aria-label="Flight ${count + 1} departure airport">${options}</select></div><div class="field"><label>To</label><select class="flight-airport-select" name="multiTo" aria-label="Flight ${count + 1} arrival airport">${options}</select></div><div class="field"><label>Departure</label><input class="date-input" name="multiDate" type="date" min="${dateOffsetISO(0)}" value="${nextDateValue}"></div>`;
+    list.appendChild(row);
+    const fromSelect = row.querySelector('[name="multiFrom"]');
+    const toSelect = row.querySelector('[name="multiTo"]');
+    if (airports.some((airport) => airport.iata === previousTo)) fromSelect.value = previousTo;
+    if (airports.some((airport) => airport.iata === "DAC")) toSelect.value = "DAC";
+    [fromSelect, toSelect].forEach((select) => mountAirportPicker(select, airports));
+    row.querySelector("[data-remove-flight-leg]")?.addEventListener("click", () => {
+      row.remove();
+      renumberMultiCityLegs(list);
+    });
+    renumberMultiCityLegs(list);
+  }));
+  document.querySelectorAll("[data-remove-flight-leg]").forEach((button) => button.addEventListener("click", () => {
+    const list = button.closest("[data-multi-city-legs]");
+    button.closest("[data-leg]")?.remove();
+    if (list) renumberMultiCityLegs(list);
   }));
   document.querySelectorAll("[data-flight-search]").forEach((button) => button.addEventListener("click", () => searchFlightsFromForm(button)));
   function readHotelCriteria(button) {
@@ -765,7 +828,12 @@ function bindInteractions() {
     document.querySelectorAll("[data-flight-mode]").forEach((item) => { item.classList.remove("active"); item.setAttribute("aria-pressed", "false"); });
     button.classList.add("active"); button.setAttribute("aria-pressed", "true");
     const isRoundTrip = button.dataset.flightMode === "round-trip";
+    const isMultiCity = button.dataset.flightMode === "multi-city";
     const returnField = card?.querySelector("[data-return-field]");
+    const basicFields = card?.querySelector("[data-basic-flight-fields]");
+    const multiPanel = card?.querySelector("[data-multi-city-panel]");
+    if (basicFields) basicFields.hidden = isMultiCity;
+    if (multiPanel) multiPanel.hidden = !isMultiCity;
     if (returnField) returnField.hidden = !isRoundTrip;
     const departure = card?.querySelector('[name="departureDate"]')?.value || dateOffsetISO(1);
     const returnInput = card?.querySelector('[name="returnDate"]');
